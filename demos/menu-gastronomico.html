@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="es-AR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRASA NOIR — Burger &amp; Grill | Demo Menú Digital Serebi Lab</title>
+  <meta name="description" content="Menú digital interactivo en modo oscuro para BRASA NOIR — Burger & Grill. Pedidos por WhatsApp sin comisiones. Demo en vivo de Serebi Lab." />
+
+  <!-- Google Fonts: Outfit (Títulos con fuerza) e Inter (Lectura limpia) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS vía CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            noirBg: '#0C0C0E',
+            noirCard: '#16161A',
+            noirCardHover: '#1C1C22',
+            noirBorder: '#26262E',
+            amberGold: '#F59E0B',
+            fireOrange: '#EA580C',
+            warmWhite: '#FAF8F5',
+            smokeGray: '#A1A1AA',
+            serebiDark: '#0B0D17',
+            serebiIndigo: '#818CF8',
+            waGreen: '#25D366',
+            waGreenHover: '#1DA851',
+          },
+          boxShadow: {
+            amberGlow: '0 10px 30px -10px rgba(245, 158, 11, 0.35)',
+            cardDark: '0 12px 30px -12px rgba(0, 0, 0, 0.75)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #0C0C0E;
+      color: #FAF8F5;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Resplandor cálido de brasas en el encabezado */
+    .ember-hero-bg {
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.16) 0%, transparent 55%),
+        radial-gradient(circle at 85% 25%, rgba(234, 88, 12, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 15% 30%, rgba(245, 158, 11, 0.08) 0%, transparent 40%);
+    }
+
+    /* Ocultar scrollbar en la barra horizontal de categorías manteniendo el desplazamiento táctil */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Transiciones suaves para modales y drawer */
+    .modal-backdrop {
+      transition: opacity 0.24s ease;
+    }
+    .modal-panel {
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+    }
+
+    /* Animación de entrada de la barra flotante del carrito */
+    .cart-bar {
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+    }
+
+    /* Fondo de chat estilo WhatsApp oscuro */
+    .wa-chat-bg {
+      background-color: #0B141A;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+  </style>
+</head>
+<body class="bg-noirBg text-warmWhite antialiased selection:bg-amberGold/30 selection:text-warmWhite pb-28">
+
+  <!-- ===================================================================== -->
+  <!-- 1. BARRA SUPERIOR FIJA DE DEMO — SEREBI LAB (z-50)                    -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-50 bg-serebiDark/95 backdrop-blur-md border-b border-serebiIndigo/35 text-slate-100">
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 h-14 flex items-center justify-between gap-2">
+      <!-- Izquierda: Volver a Serebi Lab + Etiqueta Demo -->
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <a
+          href="../index.html"
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-200 bg-white/5 hover:bg-white/15 border border-white/10 transition-colors shrink-0"
+        >
+          <span aria-hidden="true">&larr;</span>
+          <span>Volver a Serebi Lab</span>
+        </a>
+        <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-medium text-slate-300 bg-indigo-500/10 border border-indigo-400/25 px-2.5 py-1 rounded-full truncate">
+          <span class="w-1.5 h-1.5 rounded-full bg-serebiIndigo shrink-0"></span>
+          Demo: Menú Gastronómico ($70.000)
+        </span>
+      </div>
+
+      <!-- Derecha: Botón oficial WhatsApp Serebi Lab -->
+      <a
+        id="serebi-cta-btn"
+        href="https://wa.me/5491134441993?text=Hola%20Serebi%20Lab!%20Vi%20la%20demo%20de%20Men%C3%BA%20Digital%20Gastron%C3%B3mico%20(%2470.000)%20y%20quiero%20un%20men%C3%BA%20as%C3%AD%20para%20mi%20local."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-waGreen hover:bg-waGreenHover text-[#020617] shadow-sm transition-all hover:-translate-y-0.5 shrink-0"
+      >
+        <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.438 1.344-2 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.344-1.766-.656-3.109-1.344-5.141-4.5-5.297-4.703-.156-.203-1.266-1.688-1.266-3.219s.797-2.281 1.078-2.594c.281-.312.625-.391.828-.391.203 0 .422.016.609.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.766 2.203 1.219 1.094 2.25 1.422 2.562 1.578.312.156.5.141.688-.078.188-.219.797-.938 1.016-1.25.219-.312.438-.266.734-.156.297.109 1.891.891 2.219 1.047.328.156.547.234.625.375.078.141.078.812-.172 1.516z"/>
+        </svg>
+        <span>Quiero un menú así</span>
+      </a>
+    </div>
+    <!-- Sub-etiqueta compacta visible en mobile -->
+    <div class="md:hidden border-t border-white/10 py-1 text-center text-[11px] font-medium text-slate-300 bg-serebiDark">
+      Demo: Menú Gastronómico ($70.000)
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- 2. ENCABEZADO DEL LOCAL: BRASA NOIR — BURGER & GRILL                  -->
+  <!-- ===================================================================== -->
+  <section class="ember-hero-bg border-b border-noirBorder">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-8 pb-7 sm:pt-10 sm:pb-9">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <!-- Identidad del local -->
+        <div class="flex items-start sm:items-center gap-4">
+          <!-- Logo minimalista SVG de llama/brasa -->
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-noirCard border border-amberGold/35 shadow-amberGlow flex items-center justify-center shrink-0">
+            <svg width="46" height="46" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Brasa Noir">
+              <defs>
+                <linearGradient id="flameGrad" x1="24" y1="6" x2="24" y2="40" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FDE047"/>
+                  <stop offset="0.45" stop-color="#F59E0B"/>
+                  <stop offset="1" stop-color="#EA580C"/>
+                </linearGradient>
+              </defs>
+              <!-- Llama exterior -->
+              <path d="M24.8 6.5C24.8 6.5 34.5 14.2 34.5 24.4C34.5 30.8 29.8 36 24 36C18.2 36 13.5 30.8 13.5 24.4C13.5 20.6 15.2 17.2 17.5 14.6C17.5 14.6 17.2 18.8 19.8 19.6C19.8 19.6 19.4 12.2 24.8 6.5Z" fill="url(#flameGrad)"/>
+              <!-- Núcleo interior oscuro -->
+              <path d="M24.2 21.5C24.2 21.5 28 24.6 28 28.4C28 30.9 26.2 33 24 33C21.8 33 20 30.9 20 28.4C20 26.2 21.6 23.6 24.2 21.5Z" fill="#0C0C0E"/>
+              <!-- Base de brasa -->
+              <rect x="13" y="39" width="22" height="2.6" rx="1.3" fill="#F59E0B" fill-opacity="0.8"/>
+            </svg>
+          </div>
+
+          <div>
+            <!-- Badge Abierto ahora -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-noirCard border border-noirBorder text-xs font-medium text-warmWhite mb-2">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span>Abierto ahora &bull; 19:00 a 00:30 hs</span>
+            </div>
+
+            <h1 class="font-heading font-extrabold text-3xl sm:text-4xl tracking-tight text-warmWhite leading-none">
+              BRASA <span class="text-amberGold">NOIR</span>
+            </h1>
+            <p class="text-sm sm:text-base text-smokeGray mt-1.5">
+              Hamburguesas smash, grill nocturno &amp; birra artesanal
+            </p>
+            <p class="inline-flex items-center gap-1.5 text-xs text-smokeGray/90 mt-2">
+              <svg class="w-3.5 h-3.5 text-amberGold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span>Av. Jauretche 1420 &bull; Envíos y Retiro</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Botón secundario: Ver QR de mesa -->
+        <div class="flex sm:flex-col items-stretch sm:items-end gap-2.5">
+          <button
+            id="open-qr-btn"
+            type="button"
+            class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-noirCard hover:bg-noirCardHover text-warmWhite border border-amberGold/40 hover:border-amberGold text-xs sm:text-sm font-semibold transition-all shadow-cardDark"
+          >
+            <svg class="w-4 h-4 text-amberGold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 3h2m4 0h-2m0 0v3m0-3v-3"/>
+            </svg>
+            <span>Ver QR de mesa</span>
+          </button>
+          <span class="hidden sm:inline text-[11px] text-smokeGray">
+            Sin comisiones &bull; Pedidos por WhatsApp
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 3. BUSCADOR, CATEGORÍAS STICKY Y FILTROS DIETARIOS                    -->
+  <!-- ===================================================================== -->
+  <div class="sticky top-[83px] md:top-14 z-30 bg-noirBg/95 backdrop-blur-md border-b border-noirBorder">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 space-y-3">
+
+      <!-- Buscador en tiempo real -->
+      <div class="relative">
+        <svg class="w-4 h-4 text-smokeGray absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path stroke-linecap="round" d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Buscar por plato o ingrediente (ej. cheddar, bacon, veggie, IPA...)"
+          autocomplete="off"
+          class="w-full pl-10 pr-10 py-2.5 rounded-2xl bg-noirCard border border-noirBorder focus:border-amberGold focus:outline-none text-sm text-warmWhite placeholder:text-smokeGray/70 transition-colors"
+        />
+        <button
+          id="clear-search-btn"
+          type="button"
+          aria-label="Limpiar búsqueda"
+          class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-noirBorder text-smokeGray hover:text-warmWhite flex items-center justify-center text-xs"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Categorías horizontales -->
+      <div id="category-tabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5" role="tablist" aria-label="Categorías del menú">
+        <!-- Renderizado dinámico -->
+      </div>
+
+      <!-- Chips de filtro dietario combinables -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-0.5">
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-smokeGray shrink-0 mr-1">Filtrar:</span>
+        <div id="dietary-chips" class="flex items-center gap-2">
+          <!-- Renderizado dinámico -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 4. GRILLA PRINCIPAL DEL MENÚ INTERACTIVO                              -->
+  <!-- ===================================================================== -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-7 space-y-6">
+    <!-- Contador de resultados y botón limpiar filtros -->
+    <div class="flex items-center justify-between gap-2 text-xs sm:text-sm">
+      <p id="results-count" class="text-smokeGray font-medium">Mostrando 12 platos</p>
+      <button
+        id="reset-filters-btn"
+        type="button"
+        class="hidden text-amberGold hover:text-fireOrange font-semibold transition-colors"
+      >
+        Limpiar filtros
+      </button>
+    </div>
+
+    <!-- Contenedor de platos -->
+    <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+      <!-- Renderizado dinámico desde CONFIG.menu -->
+    </div>
+
+    <!-- Estado vacío si la búsqueda o los filtros no encuentran coincidencias -->
+    <div id="empty-state" class="hidden text-center py-14 px-6 rounded-3xl bg-noirCard border border-noirBorder">
+      <div class="w-12 h-12 rounded-2xl bg-noirBg border border-noirBorder text-amberGold flex items-center justify-center mx-auto mb-3 text-xl">
+        🔍
+      </div>
+      <h3 class="font-heading font-bold text-lg text-warmWhite">No encontramos platos con esos filtros</h3>
+      <p class="text-sm text-smokeGray mt-1 mb-4">Probá quitando algún filtro o buscando otro ingrediente.</p>
+      <button
+        id="empty-reset-btn"
+        type="button"
+        class="px-5 py-2.5 rounded-xl bg-amberGold hover:bg-fireOrange text-noirBg font-bold text-sm transition-colors"
+      >
+        Ver toda la carta
+      </button>
+    </div>
+
+    <!-- Footer discreto del local y Serebi Lab -->
+    <footer class="pt-10 pb-4 text-center border-t border-noirBorder/70 space-y-1.5">
+      <p class="text-xs text-smokeGray">
+        BRASA NOIR — Burger &amp; Grill &bull; Av. Jauretche 1420 &bull; Precios expresados en Pesos Argentinos (ARS).
+      </p>
+      <p class="text-xs text-smokeGray/80">
+        Menú digital desarrollado por
+        <a href="../index.html" class="font-semibold text-warmWhite hover:text-amberGold underline decoration-noirBorder underline-offset-4 transition-colors">
+          Serebi Lab
+        </a>
+      </p>
+    </footer>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- 5. BARRA FLOTANTE INFERIOR DEL CARRITO                                -->
+  <!-- ===================================================================== -->
+  <div
+    id="floating-cart-bar"
+    class="cart-bar fixed bottom-4 inset-x-0 z-40 px-4 pointer-events-none translate-y-24 opacity-0"
+  >
+    <div class="max-w-xl mx-auto pointer-events-auto">
+      <button
+        id="open-cart-btn"
+        type="button"
+        class="w-full flex items-center justify-between gap-4 px-5 py-3.5 rounded-2xl bg-gradient-to-r from-amberGold to-fireOrange hover:brightness-110 text-noirBg shadow-amberGlow transition-all active:scale-[0.99]"
+      >
+        <div class="flex items-center gap-3">
+          <span id="floating-cart-count" class="w-8 h-8 rounded-xl bg-noirBg text-amberGold font-heading font-extrabold text-sm flex items-center justify-center">
+            0
+          </span>
+          <div class="text-left">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-noirBg/75 leading-none">Tu pedido</p>
+            <p id="floating-cart-total" class="font-heading font-extrabold text-lg leading-tight text-noirBg">$ 0</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center gap-1.5 font-heading font-bold text-sm sm:text-base text-noirBg">
+          <span>Ver mi pedido</span>
+          <span aria-hidden="true">&rarr;</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 6. MODAL: QR DE MESA IMPRIMIBLE                                       -->
+  <!-- ===================================================================== -->
+  <div
+    id="qr-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal-backdrop opacity-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="qr-modal-title"
+  >
+    <div id="qr-modal-panel" class="modal-panel bg-noirCard rounded-3xl max-w-sm w-full border border-amberGold/40 shadow-2xl overflow-hidden transform scale-95 opacity-0">
+      <div class="p-6 text-center relative">
+        <button
+          id="close-qr-btn"
+          type="button"
+          aria-label="Cerrar tarjeta QR"
+          class="absolute top-4 right-4 w-8 h-8 rounded-xl bg-noirBg hover:bg-noirBorder text-smokeGray hover:text-warmWhite flex items-center justify-center transition-colors"
+        >
+          &times;
+        </button>
+
+        <span class="inline-block text-[10px] font-heading font-bold uppercase tracking-[0.2em] text-amberGold bg-amberGold/10 border border-amberGold/30 px-3 py-1 rounded-full mb-3">
+          Tarjeta imprimible para mesa
+        </span>
+
+        <h2 id="qr-modal-title" class="font-heading font-extrabold text-2xl text-warmWhite tracking-tight">
+          BRASA <span class="text-amberGold">NOIR</span>
+        </h2>
+        <p class="text-xs text-smokeGray mt-1 mb-5">
+          Escaneá el código con la cámara de tu celular para ver la carta actualizada
+        </p>
+
+        <!-- Código QR decorativo de alta nitidez en SVG -->
+        <div class="bg-warmWhite p-4 rounded-2xl inline-block shadow-lg border-4 border-amberGold/80 mb-5">
+          <svg width="168" height="168" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Código QR de mesa Brasa Noir">
+            <rect width="168" height="168" fill="#FAF8F5"/>
+            <!-- Esquina superior izquierda -->
+            <rect x="12" y="12" width="42" height="42" rx="6" stroke="#0C0C0E" stroke-width="6"/>
+            <rect x="24" y="24" width="18" height="18" rx="3" fill="#0C0C0E"/>
+            <!-- Esquina superior derecha -->
+            <rect x="114" y="12" width="42" height="42" rx="6" stroke="#0C0C0E" stroke-width="6"/>
+            <rect x="126" y="24" width="18" height="18" rx="3" fill="#0C0C0E"/>
+            <!-- Esquina inferior izquierda -->
+            <rect x="12" y="114" width="42" height="42" rx="6" stroke="#0C0C0E" stroke-width="6"/>
+            <rect x="24" y="126" width="18" height="18" rx="3" fill="#0C0C0E"/>
+            <!-- Matriz QR estilizada -->
+            <g fill="#0C0C0E">
+              <rect x="66" y="12" width="10" height="10" rx="2"/><rect x="84" y="12" width="10" height="10" rx="2"/><rect x="96" y="24" width="10" height="10" rx="2"/>
+              <rect x="66" y="30" width="12" height="12" rx="2"/><rect x="84" y="42" width="10" height="10" rx="2"/><rect x="66" y="54" width="10" height="10" rx="2"/>
+              <rect x="12" y="66" width="10" height="10" rx="2"/><rect x="30" y="66" width="12" height="12" rx="2"/><rect x="48" y="72" width="10" height="10" rx="2"/>
+              <rect x="18" y="84" width="12" height="12" rx="2"/><rect x="36" y="96" width="10" height="10" rx="2"/><rect x="12" y="96" width="10" height="10" rx="2"/>
+              <rect x="114" y="66" width="10" height="10" rx="2"/><rect x="132" y="66" width="12" height="12" rx="2"/><rect x="148" y="78" width="10" height="10" rx="2"/>
+              <rect x="114" y="84" width="12" height="12" rx="2"/><rect x="132" y="96" width="10" height="10" rx="2"/><rect x="148" y="102" width="10" height="10" rx="2"/>
+              <rect x="66" y="114" width="10" height="10" rx="2"/><rect x="84" y="114" width="12" height="12" rx="2"/><rect x="102" y="114" width="10" height="10" rx="2"/>
+              <rect x="120" y="120" width="12" height="12" rx="2"/><rect x="144" y="120" width="12" height="12" rx="2"/>
+              <rect x="66" y="132" width="12" height="12" rx="2"/><rect x="90" y="138" width="10" height="10" rx="2"/><rect x="108" y="138" width="12" height="12" rx="2"/>
+              <rect x="132" y="144" width="12" height="12" rx="2"/><rect x="148" y="144" width="10" height="10" rx="2"/><rect x="72" y="148" width="12" height="10" rx="2"/>
+            </g>
+            <!-- Emblema central ámbar -->
+            <rect x="64" y="64" width="40" height="40" rx="10" fill="#0C0C0E"/>
+            <path d="M84.4 72C84.4 72 91 77.2 91 84C91 88.2 87.9 91.6 84 91.6C80.1 91.6 77 88.2 77 84C77 81.4 78.2 79.1 79.8 77.4C79.8 77.4 79.6 80.2 81.3 80.7C81.3 80.7 81 75.8 84.4 72Z" fill="#F59E0B"/>
+          </svg>
+        </div>
+
+        <div class="rounded-2xl bg-noirBg border border-noirBorder p-3.5 text-left text-xs text-smokeGray space-y-1">
+          <p class="font-semibold text-warmWhite">Incluido en el paquete Menú Digital ($70.000)</p>
+          <p>Te entregamos el QR en alta resolución listo para imprimir en mesas, barra o folletos. Si cambiás precios, el QR sigue siendo el mismo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 7. MODAL / DRAWER DE CARRITO Y SIMULADOR DE WHATSAPP                  -->
+  <!-- ===================================================================== -->
+  <div
+    id="cart-modal"
+    class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center sm:p-4 bg-black/80 backdrop-blur-sm modal-backdrop opacity-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cart-modal-title"
+  >
+    <div id="cart-modal-panel" class="modal-panel bg-noirCard w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl border border-noirBorder shadow-2xl max-h-[92vh] flex flex-col transform translate-y-6 sm:translate-y-0 sm:scale-95 opacity-0 overflow-hidden">
+
+      <!-- Cabecera del Modal -->
+      <div class="px-5 py-4 border-b border-noirBorder flex items-center justify-between gap-3 shrink-0 bg-noirCard">
+        <div>
+          <h2 id="cart-modal-title" class="font-heading font-bold text-xl text-warmWhite">Tu Pedido</h2>
+          <p id="cart-modal-subtitle" class="text-xs text-smokeGray">BRASA NOIR — Burger &amp; Grill</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            id="clear-cart-btn"
+            type="button"
+            class="text-xs font-medium text-smokeGray hover:text-red-400 px-2.5 py-1.5 rounded-lg hover:bg-red-500/10 transition-colors"
+          >
+            Vaciar
+          </button>
+          <button
+            id="close-cart-btn"
+            type="button"
+            aria-label="Cerrar carrito"
+            class="w-9 h-9 rounded-xl bg-noirBg hover:bg-noirBorder text-smokeGray hover:text-warmWhite flex items-center justify-center text-lg transition-colors"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+
+      <!-- Cuerpo deslizable -->
+      <div class="overflow-y-auto p-5 space-y-5 flex-1">
+
+        <!-- VISTA A: FORMULARIO Y RESUMEN DEL CARRITO -->
+        <div id="cart-step-form" class="space-y-5">
+          <!-- Lista de productos en el carrito -->
+          <div id="cart-items-list" class="space-y-3"></div>
+
+          <!-- Modalidad de entrega -->
+          <div class="space-y-2.5 pt-2 border-t border-noirBorder">
+            <label class="block font-heading font-semibold text-sm text-warmWhite">Modalidad de entrega</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <label class="cursor-pointer">
+                <input type="radio" name="deliveryMode" value="retiro" class="peer sr-only" checked />
+                <div class="p-3 rounded-2xl bg-noirBg border border-noirBorder peer-checked:border-amberGold peer-checked:bg-amberGold/10 transition-all">
+                  <p class="text-sm font-semibold text-warmWhite">Retiro en local</p>
+                  <p class="text-xs text-emerald-400 font-medium mt-0.5">Sin cargo</p>
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="deliveryMode" value="envio" class="peer sr-only" />
+                <div class="p-3 rounded-2xl bg-noirBg border border-noirBorder peer-checked:border-amberGold peer-checked:bg-amberGold/10 transition-all">
+                  <p class="text-sm font-semibold text-warmWhite">Envío a domicilio</p>
+                  <p class="text-xs text-amberGold font-medium mt-0.5">+ $ 2.000</p>
+                </div>
+              </label>
+            </div>
+
+            <!-- Campo dirección (visible solo si elige Envío a domicilio) -->
+            <div id="address-wrapper" class="hidden pt-1">
+              <label for="customer-address" class="block text-xs font-medium text-smokeGray mb-1.5">Dirección de entrega *</label>
+              <input
+                id="customer-address"
+                type="text"
+                placeholder="Ej: Av. Vergara 2350, Depto 3B (entre calles...)"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-noirBg border border-noirBorder focus:border-amberGold focus:outline-none text-sm text-warmWhite placeholder:text-smokeGray/60"
+              />
+            </div>
+          </div>
+
+          <!-- Medio de pago -->
+          <div class="space-y-2.5">
+            <label class="block font-heading font-semibold text-sm text-warmWhite">Medio de pago</label>
+            <div class="grid grid-cols-3 gap-2">
+              <label class="cursor-pointer">
+                <input type="radio" name="paymentMethod" value="Efectivo" class="peer sr-only" checked />
+                <div class="py-2.5 px-2 text-center rounded-xl bg-noirBg border border-noirBorder peer-checked:border-amberGold peer-checked:bg-amberGold/10 text-xs sm:text-sm font-medium text-warmWhite transition-all">
+                  Efectivo
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="paymentMethod" value="Transferencia" class="peer sr-only" />
+                <div class="py-2.5 px-2 text-center rounded-xl bg-noirBg border border-noirBorder peer-checked:border-amberGold peer-checked:bg-amberGold/10 text-xs sm:text-sm font-medium text-warmWhite transition-all">
+                  Transferencia
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="paymentMethod" value="Mercado Pago" class="peer sr-only" />
+                <div class="py-2.5 px-2 text-center rounded-xl bg-noirBg border border-noirBorder peer-checked:border-amberGold peer-checked:bg-amberGold/10 text-xs sm:text-sm font-medium text-warmWhite transition-all">
+                  Mercado Pago
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Datos del cliente y aclaraciones -->
+          <div class="grid grid-cols-1 gap-3">
+            <div>
+              <label for="customer-name" class="block text-xs font-medium text-smokeGray mb-1.5">Tu nombre *</label>
+              <input
+                id="customer-name"
+                type="text"
+                placeholder="Ej: Lucas"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-noirBg border border-noirBorder focus:border-amberGold focus:outline-none text-sm text-warmWhite placeholder:text-smokeGray/60"
+              />
+            </div>
+            <div>
+              <label for="customer-notes" class="block text-xs font-medium text-smokeGray mb-1.5">Notas / Aclaraciones (opcional)</label>
+              <textarea
+                id="customer-notes"
+                rows="2"
+                placeholder="Ej: Sin cebolla, punto de carne jugoso, timbre no anda..."
+                class="w-full px-3.5 py-2.5 rounded-xl bg-noirBg border border-noirBorder focus:border-amberGold focus:outline-none text-sm text-warmWhite placeholder:text-smokeGray/60 resize-none"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Mensaje de validación en línea (sin usar alert()) -->
+          <p id="cart-error-msg" class="hidden text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/30 rounded-xl px-3.5 py-2.5"></p>
+
+          <!-- Totales -->
+          <div class="rounded-2xl bg-noirBg border border-noirBorder p-4 space-y-2 text-sm">
+            <div class="flex items-center justify-between text-smokeGray">
+              <span>Subtotal</span>
+              <span id="summary-subtotal">$ 0</span>
+            </div>
+            <div class="flex items-center justify-between text-smokeGray">
+              <span>Envío</span>
+              <span id="summary-delivery" class="text-emerald-400">Gratis</span>
+            </div>
+            <div class="pt-2 border-t border-noirBorder flex items-center justify-between font-heading font-bold text-lg text-warmWhite">
+              <span>Total</span>
+              <span id="summary-total" class="text-amberGold">$ 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISTA B: SIMULADOR DE CHAT DE WHATSAPP -->
+        <div id="cart-step-preview" class="hidden space-y-4">
+          <div class="rounded-2xl bg-indigo-500/10 border border-indigo-400/30 p-3.5 text-xs text-slate-200 leading-relaxed">
+            <strong class="text-indigo-300">Simulador de pedido en vivo:</strong> Así recibe tu local el pedido ya ordenado y listo para preparar, <strong>directo en tu WhatsApp y sin pagar comisiones</strong> a apps de terceros.
+          </div>
+
+          <!-- Ventana estilo WhatsApp Dark -->
+          <div class="rounded-2xl overflow-hidden border border-noirBorder shadow-lg">
+            <!-- Header de chat -->
+            <div class="bg-[#202C33] px-4 py-3 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-noirBg border border-amberGold/50 flex items-center justify-center text-amberGold font-heading font-bold text-xs">
+                BN
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-white leading-tight">BRASA NOIR — Pedidos</p>
+                <p class="text-[11px] text-emerald-400">en línea</p>
+              </div>
+            </div>
+
+            <!-- Burbuja del mensaje enviado -->
+            <div class="wa-chat-bg p-4">
+              <div class="ml-auto max-w-[92%] rounded-2xl rounded-tr-sm bg-[#005C4B] text-[#E9EDEF] px-3.5 py-2.5 shadow-sm">
+                <pre id="wa-preview-text" class="font-sans text-xs sm:text-[13px] whitespace-pre-wrap leading-relaxed"></pre>
+                <div class="text-right text-[10px] text-[#8696A0] mt-1 flex items-center justify-end gap-1">
+                  <span id="wa-preview-time">21:15</span>
+                  <span class="text-sky-400 font-bold">✓✓</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer fijo del Modal -->
+      <div class="p-4 sm:p-5 border-t border-noirBorder bg-noirCard shrink-0">
+        <!-- Botón paso formulario -->
+        <div id="cart-footer-form">
+          <button
+            id="simulate-wa-btn"
+            type="button"
+            class="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-2xl bg-waGreen hover:bg-waGreenHover text-[#020617] font-heading font-bold text-sm sm:text-base shadow-md transition-all active:scale-[0.99]"
+          >
+            <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.438 1.344-2 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.344-1.766-.656-3.109-1.344-5.141-4.5-5.297-4.703-.156-.203-1.266-1.688-1.266-3.219s.797-2.281 1.078-2.594c.281-.312.625-.391.828-.391.203 0 .422.016.609.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.766 2.203 1.219 1.094 2.25 1.422 2.562 1.578.312.156.5.141.688-.078.188-.219.797-.938 1.016-1.25.219-.312.438-.266.734-.156.297.109 1.891.891 2.219 1.047.328.156.547.234.625.375.078.141.078.812-.172 1.516z"/>
+            </svg>
+            <span>Enviar pedido por WhatsApp</span>
+          </button>
+        </div>
+
+        <!-- Botones paso simulador -->
+        <div id="cart-footer-preview" class="hidden flex flex-col sm:flex-row gap-2.5">
+          <button
+            id="back-to-cart-btn"
+            type="button"
+            class="px-4 py-3 rounded-xl bg-noirBg hover:bg-noirBorder border border-noirBorder text-warmWhite text-sm font-semibold transition-colors"
+          >
+            &larr; Editar pedido
+          </button>
+          <a
+            id="real-wa-send-btn"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-waGreen hover:bg-waGreenHover text-[#020617] font-heading font-bold text-sm transition-colors"
+          >
+            <span>Probar envío real por WhatsApp</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT MODULAR: CONFIG, FILTROS, CARRITO Y SIMULADOR WHATSAPP     -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * =====================================================================
+     * CONFIGURACIÓN CENTRALIZADA DE LA DEMO — BRASA NOIR
+     * Editá los datos del local, precios o platos directamente acá.
+     * =====================================================================
+     */
+    const CONFIG = {
+      serebiWhatsapp: '5491134441993',
+      restaurant: {
+        name: 'BRASA NOIR — Burger & Grill',
+        address: 'Av. Jauretche 1420',
+        hours: '19:00 a 00:30 hs',
+        deliveryCost: 2000
+      },
+      categories: ['Todos', 'Burgers', 'Entradas', 'Bebidas', 'Postres'],
+      dietaryTags: ['Más pedido', 'Veggie', 'Sin TACC', 'Picante'],
+      menu: [
+        {
+          id: 'smash-doble-cheddar',
+          name: 'Smash Doble Cheddar',
+          category: 'Burgers',
+          price: 12500,
+          description: 'Doble medallón smash 110g con costra crocante, cuádruple cheddar fundido, cebolla brunoise y salsa de la casa en pan de papa.',
+          tags: ['Más pedido'],
+          iconType: 'burger'
+        },
+        {
+          id: 'brasa-ahumada',
+          name: 'Brasa Ahumada',
+          category: 'Burgers',
+          price: 13800,
+          description: 'Doble carne a la parrilla, panceta ahumada crocante, cheddar, aros de cebolla y barbacoa casera al whisky.',
+          tags: ['Más pedido'],
+          iconType: 'burger-smoke'
+        },
+        {
+          id: 'trufa-portobello',
+          name: 'Trufa & Portobello',
+          category: 'Burgers',
+          price: 12900,
+          description: 'Medallón artesanal de portobellos grillados y porotos negros, queso provoleta, rúcula fresca y alioli de trufa.',
+          tags: ['Veggie'],
+          iconType: 'burger-veggie'
+        },
+        {
+          id: 'pollo-crispy-picante',
+          name: 'Pollo Crispy Picante',
+          category: 'Burgers',
+          price: 12200,
+          description: 'Suprema rebozada súper crocante, glaseado picante de miel y sriracha, coleslaw fresco y pepinillos en pan brioche.',
+          tags: ['Picante'],
+          iconType: 'burger-spicy'
+        },
+        {
+          id: 'papas-bravas-alioli',
+          name: 'Papas Bravas con Alioli',
+          category: 'Entradas',
+          price: 6800,
+          description: 'Papas rústicas doble cocción con pimentón ahumado de la Vera, salsa brava suave y alioli de ajo asado.',
+          tags: ['Veggie', 'Sin TACC', 'Picante'],
+          iconType: 'fries'
+        },
+        {
+          id: 'bastones-muzzarella',
+          name: 'Bastones de Muzzarella',
+          category: 'Entradas',
+          price: 7400,
+          description: '6 bastones crocantes rellenos de muzzarella hilada, acompañados con dip de salsa fileto especiada.',
+          tags: ['Más pedido', 'Veggie'],
+          iconType: 'sticks'
+        },
+        {
+          id: 'aros-cebolla',
+          name: 'Aros de Cebolla',
+          category: 'Entradas',
+          price: 6200,
+          description: 'Aros de cebolla dorados en rebozado de cerveza negra, servidos con barbacoa ahumada.',
+          tags: ['Veggie'],
+          iconType: 'rings'
+        },
+        {
+          id: 'pinta-ipa',
+          name: 'Pinta IPA Artesanal',
+          category: 'Bebidas',
+          price: 5500,
+          description: '500 ml de American IPA tirada bien fría, notas cítricas y amargor equilibrado.',
+          tags: ['Más pedido'],
+          iconType: 'beer'
+        },
+        {
+          id: 'limonada-menta',
+          name: 'Limonada Menta & Jengibre',
+          category: 'Bebidas',
+          price: 4200,
+          description: 'Limonada fresca exprimida en el momento con hojas de menta, jengibre rallado y hielo picado (500 ml).',
+          tags: ['Veggie', 'Sin TACC'],
+          iconType: 'lemonade'
+        },
+        {
+          id: 'agua-gaseosa',
+          name: 'Agua / Gaseosa 500ml',
+          category: 'Bebidas',
+          price: 3000,
+          description: 'Línea Coca-Cola (Original o Sin Azúcar), Sprite o Agua mineral con o sin gas.',
+          tags: ['Veggie', 'Sin TACC'],
+          iconType: 'soda'
+        },
+        {
+          id: 'chocotorta-frasco',
+          name: 'Chocotorta en Frasco',
+          category: 'Postres',
+          price: 6500,
+          description: 'Capas de galletitas de chocolate humedecidas en café, crema de dulce de leche artesanal y ganache semiamargo.',
+          tags: ['Más pedido', 'Veggie'],
+          iconType: 'dessert-jar'
+        },
+        {
+          id: 'brownie-helado',
+          name: 'Brownie Tibio con Helado',
+          category: 'Postres',
+          price: 7200,
+          description: 'Brownie húmedo de chocolate 70% libre de gluten servido tibio con bocha de americana y salsa de caramelo salado.',
+          tags: ['Veggie', 'Sin TACC'],
+          iconType: 'brownie'
+        }
+      ]
+    };
+
+    // Estado reactivo de la aplicación
+    const state = {
+      activeCategory: 'Todos',
+      activeTags: new Set(),
+      searchQuery: '',
+      cart: {} // { [productId]: cantidad }
+    };
+
+    /**
+     * Formatea un monto numérico a moneda argentina (ej: "$ 12.500").
+     */
+    function formatARS(amount) {
+      return '$ ' + Number(amount).toLocaleString('es-AR');
+    }
+
+    /**
+     * Devuelve el estilo visual de cada etiqueta dietaria o destacada.
+     */
+    function getTagBadgeHTML(tag) {
+      const styles = {
+        'Más pedido': 'bg-amberGold/15 text-amberGold border-amberGold/35',
+        'Veggie': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/35',
+        'Sin TACC': 'bg-sky-500/15 text-sky-400 border-sky-500/35',
+        'Picante': 'bg-orange-500/15 text-orange-400 border-orange-500/35'
+      };
+      const cls = styles[tag] || 'bg-noirBg text-smokeGray border-noirBorder';
+      return `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cls}">${tag}</span>`;
+    }
+
+    /**
+     * Genera una ilustración SVG minimalista oscura con acento ámbar para cada plato.
+     * Evita dependencias externas y garantiza carga instantánea.
+     */
+    function getDishArtworkSVG(iconType) {
+      if (iconType.startsWith('burger')) {
+        const accent = iconType === 'burger-veggie' ? '#34D399' : iconType === 'burger-spicy' ? '#FB923C' : '#F59E0B';
+        return `
+          <svg viewBox="0 0 80 80" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="80" height="80" rx="16" fill="#111115"/>
+            <circle cx="40" cy="40" r="28" fill="${accent}" fill-opacity="0.1"/>
+            <!-- Pan superior -->
+            <path d="M18 37C18 27 27 22 40 22C53 22 62 27 62 37H18Z" fill="${accent}" fill-opacity="0.88"/>
+            <circle cx="31" cy="29" r="1.4" fill="#0C0C0E"/>
+            <circle cx="40" cy="27" r="1.4" fill="#0C0C0E"/>
+            <circle cx="49" cy="29" r="1.4" fill="#0C0C0E"/>
+            <!-- Cheddar derretido -->
+            <path d="M17 40H63L56 46L48 42L40 47L32 42L24 46L17 40Z" fill="#FDE047"/>
+            <!-- Medallón -->
+            <rect x="18" y="45" width="44" height="7" rx="3.5" fill="#7C2D12"/>
+            <!-- Pan inferior -->
+            <path d="M20 54H60C60 58 56 60 40 60C24 60 20 58 20 54Z" fill="${accent}" fill-opacity="0.72"/>
+          </svg>
+        `;
+      }
+
+      if (iconType === 'fries' || iconType === 'sticks' || iconType === 'rings') {
+        return `
+          <svg viewBox="0 0 80 80" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="80" height="80" rx="16" fill="#111115"/>
+            <circle cx="40" cy="40" r="28" fill="#EA580C" fill-opacity="0.12"/>
+            <rect x="26" y="21" width="5" height="24" rx="2.5" fill="#FDE047"/>
+            <rect x="34" y="17" width="5" height="28" rx="2.5" fill="#F59E0B"/>
+            <rect x="42" y="19" width="5" height="26" rx="2.5" fill="#FDE047"/>
+            <rect x="50" y="23" width="5" height="22" rx="2.5" fill="#F59E0B"/>
+            <path d="M22 39H58L53 61H27L22 39Z" fill="#26262E" stroke="#F59E0B" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="40" cy="50" r="3.5" fill="#EA580C"/>
+          </svg>
+        `;
+      }
+
+      if (iconType === 'beer' || iconType === 'lemonade' || iconType === 'soda') {
+        const drinkColor = iconType === 'lemonade' ? '#34D399' : iconType === 'soda' ? '#38BDF8' : '#F59E0B';
+        return `
+          <svg viewBox="0 0 80 80" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="80" height="80" rx="16" fill="#111115"/>
+            <circle cx="40" cy="40" r="28" fill="${drinkColor}" fill-opacity="0.11"/>
+            <path d="M27 26H53L49 60H31L27 26Z" fill="${drinkColor}" fill-opacity="0.28" stroke="${drinkColor}" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M29 36H51L48.5 58H31.5L29 36Z" fill="${drinkColor}" fill-opacity="0.72"/>
+            <circle cx="34" cy="24" r="4" fill="#FAF8F5" fill-opacity="0.85"/>
+            <circle cx="42" cy="22" r="5" fill="#FAF8F5" fill-opacity="0.9"/>
+            <circle cx="48" cy="25" r="3.5" fill="#FAF8F5" fill-opacity="0.8"/>
+          </svg>
+        `;
+      }
+
+      // Postres
+      return `
+        <svg viewBox="0 0 80 80" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="80" height="80" rx="16" fill="#111115"/>
+          <circle cx="40" cy="40" r="28" fill="#F59E0B" fill-opacity="0.1"/>
+          <rect x="22" y="39" width="36" height="19" rx="5" fill="#5C2D16" stroke="#F59E0B" stroke-width="1.6"/>
+          <circle cx="40" cy="33" r="10" fill="#FAF8F5"/>
+          <path d="M33 36C36 33 44 33 47 36" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="40" cy="22" r="2.5" fill="#EA580C"/>
+        </svg>
+      `;
+    }
+
+    /**
+     * Renderiza las pestañas de categorías horizontales.
+     */
+    function renderCategoryTabs() {
+      const container = document.getElementById('category-tabs');
+      if (!container) return;
+
+      container.innerHTML = CONFIG.categories.map((cat) => {
+        const isActive = state.activeCategory === cat;
+        const activeClasses = isActive
+          ? 'bg-amberGold text-noirBg font-bold border-amberGold shadow-sm'
+          : 'bg-noirCard text-smokeGray hover:text-warmWhite border-noirBorder hover:border-smokeGray/40 font-medium';
+
+        return `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${isActive}"
+            data-category="${cat}"
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm border transition-all shrink-0 ${activeClasses}"
+          >
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Renderiza los chips de filtro dietario combinables.
+     */
+    function renderDietaryChips() {
+      const container = document.getElementById('dietary-chips');
+      if (!container) return;
+
+      container.innerHTML = CONFIG.dietaryTags.map((tag) => {
+        const isSelected = state.activeTags.has(tag);
+        const classes = isSelected
+          ? 'bg-fireOrange/20 text-amberGold border-amberGold font-semibold'
+          : 'bg-noirCard text-smokeGray hover:text-warmWhite border-noirBorder font-medium';
+
+        return `
+          <button
+            type="button"
+            data-dietary-tag="${tag}"
+            class="px-3 py-1 rounded-full text-xs border transition-all shrink-0 ${classes}"
+          >
+            ${isSelected ? '✓ ' : ''}${tag}
+          </button>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Filtra los platos de CONFIG.menu según categoría, chips dietarios y buscador.
+     */
+    function getFilteredMenu() {
+      const query = state.searchQuery.trim().toLowerCase();
+
+      return CONFIG.menu.filter((item) => {
+        const matchCategory = state.activeCategory === 'Todos' || item.category === state.activeCategory;
+        const matchTags = Array.from(state.activeTags).every((tag) => item.tags.includes(tag));
+        const matchQuery = !query
+          || item.name.toLowerCase().includes(query)
+          || item.description.toLowerCase().includes(query)
+          || item.category.toLowerCase().includes(query)
+          || item.tags.some((t) => t.toLowerCase().includes(query));
+
+        return matchCategory && matchTags && matchQuery;
+      });
+    }
+
+    /**
+     * Renderiza la grilla de platos con sus botones interactivos "+ Agregar" o "- 1 +".
+     */
+    function renderMenu() {
+      const grid = document.getElementById('menu-grid');
+      const emptyState = document.getElementById('empty-state');
+      const countEl = document.getElementById('results-count');
+      const resetBtn = document.getElementById('reset-filters-btn');
+      if (!grid) return;
+
+      const items = getFilteredMenu();
+      const hasFilters = state.activeCategory !== 'Todos' || state.activeTags.size > 0 || state.searchQuery.trim() !== '';
+
+      if (countEl) {
+        countEl.textContent = items.length === 1 ? 'Mostrando 1 plato' : `Mostrando ${items.length} platos`;
+      }
+      if (resetBtn) {
+        resetBtn.classList.toggle('hidden', !hasFilters);
+      }
+
+      if (items.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      grid.innerHTML = items.map((item) => {
+        const qty = state.cart[item.id] || 0;
+        const tagsHTML = item.tags.map(getTagBadgeHTML).join('');
+
+        const actionHTML = qty === 0
+          ? `<button
+              type="button"
+              data-cart-add="${item.id}"
+              class="px-4 py-2 rounded-xl bg-amberGold hover:bg-fireOrange text-noirBg font-heading font-bold text-xs sm:text-sm transition-colors shrink-0"
+            >
+              + Agregar
+            </button>`
+          : `<div class="inline-flex items-center gap-2 bg-noirBg border border-amberGold/50 rounded-xl p-1 shrink-0">
+              <button
+                type="button"
+                data-cart-dec="${item.id}"
+                aria-label="Restar una unidad de ${item.name}"
+                class="w-7 h-7 rounded-lg bg-noirCard hover:bg-noirBorder text-warmWhite font-bold text-sm flex items-center justify-center transition-colors"
+              >
+                &minus;
+              </button>
+              <span class="min-w-[20px] text-center font-heading font-bold text-sm text-amberGold">${qty}</span>
+              <button
+                type="button"
+                data-cart-inc="${item.id}"
+                aria-label="Sumar una unidad de ${item.name}"
+                class="w-7 h-7 rounded-lg bg-amberGold hover:bg-fireOrange text-noirBg font-bold text-sm flex items-center justify-center transition-colors"
+              >
+                +
+              </button>
+            </div>`;
+
+        return `
+          <article class="bg-noirCard hover:bg-noirCardHover rounded-3xl border border-noirBorder p-4 sm:p-5 shadow-cardDark transition-colors flex gap-4 items-start justify-between">
+            <!-- Ilustración SVG del plato -->
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border border-noirBorder shrink-0">
+              ${getDishArtworkSVG(item.iconType)}
+            </div>
+
+            <!-- Información y controles -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between min-h-[88px]">
+              <div>
+                <div class="flex flex-wrap items-center gap-1.5 mb-1.5">
+                  ${tagsHTML}
+                </div>
+                <h3 class="font-heading font-bold text-base sm:text-lg text-warmWhite leading-snug">
+                  ${item.name}
+                </h3>
+                <p class="text-xs sm:text-sm text-smokeGray leading-relaxed mt-1">
+                  ${item.description}
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between gap-2 mt-4 pt-3 border-t border-noirBorder/70">
+                <span class="font-heading font-extrabold text-base sm:text-lg text-amberGold">
+                  ${formatARS(item.price)}
+                </span>
+                ${actionHTML}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Calcula cantidad total de ítems, subtotal, costo de envío y total final.
+     */
+    function getCartTotals() {
+      let itemCount = 0;
+      let subtotal = 0;
+
+      Object.entries(state.cart).forEach(([id, qty]) => {
+        const product = CONFIG.menu.find((p) => p.id === id);
+        if (product && qty > 0) {
+          itemCount += qty;
+          subtotal += product.price * qty;
+        }
+      });
+
+      const deliveryRadio = document.querySelector('input[name="deliveryMode"]:checked');
+      const isDelivery = deliveryRadio && deliveryRadio.value === 'envio';
+      const deliveryFee = isDelivery && itemCount > 0 ? CONFIG.restaurant.deliveryCost : 0;
+
+      return {
+        itemCount,
+        subtotal,
+        deliveryFee,
+        isDelivery,
+        total: subtotal + deliveryFee
+      };
+    }
+
+    /**
+     * Actualiza la barra flotante inferior y el resumen dentro del modal del carrito.
+     */
+    function updateCartUI() {
+      const { itemCount, subtotal, deliveryFee, isDelivery, total } = getCartTotals();
+
+      const floatingBar = document.getElementById('floating-cart-bar');
+      const floatingCount = document.getElementById('floating-cart-count');
+      const floatingTotal = document.getElementById('floating-cart-total');
+
+      if (floatingBar && floatingCount && floatingTotal) {
+        floatingCount.textContent = String(itemCount);
+        floatingTotal.textContent = formatARS(total);
+
+        if (itemCount > 0) {
+          floatingBar.classList.remove('translate-y-24', 'opacity-0');
+          floatingBar.classList.add('translate-y-0', 'opacity-100');
+        } else {
+          floatingBar.classList.add('translate-y-24', 'opacity-0');
+          floatingBar.classList.remove('translate-y-0', 'opacity-100');
+        }
+      }
+
+      // Actualizar resumen del modal si está abierto
+      const listEl = document.getElementById('cart-items-list');
+      const subEl = document.getElementById('summary-subtotal');
+      const delEl = document.getElementById('summary-delivery');
+      const totEl = document.getElementById('summary-total');
+
+      if (listEl) {
+        const entries = Object.entries(state.cart).filter(([, qty]) => qty > 0);
+        if (entries.length === 0) {
+          listEl.innerHTML = `<p class="text-sm text-smokeGray text-center py-4">Tu carrito está vacío.</p>`;
+        } else {
+          listEl.innerHTML = entries.map(([id, qty]) => {
+            const product = CONFIG.menu.find((p) => p.id === id);
+            if (!product) return '';
+            return `
+              <div class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-noirBg border border-noirBorder">
+                <div class="min-w-0">
+                  <p class="text-sm font-semibold text-warmWhite truncate">${product.name}</p>
+                  <p class="text-xs text-amberGold font-semibold mt-0.5">${formatARS(product.price * qty)}</p>
+                </div>
+                <div class="inline-flex items-center gap-2 shrink-0">
+                  <button type="button" data-cart-dec="${product.id}" class="w-7 h-7 rounded-lg bg-noirCard hover:bg-noirBorder text-warmWhite font-bold text-sm flex items-center justify-center">&minus;</button>
+                  <span class="min-w-[18px] text-center font-heading font-bold text-sm text-warmWhite">${qty}</span>
+                  <button type="button" data-cart-inc="${product.id}" class="w-7 h-7 rounded-lg bg-amberGold hover:bg-fireOrange text-noirBg font-bold text-sm flex items-center justify-center">+</button>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      if (subEl) subEl.textContent = formatARS(subtotal);
+      if (delEl) {
+        delEl.textContent = isDelivery ? formatARS(deliveryFee) : 'Gratis';
+        delEl.className = isDelivery ? 'text-amberGold font-medium' : 'text-emerald-400 font-medium';
+      }
+      if (totEl) totEl.textContent = formatARS(total);
+    }
+
+    /**
+     * Modifica la cantidad de un producto en el carrito y refresca menú + carrito.
+     */
+    function changeCartItem(productId, delta) {
+      const nextQty = (state.cart[productId] || 0) + delta;
+      if (nextQty <= 0) {
+        delete state.cart[productId];
+      } else {
+        state.cart[productId] = nextQty;
+      }
+
+      renderMenu();
+      updateCartUI();
+
+      // Si el carrito queda vacío mientras el modal está abierto, cerramos el modal
+      if (Object.keys(state.cart).length === 0) {
+        closeCartModal();
+      }
+    }
+
+    /**
+     * Genera el texto formateado de WhatsApp con emojis, detalle y total.
+     */
+    function buildOrderWhatsAppMessage() {
+      const { subtotal, deliveryFee, isDelivery, total } = getCartTotals();
+      const name = document.getElementById('customer-name').value.trim();
+      const address = document.getElementById('customer-address').value.trim();
+      const notes = document.getElementById('customer-notes').value.trim();
+      const paymentRadio = document.querySelector('input[name="paymentMethod"]:checked');
+      const payment = paymentRadio ? paymentRadio.value : 'Efectivo';
+
+      const lines = [
+        `🔥 *NUEVO PEDIDO — ${CONFIG.restaurant.name}*`,
+        ``,
+        `👤 *Cliente:* ${name}`,
+        `🛵 *Modalidad:* ${isDelivery ? `Envío a domicilio` : `Retiro en local (${CONFIG.restaurant.address})`}`
+      ];
+
+      if (isDelivery) {
+        lines.push(`📍 *Dirección:* ${address}`);
+      }
+
+      lines.push(`💳 *Pago:* ${payment}`, ``, `🍔 *Detalle del pedido:*`);
+
+      Object.entries(state.cart).forEach(([id, qty]) => {
+        const product = CONFIG.menu.find((p) => p.id === id);
+        if (product && qty > 0) {
+          lines.push(`• ${qty}x ${product.name} — ${formatARS(product.price * qty)}`);
+        }
+      });
+
+      lines.push(``);
+      lines.push(`Subtotal: ${formatARS(subtotal)}`);
+      if (isDelivery) {
+        lines.push(`Envío: ${formatARS(deliveryFee)}`);
+      }
+      lines.push(`💰 *TOTAL: ${formatARS(total)}*`);
+
+      if (notes) {
+        lines.push(``, `📝 *Aclaraciones:* ${notes}`);
+      }
+
+      lines.push(``, `_Enviado desde la demo Menú Digital de Serebi Lab_`);
+      return lines.join('\n');
+    }
+
+    /**
+     * Controla el cambio entre el formulario del carrito y el simulador de WhatsApp.
+     */
+    function setCartModalStep(step) {
+      const formStep = document.getElementById('cart-step-form');
+      const previewStep = document.getElementById('cart-step-preview');
+      const footerForm = document.getElementById('cart-footer-form');
+      const footerPreview = document.getElementById('cart-footer-preview');
+      const titleEl = document.getElementById('cart-modal-title');
+      const clearBtn = document.getElementById('clear-cart-btn');
+
+      const isPreview = step === 'preview';
+      formStep.classList.toggle('hidden', isPreview);
+      previewStep.classList.toggle('hidden', !isPreview);
+      footerForm.classList.toggle('hidden', isPreview);
+      footerPreview.classList.toggle('hidden', !isPreview);
+      clearBtn.classList.toggle('hidden', isPreview);
+      titleEl.textContent = isPreview ? 'Vista previa del WhatsApp' : 'Tu Pedido';
+    }
+
+    /**
+     * Abre y cierra el modal de Carrito con transiciones suaves.
+     */
+    function openCartModal() {
+      const modal = document.getElementById('cart-modal');
+      const panel = document.getElementById('cart-modal-panel');
+      if (!modal || !panel) return;
+
+      setCartModalStep('form');
+      document.getElementById('cart-error-msg').classList.add('hidden');
+      updateCartUI();
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        panel.classList.remove('translate-y-6', 'sm:scale-95', 'opacity-0');
+      });
+    }
+
+    function closeCartModal() {
+      const modal = document.getElementById('cart-modal');
+      const panel = document.getElementById('cart-modal-panel');
+      if (!modal || !panel || modal.classList.contains('hidden')) return;
+
+      modal.classList.add('opacity-0');
+      panel.classList.add('translate-y-6', 'sm:scale-95', 'opacity-0');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 240);
+    }
+
+    /**
+     * Abre y cierra el modal de QR de mesa imprimible.
+     */
+    function openQrModal() {
+      const modal = document.getElementById('qr-modal');
+      const panel = document.getElementById('qr-modal-panel');
+      if (!modal || !panel) return;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        panel.classList.remove('scale-95', 'opacity-0');
+      });
+    }
+
+    function closeQrModal() {
+      const modal = document.getElementById('qr-modal');
+      const panel = document.getElementById('qr-modal-panel');
+      if (!modal || !panel || modal.classList.contains('hidden')) return;
+
+      modal.classList.add('opacity-0');
+      panel.classList.add('scale-95', 'opacity-0');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 240);
+    }
+
+    /**
+     * Limpia búsqueda, categoría y chips dietarios activos.
+     */
+    function resetAllFilters() {
+      state.activeCategory = 'Todos';
+      state.activeTags.clear();
+      state.searchQuery = '';
+
+      const searchInput = document.getElementById('search-input');
+      const clearSearchBtn = document.getElementById('clear-search-btn');
+      if (searchInput) searchInput.value = '';
+      if (clearSearchBtn) clearSearchBtn.classList.add('hidden');
+
+      renderCategoryTabs();
+      renderDietaryChips();
+      renderMenu();
+    }
+
+    /**
+     * Inicializa todos los listeners de eventos de forma delegada y segura.
+     */
+    function initEvents() {
+      // Buscador en tiempo real
+      const searchInput = document.getElementById('search-input');
+      const clearSearchBtn = document.getElementById('clear-search-btn');
+
+      searchInput.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        clearSearchBtn.classList.toggle('hidden', state.searchQuery.trim() === '');
+        renderMenu();
+      });
+
+      clearSearchBtn.addEventListener('click', () => {
+        state.searchQuery = '';
+        searchInput.value = '';
+        clearSearchBtn.classList.add('hidden');
+        renderMenu();
+        searchInput.focus();
+      });
+
+      // Botones de limpiar filtros
+      document.getElementById('reset-filters-btn').addEventListener('click', resetAllFilters);
+      document.getElementById('empty-reset-btn').addEventListener('click', resetAllFilters);
+
+      // Delegación para categorías, filtros dietarios y botones del carrito
+      document.addEventListener('click', (e) => {
+        const catBtn = e.target.closest('[data-category]');
+        if (catBtn) {
+          state.activeCategory = catBtn.getAttribute('data-category');
+          renderCategoryTabs();
+          renderMenu();
+          return;
+        }
+
+        const tagBtn = e.target.closest('[data-dietary-tag]');
+        if (tagBtn) {
+          const tag = tagBtn.getAttribute('data-dietary-tag');
+          if (state.activeTags.has(tag)) {
+            state.activeTags.delete(tag);
+          } else {
+            state.activeTags.add(tag);
+          }
+          renderDietaryChips();
+          renderMenu();
+          return;
+        }
+
+        const addBtn = e.target.closest('[data-cart-add]');
+        if (addBtn) {
+          changeCartItem(addBtn.getAttribute('data-cart-add'), 1);
+          return;
+        }
+
+        const incBtn = e.target.closest('[data-cart-inc]');
+        if (incBtn) {
+          changeCartItem(incBtn.getAttribute('data-cart-inc'), 1);
+          return;
+        }
+
+        const decBtn = e.target.closest('[data-cart-dec]');
+        if (decBtn) {
+          changeCartItem(decBtn.getAttribute('data-cart-dec'), -1);
+        }
+      });
+
+      // Modal QR de mesa
+      document.getElementById('open-qr-btn').addEventListener('click', openQrModal);
+      document.getElementById('close-qr-btn').addEventListener('click', closeQrModal);
+      document.getElementById('qr-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'qr-modal') closeQrModal();
+      });
+
+      // Modal Carrito
+      document.getElementById('open-cart-btn').addEventListener('click', openCartModal);
+      document.getElementById('close-cart-btn').addEventListener('click', closeCartModal);
+      document.getElementById('cart-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'cart-modal') closeCartModal();
+      });
+
+      // Vaciar carrito
+      document.getElementById('clear-cart-btn').addEventListener('click', () => {
+        state.cart = {};
+        renderMenu();
+        updateCartUI();
+        closeCartModal();
+      });
+
+      // Cambio de modalidad (Retiro vs Envío)
+      document.querySelectorAll('input[name="deliveryMode"]').forEach((radio) => {
+        radio.addEventListener('change', () => {
+          const isDelivery = radio.value === 'envio' && radio.checked;
+          document.getElementById('address-wrapper').classList.toggle('hidden', !isDelivery);
+          updateCartUI();
+        });
+      });
+
+      // Validar y mostrar vista previa de WhatsApp
+      document.getElementById('simulate-wa-btn').addEventListener('click', () => {
+        const errorEl = document.getElementById('cart-error-msg');
+        const nameInput = document.getElementById('customer-name');
+        const addressInput = document.getElementById('customer-address');
+        const { isDelivery } = getCartTotals();
+
+        if (!nameInput.value.trim()) {
+          errorEl.textContent = 'Por favor, ingresá tu nombre para armar el pedido.';
+          errorEl.classList.remove('hidden');
+          nameInput.focus();
+          return;
+        }
+
+        if (isDelivery && !addressInput.value.trim()) {
+          errorEl.textContent = 'Por favor, ingresá tu dirección para el envío a domicilio.';
+          errorEl.classList.remove('hidden');
+          addressInput.focus();
+          return;
+        }
+
+        errorEl.classList.add('hidden');
+
+        const message = buildOrderWhatsAppMessage();
+        document.getElementById('wa-preview-text').textContent = message;
+
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('wa-preview-time').textContent = `${hh}:${mm}`;
+
+        const waUrl = `https://wa.me/${CONFIG.serebiWhatsapp}?text=${encodeURIComponent(message)}`;
+        document.getElementById('real-wa-send-btn').setAttribute('href', waUrl);
+
+        setCartModalStep('preview');
+      });
+
+      // Volver a editar pedido desde la vista previa
+      document.getElementById('back-to-cart-btn').addEventListener('click', () => {
+        setCartModalStep('form');
+      });
+
+      // Cerrar modales con tecla Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeQrModal();
+          closeCartModal();
+        }
+      });
+    }
+
+    // Inicialización general segura al cargar el DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderCategoryTabs();
+        renderDietaryChips();
+        renderMenu();
+        updateCartUI();
+        initEvents();
+      } catch (error) {
+        console.error('Error al inicializar BRASA NOIR:', error);
+      }
+    });
+  </script>
+</body>
+</html>

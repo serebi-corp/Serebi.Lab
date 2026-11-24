@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="es-AR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estudio Vértice — Contadores Públicos &amp; Asesoría Integral | Demo Serebi Lab</title>
+  <meta name="description" content="Estudio Vértice: asesoramiento contable, impositivo, laboral y societario para PyMEs, empresas y profesionales en toda Argentina. Demo Web Institucional de Serebi Lab." />
+
+  <!-- Google Fonts: Merriweather (Títulos sobrios) y Plus Jakarta Sans (UI y cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS vía CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Merriweather', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            navy: '#0F2942',
+            navyDark: '#091B2D',
+            navyLight: '#1A3E5E',
+            gold: '#C59B48',
+            goldHover: '#B08736',
+            goldSoft: '#FBF6EC',
+            slateBg: '#F8FAFC',
+            ink: '#1E293B',
+            inkMuted: '#475569',
+            serebiDark: '#0B0D17',
+            serebiIndigo: '#818CF8',
+            waGreen: '#25D366',
+            waGreenHover: '#1DA851',
+          },
+          boxShadow: {
+            corp: '0 12px 32px -12px rgba(15, 41, 66, 0.12)',
+            corpHover: '0 20px 40px -14px rgba(15, 41, 66, 0.18)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FFFFFF;
+      color: #1E293B;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .font-serif {
+      font-family: 'Merriweather', Georgia, serif;
+    }
+
+    /* Patrón geométrico muy sutil para el Hero corporativo */
+    .hero-grid-pattern {
+      background-image:
+        linear-gradient(to right, rgba(15, 41, 66, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 41, 66, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Transiciones suaves para modal de servicios */
+    .modal-backdrop {
+      transition: opacity 0.25s ease;
+    }
+    .modal-panel {
+      transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+    }
+
+    /* Animación suave del acordeón FAQ */
+    .faq-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.28s ease;
+    }
+    .faq-item[data-open="true"] .faq-content {
+      grid-template-rows: 1fr;
+    }
+    .faq-inner {
+      overflow: hidden;
+    }
+    .faq-chevron {
+      transition: transform 0.25s ease;
+    }
+    .faq-item[data-open="true"] .faq-chevron {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="bg-white text-ink antialiased selection:bg-gold/25 selection:text-navy">
+
+  <!-- ===================================================================== -->
+  <!-- 1. BARRA FIJA SUPERIOR DE DEMO — SEREBI LAB (sticky top-0 z-50)       -->
+  <!-- ===================================================================== -->
+  <div class="sticky top-0 z-50 bg-serebiDark/95 backdrop-blur-md border-b border-serebiIndigo/35 text-slate-100">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-14 flex items-center justify-between gap-2">
+      <!-- Izquierda: Volver a Serebi Lab -->
+      <a
+        href="../index.html"
+        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-200 bg-white/5 hover:bg-white/15 border border-white/10 transition-colors shrink-0"
+      >
+        <span aria-hidden="true">&larr;</span>
+        <span>Volver a Serebi Lab</span>
+      </a>
+
+      <!-- Centro (Desktop): Etiqueta Demo -->
+      <div class="hidden md:flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-xs font-medium text-slate-200">
+        <span class="w-1.5 h-1.5 rounded-full bg-serebiIndigo shrink-0"></span>
+        <span>Demo en vivo &middot; Paquete Web Institucional</span>
+      </div>
+
+      <!-- Derecha: Botón oficial WhatsApp Serebi Lab -->
+      <a
+        href="https://wa.me/5491134441993?text=Hola%20Serebi%20Lab!%20Vi%20la%20demo%20de%20Web%20Institucional%20(%24120.000)%20y%20me%20interesa%20consultar%20para%20mi%20empresa%2Festudio."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-waGreen hover:bg-waGreenHover text-[#020617] shadow-sm transition-all hover:-translate-y-0.5 shrink-0"
+      >
+        <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.438 1.344-2 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.344-1.766-.656-3.109-1.344-5.141-4.5-5.297-4.703-.156-.203-1.266-1.688-1.266-3.219s.797-2.281 1.078-2.594c.281-.312.625-.391.828-.391.203 0 .422.016.609.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.766 2.203 1.219 1.094 2.25 1.422 2.562 1.578.312.156.5.141.688-.078.188-.219.797-.938 1.016-1.25.219-.312.438-.266.734-.156.297.109 1.891.891 2.219 1.047.328.156.547.234.625.375.078.141.078.812-.172 1.516z"/>
+        </svg>
+        <span>Quiero una web así</span>
+      </a>
+    </div>
+    <!-- Sub-etiqueta compacta para mobile -->
+    <div class="md:hidden border-t border-white/10 py-1 text-center text-[11px] font-medium text-slate-300 bg-serebiDark">
+      Demo en vivo &middot; Paquete Web Institucional ($120.000)
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 2. BARRA DE NAVEGACIÓN INSTITUCIONAL — ESTUDIO VÉRTICE                -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-[82px] md:top-14 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+
+        <!-- Logo Geométrico SVG + Nombre Institucional -->
+        <a href="#inicio" class="flex items-center gap-3 group focus:outline-none">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-xl shadow-sm transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
+            <rect width="42" height="42" rx="10" fill="#0F2942"/>
+            <rect x="4" y="4" width="34" height="34" rx="7" stroke="#C59B48" stroke-opacity="0.45" stroke-width="1"/>
+            <!-- Vértice geométrico dorado -->
+            <path d="M12.5 13.5L21 29.5L29.5 13.5" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17.5 13.5L21 20.5L24.5 13.5" stroke="#C59B48" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <span class="block font-serif font-bold text-lg sm:text-xl text-navy leading-none tracking-tight">
+              Estudio Vértice
+            </span>
+            <span class="block text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-gold mt-1">
+              Contadores Públicos
+            </span>
+          </div>
+        </a>
+
+        <!-- Enlaces de Navegación Desktop -->
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-inkMuted" aria-label="Navegación principal">
+          <a href="#inicio" class="hover:text-navy transition-colors">Inicio</a>
+          <a href="#nosotros" class="hover:text-navy transition-colors">Nosotros</a>
+          <a href="#servicios" class="hover:text-navy transition-colors">Servicios</a>
+          <a href="#equipo" class="hover:text-navy transition-colors">Equipo</a>
+          <a href="#preguntas" class="hover:text-navy transition-colors">Preguntas</a>
+          <a href="#contacto" class="hover:text-navy transition-colors">Contacto</a>
+        </nav>
+
+        <!-- Botón CTA Desktop -->
+        <div class="hidden lg:flex items-center">
+          <a
+            href="#contacto"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy hover:bg-navyLight text-white text-sm font-semibold shadow-sm transition-all hover:-translate-y-0.5"
+          >
+            <span>Agendar consulta</span>
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Botón Hamburguesa Mobile -->
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Abrir menú de navegación"
+          class="lg:hidden inline-flex items-center justify-center p-2.5 rounded-xl bg-slateBg hover:bg-slate-200 text-navy border border-slate-200 transition-colors"
+        >
+          <svg id="icon-menu-open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-menu-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú Desplegable Mobile -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-200 shadow-lg">
+      <div class="px-4 pt-3 pb-5 space-y-1.5">
+        <a href="#inicio" class="mobile-link block px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-slateBg">Inicio</a>
+        <a href="#nosotros" class="mobile-link block px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-slateBg">Nosotros</a>
+        <a href="#servicios" class="mobile-link block px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-slateBg">Servicios</a>
+        <a href="#equipo" class="mobile-link block px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-slateBg">Equipo</a>
+        <a href="#preguntas" class="mobile-link block px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-slateBg">Preguntas Frecuentes</a>
+        <a href="#contacto" class="mobile-link block px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-slateBg">Contacto</a>
+        <div class="pt-2">
+          <a
+            href="#contacto"
+            class="mobile-link flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl bg-navy text-white text-sm font-semibold"
+          >
+            Agendar consulta inicial
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =================================================================== -->
+    <!-- 3. HERO CORPORATIVO + BARRA DE INDICADORES DE CONFIANZA             -->
+    <!-- =================================================================== -->
+    <section id="inicio" class="relative bg-slateBg hero-grid-pattern border-b border-slate-200/80 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+
+          <!-- Columna Izquierda: Propuesta de valor -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-goldSoft border border-gold/40">
+              <span class="w-2 h-2 rounded-full bg-gold"></span>
+              <span class="text-xs sm:text-sm font-semibold text-navy">Asesoramiento Contable, Impositivo y Societario</span>
+            </div>
+
+            <h1 class="font-serif font-bold text-3xl sm:text-4xl lg:text-[2.85rem] text-navy leading-[1.18] tracking-tight">
+              Claridad impositiva y respaldo estratégico para hacer crecer tu empresa.
+            </h1>
+
+            <p class="text-base sm:text-lg text-inkMuted leading-relaxed max-w-2xl">
+              Acompañamos a PyMEs, sociedades, emprendedores y profesionales independientes en toda Argentina con planificación fiscal proactiva, balances claros y gestión 100% digital.
+            </p>
+
+            <!-- Botones de Acción -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
+              <a
+                href="#contacto"
+                class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-navy hover:bg-navyLight text-white font-semibold text-sm sm:text-base shadow-corp transition-all hover:-translate-y-0.5"
+              >
+                <span>Agendar reunión inicial</span>
+                <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </a>
+              <a
+                href="#servicios"
+                class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-goldSoft text-navy border border-slate-300 hover:border-gold font-semibold text-sm sm:text-base transition-colors"
+              >
+                <span>Ver servicios</span>
+              </a>
+            </div>
+
+            <p class="text-xs text-inkMuted flex items-center gap-2 pt-1">
+              <svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span>Matriculados en el Consejo Profesional de Ciencias Económicas (CPCECABA).</span>
+            </p>
+          </div>
+
+          <!-- Columna Derecha: Tarjeta visual ejecutiva con métricas y gráfico SVG -->
+          <div class="lg:col-span-5">
+            <div class="relative rounded-3xl bg-navy text-white p-6 sm:p-7 shadow-2xl border border-navyLight overflow-hidden">
+              <!-- Destello dorado sutil -->
+              <div class="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-gold/15 blur-3xl pointer-events-none"></div>
+
+              <div class="relative z-10 space-y-5">
+                <!-- Encabezado de tarjeta -->
+                <div class="flex items-center justify-between gap-2 pb-4 border-b border-white/10">
+                  <div>
+                    <p class="text-[11px] font-semibold uppercase tracking-widest text-gold">Tablero de Gestión</p>
+                    <p class="font-serif font-bold text-lg text-white mt-0.5">Planificación Fiscal 2026</p>
+                  </div>
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-[11px] font-semibold text-emerald-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    Al día
+                  </span>
+                </div>
+
+                <!-- Gráfico SVG Corporativo -->
+                <div class="rounded-2xl bg-navyDark/70 border border-white/10 p-4">
+                  <div class="flex items-center justify-between text-xs text-slate-300 mb-3">
+                    <span>Optimización de carga impositiva</span>
+                    <span class="font-bold text-gold">+22% eficiencia</span>
+                  </div>
+                  <svg viewBox="0 0 320 110" class="w-full h-24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico de evolución financiera">
+                    <defs>
+                      <linearGradient id="goldAreaGrad" x1="160" y1="10" x2="160" y2="105" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#C59B48" stop-opacity="0.45"/>
+                        <stop offset="1" stop-color="#C59B48" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Líneas guía horizontales -->
+                    <line x1="0" y1="25" x2="320" y2="25" stroke="#FFFFFF" stroke-opacity="0.08" stroke-dasharray="3 3"/>
+                    <line x1="0" y1="60" x2="320" y2="60" stroke="#FFFFFF" stroke-opacity="0.08" stroke-dasharray="3 3"/>
+                    <line x1="0" y1="95" x2="320" y2="95" stroke="#FFFFFF" stroke-opacity="0.12"/>
+                    <!-- Barras sutiles -->
+                    <rect x="24" y="68" width="22" height="27" rx="4" fill="#1A3E5E"/>
+                    <rect x="76" y="56" width="22" height="39" rx="4" fill="#1A3E5E"/>
+                    <rect x="128" y="48" width="22" height="47" rx="4" fill="#1A3E5E"/>
+                    <rect x="180" y="38" width="22" height="57" rx="4" fill="#1A3E5E"/>
+                    <rect x="232" y="28" width="22" height="67" rx="4" fill="#25537B"/>
+                    <rect x="280" y="18" width="22" height="77" rx="4" fill="#C59B48" fill-opacity="0.85"/>
+                    <!-- Línea de tendencia -->
+                    <path d="M35 64 L87 52 L139 44 L191 34 L243 24 L291 14 L291 95 L35 95 Z" fill="url(#goldAreaGrad)"/>
+                    <path d="M35 64 L87 52 L139 44 L191 34 L243 24 L291 14" stroke="#C59B48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="291" cy="14" r="4.5" fill="#FFFFFF" stroke="#C59B48" stroke-width="2.5"/>
+                  </svg>
+                </div>
+
+                <!-- Mini indicadores -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="rounded-2xl bg-white/5 border border-white/10 p-3.5">
+                    <p class="text-[11px] text-slate-300">Vencimientos ARCA / AGIP</p>
+                    <p class="font-bold text-base text-white mt-1">100% en término</p>
+                  </div>
+                  <div class="rounded-2xl bg-white/5 border border-white/10 p-3.5">
+                    <p class="text-[11px] text-slate-300">Reportes Mensuales</p>
+                    <p class="font-bold text-base text-gold mt-1">Panel Digital</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Barra de 4 Indicadores de Confianza -->
+        <div class="mt-14 pt-10 border-t border-slate-200 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
+            <p class="font-serif font-bold text-2xl sm:text-3xl text-navy">+15 años</p>
+            <p class="text-xs sm:text-sm text-inkMuted mt-1 font-medium">de trayectoria profesional</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
+            <p class="font-serif font-bold text-2xl sm:text-3xl text-navy">+240</p>
+            <p class="text-xs sm:text-sm text-inkMuted mt-1 font-medium">empresas y clientes asesorados</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
+            <p class="font-serif font-bold text-2xl sm:text-3xl text-gold">100%</p>
+            <p class="text-xs sm:text-sm text-inkMuted mt-1 font-medium">gestión digital a todo el país</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
+            <p class="font-serif font-bold text-2xl sm:text-3xl text-navy">Directa</p>
+            <p class="text-xs sm:text-sm text-inkMuted mt-1 font-medium">atención personalizada por socio</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 4. SECCIÓN NOSOTROS (MISIÓN, VISIÓN Y 3 DIFERENCIALES)              -->
+    <!-- =================================================================== -->
+    <section id="nosotros" class="py-20 sm:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          <!-- Izquierda: Misión y Visión -->
+          <div class="lg:col-span-5 space-y-6">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold">Sobre el Estudio</span>
+              <h2 class="font-serif font-bold text-3xl sm:text-4xl text-navy mt-2 leading-tight">
+                Más que liquidadores de impuestos: socios estratégicos de tu negocio.
+              </h2>
+            </div>
+
+            <p class="text-sm sm:text-base text-inkMuted leading-relaxed">
+              En <strong class="text-navy">Estudio Vértice</strong> combinamos el rigor técnico de la contabilidad tradicional con herramientas digitales ágiles, para que tengas tus números ordenados y puedas tomar decisiones con previsibilidad.
+            </p>
+
+            <div class="space-y-4 pt-2">
+              <div class="p-5 rounded-2xl bg-slateBg border-l-4 border-navy">
+                <h3 class="font-serif font-bold text-base text-navy mb-1">Nuestra Misión</h3>
+                <p class="text-sm text-inkMuted leading-relaxed">
+                  Brindar tranquilidad fiscal, laboral y contable a través de un acompañamiento cercano, transparente y libre de tecnicismos innecesarios.
+                </p>
+              </div>
+              <div class="p-5 rounded-2xl bg-goldSoft/70 border-l-4 border-gold">
+                <h3 class="font-serif font-bold text-base text-navy mb-1">Nuestra Visión</h3>
+                <p class="text-sm text-inkMuted leading-relaxed">
+                  Ser el estudio contable digital de referencia para PyMEs y profesionales modernos en Argentina, integrando cumplimiento impecable con planificación financiera.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Derecha: 3 Diferenciales Clave -->
+          <div class="lg:col-span-7 grid grid-cols-1 gap-5">
+            <article class="p-6 sm:p-7 rounded-2xl bg-slateBg border border-slate-200/80 hover:border-gold/60 transition-colors flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-navy text-gold flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-serif font-bold text-lg text-navy">Planificación Fiscal Preventiva</h3>
+                <p class="text-sm text-inkMuted leading-relaxed mt-1.5">
+                  No esperamos al cierre de mes para avisarte cuánto pagar. Proyectamos tus vencimientos, evaluamos beneficios impositivos vigentes y te ayudamos a evitar multas y recargos.
+                </p>
+              </div>
+            </article>
+
+            <article class="p-6 sm:p-7 rounded-2xl bg-slateBg border border-slate-200/80 hover:border-gold/60 transition-colors flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-navy text-gold flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-serif font-bold text-lg text-navy">Gestión 100% Digital y Ordenada</h3>
+                <p class="text-sm text-inkMuted leading-relaxed mt-1.5">
+                  Carpeta compartida en la nube con todos tus comprobantes, declaraciones juradas, VEP y recibos de sueldo siempre disponibles desde tu celular o computadora.
+                </p>
+              </div>
+            </article>
+
+            <article class="p-6 sm:p-7 rounded-2xl bg-slateBg border border-slate-200/80 hover:border-gold/60 transition-colors flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-navy text-gold flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-serif font-bold text-lg text-navy">Respuesta Ágil y Trato Directo</h3>
+                <p class="text-sm text-inkMuted leading-relaxed mt-1.5">
+                  Cada cliente cuenta con un contador referente asignado y canales directos de WhatsApp y correo con compromiso de respuesta en menos de 24 horas hábiles.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 5. ÁREAS DE PRÁCTICA / SERVICIOS (6 SERVICIOS + FILTRO + MODAL)     -->
+    <!-- =================================================================== -->
+    <section id="servicios" class="py-20 sm:py-24 bg-slateBg border-y border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Encabezado y Filtros por Tipo de Cliente -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div class="max-w-2xl">
+            <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold">Áreas de Práctica</span>
+            <h2 class="font-serif font-bold text-3xl sm:text-4xl text-navy mt-2">
+              Servicios contables e impositivos a medida
+            </h2>
+            <p class="text-sm sm:text-base text-inkMuted mt-3">
+              Filtrá según tu perfil y hacé clic en cualquier área para ver el alcance detallado y los entregables incluidos.
+            </p>
+          </div>
+
+          <!-- Botones de filtro interactivo -->
+          <div id="service-filters" class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filtrar servicios por tipo de cliente">
+            <!-- Renderizado por JS -->
+          </div>
+        </div>
+
+        <!-- Grilla de 6 Servicios -->
+        <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Renderizado dinámicamente desde DATA.services -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 6. NUESTRO EQUIPO (3 SOCIOS CON MONOGRAMAS Y MATRÍCULAS)            -->
+    <!-- =================================================================== -->
+    <section id="equipo" class="py-20 sm:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold">Socios &amp; Especialistas</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl text-navy mt-2">
+            Nuestro Equipo Directivo
+          </h2>
+          <p class="text-sm sm:text-base text-inkMuted mt-3">
+            Profesionales matriculados con amplia experiencia en asesoramiento a empresas nacionales, comercios y prestadores de servicios.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+          <!-- Socio 1 -->
+          <article class="rounded-3xl bg-slateBg border border-slate-200/80 p-7 text-center shadow-sm hover:shadow-corp transition-shadow">
+            <div class="w-20 h-20 rounded-2xl bg-navy border-2 border-gold/60 mx-auto mb-5 flex items-center justify-center shadow-md">
+              <span class="font-serif font-bold text-2xl text-white tracking-wider">MR</span>
+            </div>
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-gold bg-goldSoft border border-gold/30 px-3 py-1 rounded-full">
+              Socio Fundador
+            </span>
+            <h3 class="font-serif font-bold text-xl text-navy mt-3">Cdor. Martín Roldán</h3>
+            <p class="text-xs font-semibold text-inkMuted mt-1">CPCECABA T° 318 F° 142</p>
+            <p class="text-sm text-inkMuted leading-relaxed mt-4">
+              Especialista en Impuestos Nacionales, Planificación Tributaria para PyMEs y Convenio Multilateral. Más de 16 años asesorando industrias y comercios.
+            </p>
+          </article>
+
+          <!-- Socio 2 -->
+          <article class="rounded-3xl bg-slateBg border border-slate-200/80 p-7 text-center shadow-sm hover:shadow-corp transition-shadow">
+            <div class="w-20 h-20 rounded-2xl bg-navy border-2 border-gold/60 mx-auto mb-5 flex items-center justify-center shadow-md">
+              <span class="font-serif font-bold text-2xl text-white tracking-wider">LV</span>
+            </div>
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-gold bg-goldSoft border border-gold/30 px-3 py-1 rounded-full">
+              Socia Directora
+            </span>
+            <h3 class="font-serif font-bold text-xl text-navy mt-3">Cdora. Lucía Valdés</h3>
+            <p class="text-xs font-semibold text-inkMuted mt-1">CPCECABA T° 345 F° 089</p>
+            <p class="text-sm text-inkMuted leading-relaxed mt-4">
+              Magíster en Auditoría y Contabilidad Societaria. Lidera el área de Balances Certificados, Constitución de Sociedades (SRL, SA, SAS) y Auditoría Externa.
+            </p>
+          </article>
+
+          <!-- Socio 3 -->
+          <article class="rounded-3xl bg-slateBg border border-slate-200/80 p-7 text-center shadow-sm hover:shadow-corp transition-shadow">
+            <div class="w-20 h-20 rounded-2xl bg-navy border-2 border-gold/60 mx-auto mb-5 flex items-center justify-center shadow-md">
+              <span class="font-serif font-bold text-2xl text-white tracking-wider">FE</span>
+            </div>
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-gold bg-goldSoft border border-gold/30 px-3 py-1 rounded-full">
+              Socio Área Laboral
+            </span>
+            <h3 class="font-serif font-bold text-xl text-navy mt-3">Cdor. Federico Echeverría</h3>
+            <p class="text-xs font-semibold text-inkMuted mt-1">CPCECABA T° 371 F° 204</p>
+            <p class="text-sm text-inkMuted leading-relaxed mt-4">
+              Especialista en Liquidación de Sueldos, Cargas Sociales, Convenios Colectivos y Encuadre para Emprendedores, Monotributistas y Exportadores de Servicios.
+            </p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 7. PREGUNTAS FRECUENTES (ACORDEÓN INTERACTIVO — 5 PREGUNTAS)        -->
+    <!-- =================================================================== -->
+    <section id="preguntas" class="py-20 sm:py-24 bg-slateBg border-y border-slate-200/80">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold">Consultas Habituales</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl text-navy mt-2">
+            Preguntas Frecuentes
+          </h2>
+          <p class="text-sm sm:text-base text-inkMuted mt-3">
+            Resolvemos las dudas más comunes antes de empezar a trabajar juntos.
+          </p>
+        </div>
+
+        <div id="faq-list" class="space-y-3.5">
+          <!-- Renderizado dinámicamente desde DATA.faqs -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 8. SECCIÓN CONTACTO (DATOS + MAPA ESTILIZADO + FORMULARIO VALIDADO) -->
+    <!-- =================================================================== -->
+    <section id="contacto" class="py-20 sm:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold">Contacto Directo</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl text-navy mt-2">
+            Agendá tu reunión inicial sin cargo
+          </h2>
+          <p class="text-sm sm:text-base text-inkMuted mt-3">
+            Completá el formulario y un socio del estudio se pondrá en contacto en menos de 24 horas hábiles para evaluar tu situación.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+
+          <!-- Columna Izquierda: Información Institucional + Mapa Vectorial -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="rounded-3xl bg-navy text-white p-7 sm:p-8 shadow-corp space-y-6">
+              <div>
+                <h3 class="font-serif font-bold text-xl text-white">Información de Oficina</h3>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                  Atención presencial en CABA con turno previo y modalidad 100% online a todo el país.
+                </p>
+              </div>
+
+              <ul class="space-y-4 text-sm">
+                <li class="flex items-start gap-3.5">
+                  <span class="w-9 h-9 rounded-xl bg-white/10 text-gold flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p class="font-semibold text-white">Dirección</p>
+                    <p class="text-slate-300 text-xs sm:text-sm">Av. Corrientes 1480, Piso 8 · CABA, Buenos Aires</p>
+                  </div>
+                </li>
+
+                <li class="flex items-start gap-3.5">
+                  <span class="w-9 h-9 rounded-xl bg-white/10 text-gold flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p class="font-semibold text-white">Horarios de Atención</p>
+                    <p class="text-slate-300 text-xs sm:text-sm">Lunes a Viernes de 09:00 a 18:00 hs</p>
+                  </div>
+                </li>
+
+                <li class="flex items-start gap-3.5">
+                  <span class="w-9 h-9 rounded-xl bg-white/10 text-gold flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p class="font-semibold text-white">Teléfono / WhatsApp</p>
+                    <p class="text-slate-300 text-xs sm:text-sm">+54 11 4372-8900</p>
+                  </div>
+                </li>
+
+                <li class="flex items-start gap-3.5">
+                  <span class="w-9 h-9 rounded-xl bg-white/10 text-gold flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p class="font-semibold text-white">Correo Institucional</p>
+                    <p class="text-gold text-xs sm:text-sm font-medium">contacto@estudiovertice.com.ar</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Mapa Vectorial Estilizado (sin dependencias de API keys rotas) -->
+            <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slateBg">
+              <div class="relative h-52 w-full">
+                <svg viewBox="0 0 420 210" class="w-full h-full object-cover" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa ilustrativo Av. Corrientes, CABA">
+                  <rect width="420" height="210" fill="#EFF4F9"/>
+                  <!-- Manzanas -->
+                  <g fill="#E2EBF3">
+                    <rect x="18" y="16" width="84" height="48" rx="6"/>
+                    <rect x="118" y="16" width="96" height="48" rx="6"/>
+                    <rect x="230" y="16" width="88" height="48" rx="6"/>
+                    <rect x="334" y="16" width="70" height="48" rx="6"/>
+                    <rect x="18" y="84" width="84" height="52" rx="6"/>
+                    <rect x="118" y="84" width="96" height="52" rx="6"/>
+                    <rect x="230" y="84" width="88" height="52" rx="6"/>
+                    <rect x="334" y="84" width="70" height="52" rx="6"/>
+                    <rect x="18" y="154" width="84" height="42" rx="6"/>
+                    <rect x="118" y="154" width="96" height="42" rx="6"/>
+                    <rect x="230" y="154" width="88" height="42" rx="6"/>
+                    <rect x="334" y="154" width="70" height="42" rx="6"/>
+                  </g>
+                  <!-- Avenidas principales -->
+                  <line x1="0" y1="74" x2="420" y2="74" stroke="#FFFFFF" stroke-width="10"/>
+                  <line x1="0" y1="74" x2="420" y2="74" stroke="#C59B48" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="6 4"/>
+                  <line x1="222" y1="0" x2="222" y2="210" stroke="#FFFFFF" stroke-width="10"/>
+                  <line x1="110" y1="0" x2="110" y2="210" stroke="#FFFFFF" stroke-width="6"/>
+                  <line x1="0" y1="145" x2="420" y2="145" stroke="#FFFFFF" stroke-width="6"/>
+                  <!-- Etiqueta Avenida -->
+                  <rect x="24" y="65" width="106" height="18" rx="4" fill="#0F2942"/>
+                  <text x="77" y="77" text-anchor="middle" fill="#FFFFFF" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="700">AV. CORRIENTES</text>
+                  <!-- Pin de ubicación -->
+                  <circle cx="222" cy="74" r="24" fill="#C59B48" fill-opacity="0.22"/>
+                  <circle cx="222" cy="74" r="12" fill="#0F2942" stroke="#C59B48" stroke-width="3"/>
+                  <circle cx="222" cy="74" r="3.5" fill="#FFFFFF"/>
+                </svg>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Av+Corrientes+1480+CABA+Argentina"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="absolute bottom-3 right-3 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-navy text-navy hover:text-white border border-slate-200 text-xs font-semibold shadow-sm transition-colors"
+                >
+                  <span>Abrir en Google Maps</span>
+                  <span aria-hidden="true">&nearr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Formulario Completo con Validación JS -->
+          <div class="lg:col-span-7">
+            <div class="rounded-3xl bg-slateBg border border-slate-200/90 p-6 sm:p-9 shadow-corp">
+
+              <!-- Formulario -->
+              <form id="contact-form" novalidate class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="f-name" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">Nombre y Apellido *</label>
+                    <input
+                      id="f-name"
+                      type="text"
+                      required
+                      placeholder="Ej: Carolina Gómez"
+                      class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 focus:border-navy focus:ring-2 focus:ring-navy/15 focus:outline-none text-sm text-ink transition-all"
+                    />
+                    <p data-error-for="f-name" class="hidden text-xs font-medium text-rose-600 mt-1"></p>
+                  </div>
+
+                  <div>
+                    <label for="f-company" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">Empresa o Rubro</label>
+                    <input
+                      id="f-company"
+                      type="text"
+                      placeholder="Ej: Distribuidora / Profesional"
+                      class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 focus:border-navy focus:ring-2 focus:ring-navy/15 focus:outline-none text-sm text-ink transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="f-email" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">Correo Electrónico *</label>
+                    <input
+                      id="f-email"
+                      type="email"
+                      required
+                      placeholder="nombre@empresa.com.ar"
+                      class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 focus:border-navy focus:ring-2 focus:ring-navy/15 focus:outline-none text-sm text-ink transition-all"
+                    />
+                    <p data-error-for="f-email" class="hidden text-xs font-medium text-rose-600 mt-1"></p>
+                  </div>
+
+                  <div>
+                    <label for="f-phone" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">Teléfono / WhatsApp *</label>
+                    <input
+                      id="f-phone"
+                      type="tel"
+                      required
+                      placeholder="Ej: 11 5555-4433"
+                      class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 focus:border-navy focus:ring-2 focus:ring-navy/15 focus:outline-none text-sm text-ink transition-all"
+                    />
+                    <p data-error-for="f-phone" class="hidden text-xs font-medium text-rose-600 mt-1"></p>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="f-service" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">Tipo de Consulta *</label>
+                  <select
+                    id="f-service"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 focus:border-navy focus:ring-2 focus:ring-navy/15 focus:outline-none text-sm text-ink transition-all"
+                  >
+                    <option value="">Seleccioná un área de interés...</option>
+                    <option value="Contabilidad y Balances">Contabilidad y Balances</option>
+                    <option value="Liquidación de Impuestos">Liquidación de Impuestos</option>
+                    <option value="Sueldos y Cargas Sociales">Sueldos y Cargas Sociales</option>
+                    <option value="Constitución de Sociedades">Constitución de Sociedades</option>
+                    <option value="Monotributo y Responsables Inscriptos">Monotributo y Responsables Inscriptos</option>
+                    <option value="Auditoría y Consultoría">Auditoría y Consultoría</option>
+                    <option value="Otra consulta institucional">Otra consulta institucional</option>
+                  </select>
+                  <p data-error-for="f-service" class="hidden text-xs font-medium text-rose-600 mt-1"></p>
+                </div>
+
+                <div>
+                  <label for="f-message" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">Mensaje *</label>
+                  <textarea
+                    id="f-message"
+                    rows="4"
+                    required
+                    placeholder="Contanos brevemente tu situación actual o qué servicio estás buscando..."
+                    class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 focus:border-navy focus:ring-2 focus:ring-navy/15 focus:outline-none text-sm text-ink transition-all resize-none"
+                  ></textarea>
+                  <p data-error-for="f-message" class="hidden text-xs font-medium text-rose-600 mt-1"></p>
+                </div>
+
+                <div class="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <p class="text-xs text-inkMuted">
+                    Tus datos son estrictamente confidenciales.
+                  </p>
+                  <button
+                    type="submit"
+                    class="px-7 py-3.5 rounded-xl bg-navy hover:bg-navyLight text-white font-semibold text-sm shadow-corp transition-all hover:-translate-y-0.5 active:scale-[0.99]"
+                  >
+                    Enviar consulta &rarr;
+                  </button>
+                </div>
+              </form>
+
+              <!-- Estado de Envío Exitoso Simulado -->
+              <div id="contact-success" class="hidden py-4 space-y-6">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Consulta registrada (Demo)</span>
+                    <h3 class="font-serif font-bold text-2xl text-navy mt-0.5">¡Recibimos tu mensaje!</h3>
+                    <p class="text-sm text-inkMuted mt-1">
+                      Un contador de nuestro equipo se comunicará a la brevedad. Acá tenés el resumen enviado:
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Resumen de datos ingresados -->
+                <div id="success-summary" class="rounded-2xl bg-white border border-slate-200 p-5 text-sm space-y-2 text-ink"></div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <a
+                    id="success-wa-btn"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-waGreen hover:bg-waGreenHover text-[#020617] font-bold text-sm transition-colors"
+                  >
+                    <span>Enviar copia por WhatsApp</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
+                  <button
+                    id="reset-form-btn"
+                    type="button"
+                    class="px-5 py-3 rounded-xl bg-white hover:bg-slate-100 text-navy border border-slate-300 font-semibold text-sm transition-colors"
+                  >
+                    Hacer otra consulta
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- 9. FOOTER CORPORATIVO COMPLETO                                        -->
+  <!-- ===================================================================== -->
+  <footer class="bg-navyDark text-slate-300 border-t border-navyLight">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-white/10">
+
+        <!-- Marca -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-lg" aria-hidden="true">
+              <rect width="42" height="42" rx="10" fill="#0F2942"/>
+              <rect x="4" y="4" width="34" height="34" rx="7" stroke="#C59B48" stroke-opacity="0.5" stroke-width="1"/>
+              <path d="M12.5 13.5L21 29.5L29.5 13.5" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17.5 13.5L21 20.5L24.5 13.5" stroke="#C59B48" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <p class="font-serif font-bold text-lg text-white leading-none">Estudio Vértice</p>
+              <p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-gold mt-1">Contadores Públicos &amp; Asesoría Integral</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed max-w-sm">
+            Asesoramiento contable, tributario, laboral y societario con foco en previsibilidad, orden financiero y atención personalizada.
+          </p>
+        </div>
+
+        <!-- Enlaces rápidos -->
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="font-serif font-bold text-sm text-white uppercase tracking-wider">Navegación</h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li><a href="#inicio" class="hover:text-gold transition-colors">Inicio</a></li>
+            <li><a href="#nosotros" class="hover:text-gold transition-colors">Nosotros</a></li>
+            <li><a href="#servicios" class="hover:text-gold transition-colors">Áreas de Práctica</a></li>
+            <li><a href="#equipo" class="hover:text-gold transition-colors">Nuestro Equipo</a></li>
+            <li><a href="#preguntas" class="hover:text-gold transition-colors">Preguntas Frecuentes</a></li>
+            <li><a href="#contacto" class="hover:text-gold transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Datos de contacto -->
+        <div class="md:col-span-4 space-y-3">
+          <h4 class="font-serif font-bold text-sm text-white uppercase tracking-wider">Oficina Central</h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>Av. Corrientes 1480, Piso 8 · CABA</li>
+            <li>Lunes a Viernes · 09:00 a 18:00 hs</li>
+            <li>Tel: +54 11 4372-8900</li>
+            <li class="text-gold">contacto@estudiovertice.com.ar</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pie inferior con crédito a Serebi Lab -->
+      <div class="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <p>&copy; <span id="footer-year">2026</span> Estudio Vértice. Sitio de demostración ficticio.</p>
+        <p>
+          Demo del paquete Web Institucional creada por
+          <a href="../index.html" class="font-semibold text-white hover:text-gold underline decoration-gold/60 underline-offset-4 transition-colors">
+            Serebi Lab
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL DE DETALLE DE SERVICIO                                          -->
+  <!-- ===================================================================== -->
+  <div
+    id="service-modal"
+    class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navyDark/75 backdrop-blur-sm opacity-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="sm-title"
+  >
+    <div id="service-modal-panel" class="modal-panel bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto relative transform scale-95 opacity-0">
+      <button
+        id="sm-close-btn"
+        type="button"
+        aria-label="Cerrar ventana"
+        class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-slateBg hover:bg-navy text-navy hover:text-white flex items-center justify-center font-bold transition-colors"
+      >
+        &times;
+      </button>
+
+      <span id="sm-badge" class="inline-block text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-goldSoft text-navy border border-gold/40 mb-3"></span>
+      <h3 id="sm-title" class="font-serif font-bold text-2xl text-navy pr-8"></h3>
+      <p id="sm-desc" class="text-sm text-inkMuted leading-relaxed mt-3 mb-5"></p>
+
+      <div class="rounded-2xl bg-slateBg border border-slate-200/80 p-4 mb-6">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-navy mb-3">Qué incluye este servicio</h4>
+        <ul id="sm-deliverables" class="space-y-2 text-sm text-ink"></ul>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button
+          id="sm-consult-btn"
+          type="button"
+          class="flex-1 px-5 py-3 rounded-xl bg-navy hover:bg-navyLight text-white font-semibold text-sm transition-colors"
+        >
+          Solicitar asesoramiento
+        </button>
+        <button
+          id="sm-close-secondary"
+          type="button"
+          class="px-5 py-3 rounded-xl bg-slateBg hover:bg-slate-200 text-navy font-semibold text-sm transition-colors"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT MODULAR: SERVICIOS, MODAL, FAQ, MENÚ Y FORMULARIO          -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * Datos estructurados del sitio institucional: filtros, servicios y preguntas frecuentes.
+     */
+    const DATA = {
+      serebiWhatsapp: '5491134441993',
+      filters: [
+        { id: 'all', label: 'Todos' },
+        { id: 'pymes', label: 'PyMEs y Empresas' },
+        { id: 'emprendedores', label: 'Profesionales y Emprendedores' }
+      ],
+      services: [
+        {
+          id: 'contabilidad-balances',
+          title: 'Contabilidad y Balances',
+          audience: ['pymes'],
+          audienceLabel: 'PyMEs y Empresas',
+          shortDesc: 'Registración contable mensual, confección de estados contables anuales y certificaciones ante CPCECABA.',
+          fullDesc: 'Llevamos la contabilidad integral de tu sociedad bajo normas técnicas vigentes, entregando información financiera clara para directorios, bancos y organismos de control.',
+          deliverables: [
+            'Armado y legalización de Balances Anuales',
+            'Libros contables obligatorios y rúbricas digitales',
+            'Certificaciones de ingresos y manifestaciones de bienes',
+            'Reportes de resultados trimestrales para toma de decisiones'
+          ],
+          icon: 'book'
+        },
+        {
+          id: 'liquidacion-impuestos',
+          title: 'Liquidación de Impuestos',
+          audience: ['pymes', 'emprendedores'],
+          audienceLabel: 'PyMEs y Profesionales',
+          shortDesc: 'Liquidación mensual y anual de IVA, Ingresos Brutos, Convenio Multilateral, Ganancias y Bienes Personales.',
+          fullDesc: 'Gestionamos el calendario fiscal completo de tu actividad anticipando vencimientos y optimizando saldos a favor, retenciones y percepciones.',
+          deliverables: [
+            'IVA, Libro IVA Digital e Ingresos Brutos (Local / CM)',
+            'Declaraciones juradas anuales de Ganancias y Bienes Personales',
+            'Seguimiento de cuenta corriente tributaria y planes de pago',
+            'Atención y respuesta de requerimientos ante ARCA / AGIP / ARBA'
+          ],
+          icon: 'calc'
+        },
+        {
+          id: 'sueldos-cargas',
+          title: 'Sueldos y Cargas Sociales',
+          audience: ['pymes'],
+          audienceLabel: 'PyMEs y Empresas',
+          shortDesc: 'Liquidación de haberes bajo todos los convenios colectivos, Libro de Sueldos Digital y cargas sindicales.',
+          fullDesc: 'Aseguramos el cumplimiento laboral estricto de tu nómina, desde altas tempranas hasta liquidaciones finales, reduciendo riesgos de contingencias laborales.',
+          deliverables: [
+            'Liquidación mensual/quincenal de recibos de sueldo',
+            'Presentación de F.931 y Libro de Sueldos Digital',
+            'Boletas sindicales, ART y altas/bajas de personal',
+            'Asesoramiento en convenios colectivos y costos laborales'
+          ],
+          icon: 'users'
+        },
+        {
+          id: 'constitucion-sociedades',
+          title: 'Constitución de Sociedades',
+          audience: ['pymes', 'emprendedores'],
+          audienceLabel: 'Empresas y Emprendedores',
+          shortDesc: 'Inscripción integral de SRL, SA y SAS ante IGJ o DPPJ, redacción de estatutos y encuadre inicial.',
+          fullDesc: 'Te asesoramos para elegir la figura societaria más conveniente según tu proyección de facturación, cantidad de socios y responsabilidad patrimonial.',
+          deliverables: [
+            'Análisis comparativo entre SRL, SA y SAS',
+            'Trámite completo ante IGJ / DPPJ hasta obtención de CUIT',
+            'Inscripción impositiva inicial y habilitación de facturación',
+            'Reformas de estatuto, aumentos de capital y actas societarias'
+          ],
+          icon: 'building'
+        },
+        {
+          id: 'monotributo-ri',
+          title: 'Monotributo y Responsables Inscriptos',
+          audience: ['emprendedores'],
+          audienceLabel: 'Profesionales y Emprendedores',
+          shortDesc: 'Altas, recategorizaciones semestrales, control de facturación, exportación de servicios y paso a Responsable Inscripto.',
+          fullDesc: 'Pensado para profesionales independientes, freelancers y comercios en crecimiento que quieren facturar ordenados sin sorpresas ni exclusiones de oficio.',
+          deliverables: [
+            'Alta integral en Monotributo e Ingresos Brutos',
+            'Control mensual de topes de facturación y gastos',
+            'Recategorizaciones semestrales y emisión de VEP',
+            'Asesoramiento en Factura E para exportación de servicios'
+          ],
+          icon: 'briefcase'
+        },
+        {
+          id: 'auditoria-consultoria',
+          title: 'Auditoría y Consultoría',
+          audience: ['pymes'],
+          audienceLabel: 'PyMEs y Empresas',
+          shortDesc: 'Auditoría de estados contables, diagnóstico financiero, presupuestos económicos y reorganización administrativa.',
+          fullDesc: 'Evaluamos la salud económica y los circuitos internos de tu empresa para mejorar márgenes, ordenar el flujo de caja y respaldar solicitudes de crédito.',
+          deliverables: [
+            'Auditoría externa de estados contables',
+            'Armado de cash-flow proyectado y tableros de control',
+            'Evaluación de rentabilidad por unidad de negocio',
+            'Informes especiales para entidades bancarias e inversores'
+          ],
+          icon: 'shield'
+        }
+      ],
+      faqs: [
+        {
+          question: '¿Cómo se determinan los honorarios mensuales del estudio?',
+          answer: 'Nuestros honorarios son fijos mensuales y se presupuestan a medida luego de una primera reunión de diagnóstico sin cargo. Se calculan según el tipo de contribuyente (Monotributo, Responsable Inscripto o Sociedad), volumen de facturación y cantidad de empleados en nómina.'
+        },
+        {
+          question: '¿Qué necesito si quiero cambiar de contador o pasarme desde otro estudio?',
+          answer: 'El traspaso es muy sencillo y nos encargamos de coordinarlo por vos. Solo necesitás tus claves fiscales vigentes (ARCA y rentas provinciales) y la documentación respaldatoria básica del último período. Realizamos una auditoría inicial de estado para detectar cualquier pendiente.'
+        },
+        {
+          question: '¿Puedo trabajar con el estudio de forma 100% online desde otra provincia?',
+          answer: 'Sí. Más del 70% de nuestros clientes operan de manera 100% digital desde CABA, GBA y el interior del país. Trabajamos con carpetas seguras en la nube, reuniones por videollamada y seguimiento ágil por WhatsApp y correo electrónico.'
+        },
+        {
+          question: '¿En cuánto tiempo realizan el alta impositiva para empezar a facturar?',
+          answer: 'Para Monotributistas y Responsables Inscriptos, el alta completa (CUIT, impuestos nacionales, Ingresos Brutos y puntos de venta para factura electrónica) suele quedar operativa en un plazo de 24 a 72 horas hábiles desde que recibimos tus datos.'
+        },
+        {
+          question: '¿Cuál es el tiempo de respuesta ante consultas del día a día?',
+          answer: 'Todas las consultas operativas enviadas por nuestros canales asignados de WhatsApp o email se responden dentro de las 24 horas hábiles. En fechas de cierre o vencimientos críticos contamos con seguimiento prioritario.'
+        }
+      ]
+    };
+
+    // Estado activo del filtro de servicios y modal seleccionado
+    let activeServiceFilter = 'all';
+    let currentModalServiceTitle = '';
+
+    /**
+     * Devuelve el ícono SVG corporativo correspondiente a cada área de servicio.
+     */
+    function getServiceIconSVG(type) {
+      const icons = {
+        book: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>`,
+        calc: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
+        users: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+        building: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+        briefcase: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`,
+        shield: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`
+      };
+      return icons[type] || icons.book;
+    }
+
+    /**
+     * Renderiza los botones de filtro por tipo de cliente en la sección Servicios.
+     */
+    function renderServiceFilters() {
+      const container = document.getElementById('service-filters');
+      if (!container) return;
+
+      container.innerHTML = DATA.filters.map((f) => {
+        const isActive = activeServiceFilter === f.id;
+        const classes = isActive
+          ? 'bg-navy text-white border-navy shadow-sm'
+          : 'bg-white text-inkMuted hover:text-navy border-slate-300 hover:border-navy/40';
+
+        return `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${isActive}"
+            data-service-filter="${f.id}"
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition-all ${classes}"
+          >
+            ${f.label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Renderiza la grilla de servicios filtrada según el perfil seleccionado.
+     */
+    function renderServicesGrid() {
+      const grid = document.getElementById('services-grid');
+      if (!grid) return;
+
+      const filtered = DATA.services.filter((srv) => {
+        if (activeServiceFilter === 'all') return true;
+        return srv.audience.includes(activeServiceFilter);
+      });
+
+      grid.innerHTML = filtered.map((srv) => `
+        <article class="group bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-sm hover:shadow-corpHover hover:border-gold/60 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-5">
+              <div class="w-12 h-12 rounded-2xl bg-slateBg group-hover:bg-navy text-navy group-hover:text-gold border border-slate-200 group-hover:border-navy flex items-center justify-center transition-colors">
+                ${getServiceIconSVG(srv.icon)}
+              </div>
+              <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-goldSoft text-navy border border-gold/30">
+                ${srv.audienceLabel}
+              </span>
+            </div>
+
+            <h3 class="font-serif font-bold text-xl text-navy leading-snug group-hover:text-navyLight transition-colors">
+              ${srv.title}
+            </h3>
+            <p class="text-sm text-inkMuted leading-relaxed mt-2.5">
+              ${srv.shortDesc}
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              data-open-service="${srv.id}"
+              class="inline-flex items-center gap-1.5 text-sm font-bold text-navy hover:text-gold transition-colors"
+            >
+              <span>Ver alcance completo</span>
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /**
+     * Abre el modal con el detalle completo del servicio seleccionado.
+     */
+    function openServiceModal(serviceId) {
+      const srv = DATA.services.find((s) => s.id === serviceId);
+      if (!srv) return;
+
+      currentModalServiceTitle = srv.title;
+      document.getElementById('sm-badge').textContent = srv.audienceLabel;
+      document.getElementById('sm-title').textContent = srv.title;
+      document.getElementById('sm-desc').textContent = srv.fullDesc;
+
+      document.getElementById('sm-deliverables').innerHTML = srv.deliverables.map((item) => `
+        <li class="flex items-start gap-2.5">
+          <svg class="w-4 h-4 text-gold shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+          <span>${item}</span>
+        </li>
+      `).join('');
+
+      const modal = document.getElementById('service-modal');
+      const panel = document.getElementById('service-modal-panel');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        panel.classList.remove('scale-95', 'opacity-0');
+      });
+    }
+
+    /**
+     * Cierra el modal de detalle de servicio.
+     */
+    function closeServiceModal() {
+      const modal = document.getElementById('service-modal');
+      const panel = document.getElementById('service-modal-panel');
+      if (!modal || modal.classList.contains('hidden')) return;
+
+      modal.classList.add('opacity-0');
+      panel.classList.add('scale-95', 'opacity-0');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 240);
+    }
+
+    /**
+     * Renderiza el acordeón de Preguntas Frecuentes (FAQ).
+     */
+    function renderFaqs() {
+      const container = document.getElementById('faq-list');
+      if (!container) return;
+
+      container.innerHTML = DATA.faqs.map((faq, idx) => `
+        <div class="faq-item rounded-2xl bg-white border border-slate-200/90 shadow-sm overflow-hidden" data-open="${idx === 0 ? 'true' : 'false'}">
+          <button
+            type="button"
+            data-faq-toggle
+            aria-expanded="${idx === 0 ? 'true' : 'false'}"
+            class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-slateBg/60 transition-colors focus:outline-none"
+          >
+            <span class="font-serif font-bold text-base sm:text-lg text-navy leading-snug">${faq.question}</span>
+            <span class="w-8 h-8 rounded-xl bg-slateBg border border-slate-200 text-navy flex items-center justify-center shrink-0">
+              <svg class="faq-chevron w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-inner">
+              <p class="px-6 pb-5 text-sm sm:text-base text-inkMuted leading-relaxed border-t border-slate-100 pt-4">
+                ${faq.answer}
+              </p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /**
+     * Controla el menú hamburguesa para dispositivos móviles.
+     */
+    function initMobileMenu() {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      const iconOpen = document.getElementById('icon-menu-open');
+      const iconClose = document.getElementById('icon-menu-close');
+      if (!btn || !menu) return;
+
+      const toggle = (forceClose = false) => {
+        const isOpen = !menu.classList.contains('hidden');
+        const nextOpen = forceClose ? false : !isOpen;
+        menu.classList.toggle('hidden', !nextOpen);
+        iconOpen.classList.toggle('hidden', nextOpen);
+        iconClose.classList.toggle('hidden', !nextOpen);
+        btn.setAttribute('aria-expanded', String(nextOpen));
+      };
+
+      btn.addEventListener('click', () => toggle());
+      menu.querySelectorAll('.mobile-link').forEach((link) => {
+        link.addEventListener('click', () => toggle(true));
+      });
+    }
+
+    /**
+     * Valida y simula el envío del formulario de contacto con resumen y enlace a WhatsApp.
+     */
+    function initContactForm() {
+      const form = document.getElementById('contact-form');
+      const successBox = document.getElementById('contact-success');
+      const summaryEl = document.getElementById('success-summary');
+      const waBtn = document.getElementById('success-wa-btn');
+      const resetBtn = document.getElementById('reset-form-btn');
+      if (!form) return;
+
+      const setFieldError = (id, message) => {
+        const input = document.getElementById(id);
+        const err = document.querySelector(`[data-error-for="${id}"]`);
+        if (!input || !err) return;
+
+        if (message) {
+          err.textContent = message;
+          err.classList.remove('hidden');
+          input.classList.add('border-rose-500');
+          input.classList.remove('border-slate-300');
+        } else {
+          err.textContent = '';
+          err.classList.add('hidden');
+          input.classList.remove('border-rose-500');
+          input.classList.add('border-slate-300');
+        }
+      };
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('f-name').value.trim();
+        const company = document.getElementById('f-company').value.trim() || 'No especificado';
+        const email = document.getElementById('f-email').value.trim();
+        const phone = document.getElementById('f-phone').value.trim();
+        const service = document.getElementById('f-service').value.trim();
+        const message = document.getElementById('f-message').value.trim();
+
+        let isValid = true;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (name.length < 2) {
+          setFieldError('f-name', 'Ingresá tu nombre y apellido.');
+          isValid = false;
+        } else {
+          setFieldError('f-name', '');
+        }
+
+        if (!emailRegex.test(email)) {
+          setFieldError('f-email', 'Ingresá un correo electrónico válido.');
+          isValid = false;
+        } else {
+          setFieldError('f-email', '');
+        }
+
+        if (phone.length < 6) {
+          setFieldError('f-phone', 'Ingresá un teléfono o WhatsApp de contacto.');
+          isValid = false;
+        } else {
+          setFieldError('f-phone', '');
+        }
+
+        if (!service) {
+          setFieldError('f-service', 'Seleccioná el tipo de consulta.');
+          isValid = false;
+        } else {
+          setFieldError('f-service', '');
+        }
+
+        if (message.length < 10) {
+          setFieldError('f-message', 'Contanos brevemente tu consulta (mínimo 10 caracteres).');
+          isValid = false;
+        } else {
+          setFieldError('f-message', '');
+        }
+
+        if (!isValid) return;
+
+        // Mostrar confirmación con resumen limpio
+        summaryEl.innerHTML = `
+          <p><strong class="text-navy">Nombre:</strong> ${name}</p>
+          <p><strong class="text-navy">Empresa / Rubro:</strong> ${company}</p>
+          <p><strong class="text-navy">Email:</strong> ${email} &middot; <strong class="text-navy">Tel:</strong> ${phone}</p>
+          <p><strong class="text-navy">Área de interés:</strong> ${service}</p>
+          <p class="pt-2 border-t border-slate-100 text-inkMuted italic">"${message}"</p>
+        `;
+
+        const waText = [
+          `Hola Estudio Vértice! Envío copia de mi consulta desde la web:`,
+          `• Nombre: ${name}`,
+          `• Empresa/Rubro: ${company}`,
+          `• Área: ${service}`,
+          `• Consulta: ${message}`
+        ].join('\n');
+
+        waBtn.setAttribute('href', `https://wa.me/${DATA.serebiWhatsapp}?text=${encodeURIComponent(waText)}`);
+
+        form.classList.add('hidden');
+        successBox.classList.remove('hidden');
+      });
+
+      resetBtn.addEventListener('click', () => {
+        form.reset();
+        successBox.classList.add('hidden');
+        form.classList.remove('hidden');
+      });
+    }
+
+    /**
+     * Registra eventos delegados para filtros de servicios, modal y acordeón FAQ.
+     */
+    function initInteractiveEvents() {
+      document.addEventListener('click', (e) => {
+        // Filtro de servicios
+        const filterBtn = e.target.closest('[data-service-filter]');
+        if (filterBtn) {
+          activeServiceFilter = filterBtn.getAttribute('data-service-filter');
+          renderServiceFilters();
+          renderServicesGrid();
+          return;
+        }
+
+        // Abrir modal de servicio
+        const serviceBtn = e.target.closest('[data-open-service]');
+        if (serviceBtn) {
+          openServiceModal(serviceBtn.getAttribute('data-open-service'));
+          return;
+        }
+
+        // Acordeón FAQ
+        const faqToggle = e.target.closest('[data-faq-toggle]');
+        if (faqToggle) {
+          const item = faqToggle.closest('.faq-item');
+          const isOpen = item.getAttribute('data-open') === 'true';
+
+          // Cerrar los demás para mantener el acordeón limpio
+          document.querySelectorAll('.faq-item').forEach((el) => {
+            el.setAttribute('data-open', 'false');
+            const btn = el.querySelector('[data-faq-toggle]');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+          });
+
+          if (!isOpen) {
+            item.setAttribute('data-open', 'true');
+            faqToggle.setAttribute('aria-expanded', 'true');
+          }
+        }
+      });
+
+      // Botón "Solicitar asesoramiento" dentro del modal: cierra, scrollea y preselecciona el servicio
+      document.getElementById('sm-consult-btn').addEventListener('click', () => {
+        closeServiceModal();
+        const select = document.getElementById('f-service');
+        const form = document.getElementById('contact-form');
+        const successBox = document.getElementById('contact-success');
+
+        if (form && successBox) {
+          successBox.classList.add('hidden');
+          form.classList.remove('hidden');
+        }
+        if (select && currentModalServiceTitle) {
+          select.value = currentModalServiceTitle;
+        }
+        const contactSection = document.getElementById('contacto');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      // Cierre del modal de servicio
+      document.getElementById('sm-close-btn').addEventListener('click', closeServiceModal);
+      document.getElementById('sm-close-secondary').addEventListener('click', closeServiceModal);
+      document.getElementById('service-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'service-modal') closeServiceModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeServiceModal();
+      });
+
+      // Año dinámico en el footer
+      const yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+    }
+
+    // Inicialización segura al cargar el DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderServiceFilters();
+        renderServicesGrid();
+        renderFaqs();
+        initMobileMenu();
+        initContactForm();
+        initInteractiveEvents();
+      } catch (error) {
+        console.error('Error al inicializar Estudio Vértice:', error);
+      }
+    });
+  </script>
+</body>
+</html>

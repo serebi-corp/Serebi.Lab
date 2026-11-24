@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="es-AR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nube Deco &amp; Bazar — Catálogo Online | Demo Serebi Lab</title>
+  <meta name="description" content="Catálogo de Ventas Online en colores pastel para Nube Deco & Bazar. Autoadministrable desde Google Sheets y con pedidos directo a WhatsApp sin comisiones. Demo en vivo de Serebi Lab." />
+
+  <!-- Google Fonts: Quicksand (Títulos amigables) y Plus Jakarta Sans (Cuerpo legible) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS vía CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Quicksand', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            creamBg: '#FFFDFB',
+            plumDark: '#2D2638',
+            plumMuted: '#6B6378',
+            pinkPastel: '#F472B6',
+            pinkSoft: '#FCE7F3',
+            mintPastel: '#34D399',
+            mintSoft: '#D1FAE5',
+            lavenderPastel: '#A78BFA',
+            lavenderSoft: '#EDE9FE',
+            peachPastel: '#FDBA74',
+            peachSoft: '#FFEDD5',
+            borderSoft: '#F3E8FF',
+            serebiDark: '#0B0D17',
+            serebiIndigo: '#818CF8',
+            waGreen: '#25D366',
+            waGreenHover: '#1DA851',
+          },
+          boxShadow: {
+            pastel: '0 10px 30px -12px rgba(167, 139, 250, 0.16), 0 4px 12px -6px rgba(244, 114, 182, 0.10)',
+            pastelHover: '0 18px 36px -14px rgba(167, 139, 250, 0.25), 0 6px 16px -6px rgba(244, 114, 182, 0.16)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FFFDFB;
+      color: #2D2638;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    /* Ocultar scrollbar en barra horizontal de categorías manteniendo scroll táctil */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Transiciones suaves para modales y drawer lateral */
+    .fade-backdrop {
+      transition: opacity 0.25s ease;
+    }
+    .drawer-panel {
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .modal-panel {
+      transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+    }
+
+    /* Animación barra flotante mobile */
+    .mobile-cart-bar {
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+    }
+
+    /* Fondo de chat estilo WhatsApp */
+    .wa-chat-bg {
+      background-color: #EFEAE2;
+      background-image: radial-gradient(rgba(45, 38, 56, 0.06) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+  </style>
+</head>
+<body class="bg-creamBg text-plumDark antialiased selection:bg-pinkSoft selection:text-plumDark pb-24 md:pb-12">
+
+  <!-- ===================================================================== -->
+  <!-- 1. BARRA SUPERIOR FIJA DE DEMO — SEREBI LAB (sticky top-0 z-50)       -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-50 bg-serebiDark/95 backdrop-blur-md border-b border-serebiIndigo/35 text-slate-100">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-14 flex items-center justify-between gap-2">
+      <!-- Izquierda: Volver a Serebi Lab -->
+      <a
+        href="../index.html"
+        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-200 bg-white/5 hover:bg-white/15 border border-white/10 transition-colors shrink-0"
+      >
+        <span aria-hidden="true">&larr;</span>
+        <span>Volver a Serebi Lab</span>
+      </a>
+
+      <!-- Centro (visible en desktop): Badge Demo -->
+      <div class="hidden lg:flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-xs font-medium text-slate-200">
+        <span class="w-1.5 h-1.5 rounded-full bg-serebiIndigo shrink-0"></span>
+        <span>DEMO EN VIVO &middot; Catálogo de Ventas Online ($80.000)</span>
+      </div>
+
+      <!-- Derecha: Botón oficial WhatsApp Serebi Lab -->
+      <a
+        href="https://wa.me/5491134441993?text=Hola%20Serebi%20Lab!%20Vi%20la%20demo%20del%20Cat%C3%A1logo%20de%20Ventas%20Online%20y%20quiero%20uno%20para%20mi%20negocio."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-waGreen hover:bg-waGreenHover text-[#020617] shadow-sm transition-all hover:-translate-y-0.5 shrink-0"
+      >
+        <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.438 1.344-2 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.344-1.766-.656-3.109-1.344-5.141-4.5-5.297-4.703-.156-.203-1.266-1.688-1.266-3.219s.797-2.281 1.078-2.594c.281-.312.625-.391.828-.391.203 0 .422.016.609.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.766 2.203 1.219 1.094 2.25 1.422 2.562 1.578.312.156.5.141.688-.078.188-.219.797-.938 1.016-1.25.219-.312.438-.266.734-.156.297.109 1.891.891 2.219 1.047.328.156.547.234.625.375.078.141.078.812-.172 1.516z"/>
+        </svg>
+        <span>Quiero un catálogo así</span>
+      </a>
+    </div>
+    <!-- Sub-badge en mobile/tablet -->
+    <div class="lg:hidden border-t border-white/10 py-1 text-center text-[11px] font-medium text-slate-300 bg-serebiDark">
+      DEMO EN VIVO &middot; Catálogo de Ventas Online ($80.000)
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- 2. NAVBAR PROPIO DE LA TIENDA: NUBE DECO & BAZAR                      -->
+  <!-- ===================================================================== -->
+  <nav class="sticky top-[82px] lg:top-14 z-40 bg-white/90 backdrop-blur-md border-b border-pinkSoft shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <!-- Logo tipográfico + Ícono de Nube SVG -->
+      <a href="#top" class="flex items-center gap-2.5 group shrink-0">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-pinkSoft via-lavenderSoft to-mintSoft border border-borderSoft flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9.5 23H22.8C25.6719 23 28 20.6719 28 17.8C28 15.1641 26.0381 12.9866 23.4936 12.6487C22.7126 9.41368 19.7989 7 16.32 7C12.3137 7 9.04191 10.1753 8.92356 14.1544C6.15364 14.5446 4 16.9219 4 19.8C4 21.5673 6.46243 23 9.5 23Z" fill="#FFFFFF" stroke="#A78BFA" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="13.5" cy="17.2" r="1.2" fill="#F472B6"/>
+            <circle cx="18.5" cy="17.2" r="1.2" fill="#34D399"/>
+          </svg>
+        </div>
+        <div>
+          <p class="font-heading font-bold text-lg sm:text-xl text-plumDark leading-none tracking-tight">
+            Nube <span class="text-pinkPastel">Deco</span> &amp; Bazar
+          </p>
+          <span class="hidden sm:inline-flex items-center gap-1 text-[11px] font-medium text-plumMuted mt-0.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-mintPastel"></span>
+            Catálogo autoadministrable desde Google Sheets
+          </span>
+        </div>
+      </a>
+
+      <!-- Buscador rápido (desktop) -->
+      <div class="hidden md:block flex-1 max-w-md mx-4">
+        <div class="relative">
+          <svg class="w-4 h-4 text-plumMuted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <path stroke-linecap="round" d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input
+            id="nav-search-input"
+            type="text"
+            placeholder="Buscar mates, tazas, velas, lámparas..."
+            autocomplete="off"
+            class="w-full pl-10 pr-4 py-2 rounded-2xl bg-creamBg border border-borderSoft focus:border-lavenderPastel focus:outline-none text-sm text-plumDark placeholder:text-plumMuted/70 transition-colors"
+          />
+        </div>
+      </div>
+
+      <!-- Botón Carrito con contador dinámico -->
+      <button
+        id="header-cart-btn"
+        type="button"
+        aria-label="Abrir carrito de compras"
+        class="inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 rounded-2xl bg-lavenderSoft/70 hover:bg-lavenderSoft border border-lavenderPastel/40 text-plumDark font-heading font-bold text-sm transition-all active:scale-95 shrink-0"
+      >
+        <svg class="w-5 h-5 text-plumDark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <span class="hidden sm:inline">Mi Carrito</span>
+        <span
+          id="header-cart-count"
+          class="min-w-[24px] h-6 px-1.5 rounded-full bg-pinkPastel text-white text-xs font-bold flex items-center justify-center shadow-sm"
+        >
+          0
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===================================================================== -->
+  <!-- BANNER PROMOCIONAL PASTEL (HERO DE LA TIENDA)                         -->
+  <!-- ===================================================================== -->
+  <section id="top" class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
+    <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-pinkSoft via-lavenderSoft to-mintSoft border border-white shadow-pastel p-6 sm:p-9 lg:p-10">
+      <!-- Burbujas pastel decorativas -->
+      <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-white/40 blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-14 left-1/3 w-56 h-56 rounded-full bg-peachSoft/60 blur-2xl pointer-events-none"></div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="max-w-2xl space-y-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/85 border border-mintPastel/40 text-xs font-semibold text-plumDark shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-mintPastel"></span>
+              Pedidos sin comisiones directo a WhatsApp
+            </span>
+            <span class="sm:hidden inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 text-[11px] font-medium text-plumMuted">
+              Autoadministrable vía Google Sheets
+            </span>
+          </div>
+
+          <h1 class="font-heading font-bold text-2xl sm:text-4xl text-plumDark leading-tight tracking-tight">
+            10% OFF abonando por transferencia &middot; Envíos a todo el país
+          </h1>
+
+          <p class="text-sm sm:text-base text-plumMuted leading-relaxed">
+            Objetos lindos, cálidos y funcionales para llenar tu casa de color. Elegí tus favoritos, armá tu carrito y mandanos el pedido listo en un toque.
+          </p>
+        </div>
+
+        <!-- Mini resumen de beneficios de la tienda -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-2.5 shrink-0">
+          <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/80 backdrop-blur-sm border border-white text-xs sm:text-sm font-semibold text-plumDark">
+            <span class="w-7 h-7 rounded-xl bg-pinkSoft text-pinkPastel flex items-center justify-center shrink-0">%</span>
+            <span>10% OFF Transferencia</span>
+          </div>
+          <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/80 backdrop-blur-sm border border-white text-xs sm:text-sm font-semibold text-plumDark">
+            <span class="w-7 h-7 rounded-xl bg-mintSoft text-emerald-700 flex items-center justify-center shrink-0">✦</span>
+            <span>Retiro gratis en local</span>
+          </div>
+          <div class="col-span-2 sm:col-span-1 flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/80 backdrop-blur-sm border border-white text-xs sm:text-sm font-semibold text-plumDark">
+            <span class="w-7 h-7 rounded-xl bg-peachSoft text-amber-700 flex items-center justify-center shrink-0">★</span>
+            <span>Packaging listo para regalo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 3. FILTROS, BUSCADOR Y ORDENAMIENTO INTERACTIVOS                      -->
+  <!-- ===================================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-7 space-y-4">
+    <!-- Fila superior: Buscador (principal en mobile + sincronizado) y Ordenamiento -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      <!-- Buscador en tiempo real -->
+      <div class="relative flex-1 max-w-lg">
+        <svg class="w-4 h-4 text-plumMuted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path stroke-linecap="round" d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input
+          id="main-search-input"
+          type="text"
+          placeholder="Buscar por nombre o descripción (ej. cerámica, bambú, mate...)"
+          autocomplete="off"
+          class="w-full pl-10 pr-10 py-2.5 rounded-2xl bg-white border border-borderSoft focus:border-pinkPastel focus:outline-none text-sm text-plumDark placeholder:text-plumMuted/70 shadow-sm transition-colors"
+        />
+        <button
+          id="clear-search-btn"
+          type="button"
+          aria-label="Limpiar búsqueda"
+          class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-lavenderSoft text-plumDark hover:bg-pinkSoft flex items-center justify-center text-xs font-bold"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Selector de ordenamiento + contador -->
+      <div class="flex items-center justify-between sm:justify-end gap-3">
+        <span id="products-counter" class="text-xs sm:text-sm font-medium text-plumMuted whitespace-nowrap">
+          Mostrando 12 productos
+        </span>
+        <div class="flex items-center gap-2">
+          <label for="sort-select" class="text-xs font-semibold text-plumMuted hidden sm:inline">Ordenar:</label>
+          <select
+            id="sort-select"
+            class="px-3.5 py-2.5 rounded-2xl bg-white border border-borderSoft focus:border-lavenderPastel focus:outline-none text-xs sm:text-sm font-semibold text-plumDark shadow-sm cursor-pointer"
+          >
+            <option value="featured">Destacados</option>
+            <option value="price-asc">Menor precio</option>
+            <option value="price-desc">Mayor precio</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones pill de categorías + Ofertas % -->
+    <div id="category-pills" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" role="tablist" aria-label="Categorías del catálogo">
+      <!-- Renderizado dinámicamente por JS -->
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 4. GRILLA DE PRODUCTOS                                                -->
+  <!-- ===================================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+      <!-- Renderizado dinámicamente desde CATALOG.products -->
+    </div>
+
+    <!-- Estado vacío si no hay resultados -->
+    <div id="empty-state" class="hidden text-center py-16 px-6 rounded-3xl bg-white border border-borderSoft shadow-pastel mt-4">
+      <div class="w-14 h-14 rounded-2xl bg-lavenderSoft text-plumDark flex items-center justify-center mx-auto mb-3 text-2xl">
+        ☁️
+      </div>
+      <h3 class="font-heading font-bold text-xl text-plumDark">No encontramos productos con esa búsqueda</h3>
+      <p class="text-sm text-plumMuted mt-1 mb-5">Probá con otra palabra o mirá todo el catálogo disponible.</p>
+      <button
+        id="reset-filters-btn"
+        type="button"
+        class="px-6 py-2.5 rounded-2xl bg-plumDark hover:bg-pinkPastel text-white font-heading font-bold text-sm transition-colors"
+      >
+        Ver todos los productos
+      </button>
+    </div>
+
+    <!-- Footer delicado de la tienda -->
+    <footer class="mt-16 pt-8 pb-4 border-t border-pinkSoft text-center space-y-2">
+      <p class="font-heading font-bold text-base text-plumDark">Nube Deco &amp; Bazar</p>
+      <p class="text-xs text-plumMuted">
+        Palermo &amp; Envíos a todo el país &middot; Precios expresados en Pesos Argentinos (ARS).
+      </p>
+      <p class="text-xs text-plumMuted/90">
+        Catálogo online diseñado por
+        <a href="../index.html" class="font-semibold text-plumDark hover:text-pinkPastel underline decoration-lavenderPastel underline-offset-4 transition-colors">
+          Serebi Lab
+        </a>
+      </p>
+    </footer>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- BOTÓN FLOTANTE INFERIOR EN MOBILE PARA ABRIR CARRITO                  -->
+  <!-- ===================================================================== -->
+  <div
+    id="mobile-cart-bar"
+    class="mobile-cart-bar md:hidden fixed bottom-4 inset-x-0 z-40 px-4 pointer-events-none translate-y-24 opacity-0"
+  >
+    <button
+      id="mobile-open-cart-btn"
+      type="button"
+      class="pointer-events-auto w-full flex items-center justify-between gap-3 px-5 py-3.5 rounded-2xl bg-plumDark text-white shadow-xl border border-lavenderPastel/40 active:scale-[0.99] transition-transform"
+    >
+      <div class="flex items-center gap-3">
+        <span id="mobile-cart-count" class="w-8 h-8 rounded-xl bg-pinkPastel text-white font-heading font-bold text-sm flex items-center justify-center">
+          0
+        </span>
+        <div class="text-left">
+          <p class="text-[11px] text-lavenderSoft/90 leading-none">Tu carrito</p>
+          <p id="mobile-cart-total" class="font-heading font-bold text-base leading-tight">$ 0</p>
+        </div>
+      </div>
+      <span class="font-heading font-bold text-sm text-pinkSoft">Ver pedido &rarr;</span>
+    </button>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL DE ZOOM / DETALLE DEL PRODUCTO                                  -->
+  <!-- ===================================================================== -->
+  <div
+    id="product-modal"
+    class="fade-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4 bg-plumDark/60 backdrop-blur-sm opacity-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="pm-title"
+  >
+    <div id="product-modal-panel" class="modal-panel bg-white rounded-[2rem] max-w-2xl w-full border border-borderSoft shadow-2xl overflow-hidden max-h-[92vh] flex flex-col md:flex-row transform scale-95 opacity-0">
+      <!-- Ilustración en grande -->
+      <div id="pm-artwork-wrap" class="relative w-full md:w-1/2 min-h-[240px] sm:min-h-[280px] flex items-center justify-center p-6">
+        <div id="pm-badge" class="absolute top-4 left-4"></div>
+        <button
+          id="pm-close-mobile"
+          type="button"
+          aria-label="Cerrar detalle"
+          class="md:hidden absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 text-plumDark shadow-sm flex items-center justify-center font-bold"
+        >
+          &times;
+        </button>
+        <div id="pm-artwork" class="w-48 h-48 sm:w-56 sm:h-56"></div>
+      </div>
+
+      <!-- Información detallada -->
+      <div class="w-full md:w-1/2 p-6 sm:p-7 flex flex-col justify-between overflow-y-auto relative">
+        <button
+          id="pm-close-desktop"
+          type="button"
+          aria-label="Cerrar detalle"
+          class="hidden md:flex absolute top-5 right-5 w-9 h-9 rounded-xl bg-creamBg hover:bg-pinkSoft text-plumDark items-center justify-center font-bold transition-colors"
+        >
+          &times;
+        </button>
+
+        <div class="space-y-3.5">
+          <div class="flex flex-wrap items-center gap-2 pr-8">
+            <span id="pm-category" class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-lavenderSoft text-plumDark"></span>
+            <span class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-mintSoft px-2.5 py-1 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-mintPastel"></span>
+              Stock disponible
+            </span>
+          </div>
+
+          <h2 id="pm-title" class="font-heading font-bold text-2xl text-plumDark leading-snug"></h2>
+
+          <!-- Precio y descuento -->
+          <div class="flex items-baseline gap-2.5">
+            <span id="pm-price" class="font-heading font-bold text-2xl sm:text-3xl text-plumDark"></span>
+            <span id="pm-old-price" class="hidden text-sm text-plumMuted line-through"></span>
+          </div>
+          <p id="pm-transfer-hint" class="text-xs font-semibold text-emerald-700 bg-mintSoft/70 px-3 py-1.5 rounded-xl inline-block"></p>
+
+          <p id="pm-description" class="text-sm text-plumMuted leading-relaxed"></p>
+
+          <!-- Medidas y materiales -->
+          <div class="rounded-2xl bg-creamBg border border-borderSoft p-3.5 space-y-1.5 text-xs">
+            <p><strong class="text-plumDark">Materiales:</strong> <span id="pm-materials" class="text-plumMuted"></span></p>
+            <p><strong class="text-plumDark">Medidas:</strong> <span id="pm-dimensions" class="text-plumMuted"></span></p>
+          </div>
+        </div>
+
+        <!-- Selector de cantidad + Agregar al carrito -->
+        <div class="pt-5 mt-5 border-t border-borderSoft flex items-center gap-3">
+          <div class="inline-flex items-center gap-2 bg-creamBg border border-borderSoft rounded-2xl p-1">
+            <button
+              id="pm-qty-dec"
+              type="button"
+              aria-label="Disminuir cantidad"
+              class="w-9 h-9 rounded-xl bg-white hover:bg-pinkSoft text-plumDark font-bold flex items-center justify-center transition-colors"
+            >
+              &minus;
+            </button>
+            <span id="pm-qty-value" class="min-w-[24px] text-center font-heading font-bold text-base text-plumDark">1</span>
+            <button
+              id="pm-qty-inc"
+              type="button"
+              aria-label="Aumentar cantidad"
+              class="w-9 h-9 rounded-xl bg-white hover:bg-pinkSoft text-plumDark font-bold flex items-center justify-center transition-colors"
+            >
+              +
+            </button>
+          </div>
+
+          <button
+            id="pm-add-btn"
+            type="button"
+            class="flex-1 py-3 px-4 rounded-2xl bg-plumDark hover:bg-pinkPastel text-white font-heading font-bold text-sm shadow-sm transition-colors active:scale-[0.98]"
+          >
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 5. CARRITO DESLIZABLE (DRAWER LATERAL DERECHO)                        -->
+  <!-- ===================================================================== -->
+  <div
+    id="cart-drawer-backdrop"
+    class="fade-backdrop fixed inset-0 z-50 hidden bg-plumDark/50 backdrop-blur-sm opacity-0"
+    aria-hidden="true"
+  >
+    <aside
+      id="cart-drawer-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="drawer-title"
+      class="drawer-panel ml-auto h-full w-full max-w-md bg-white shadow-2xl border-l border-borderSoft flex flex-col translate-x-full"
+    >
+      <!-- Cabecera del Drawer -->
+      <div class="px-5 py-4 border-b border-pinkSoft flex items-center justify-between gap-2 bg-creamBg shrink-0">
+        <div>
+          <h2 id="drawer-title" class="font-heading font-bold text-xl text-plumDark">Mi Carrito</h2>
+          <p class="text-xs text-plumMuted">Nube Deco &amp; Bazar</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            id="drawer-clear-btn"
+            type="button"
+            class="text-xs font-semibold text-plumMuted hover:text-pinkPastel px-2.5 py-1.5 rounded-xl hover:bg-pinkSoft/50 transition-colors"
+          >
+            Vaciar
+          </button>
+          <button
+            id="drawer-close-btn"
+            type="button"
+            aria-label="Cerrar carrito"
+            class="w-9 h-9 rounded-xl bg-white hover:bg-pinkSoft border border-borderSoft text-plumDark font-bold text-lg flex items-center justify-center transition-colors"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+
+      <!-- Cuerpo deslizable del Drawer -->
+      <div class="flex-1 overflow-y-auto p-5 space-y-5">
+        <!-- Estado vacío del carrito -->
+        <div id="drawer-empty" class="text-center py-12 space-y-3">
+          <div class="w-14 h-14 rounded-2xl bg-pinkSoft/70 text-pinkPastel flex items-center justify-center mx-auto text-2xl">
+            🛍️
+          </div>
+          <p class="font-heading font-bold text-lg text-plumDark">Tu carrito está vacío</p>
+          <p class="text-xs sm:text-sm text-plumMuted">Sumá productos del catálogo para armar tu pedido y enviarlo por WhatsApp.</p>
+        </div>
+
+        <!-- Contenido cuando hay productos -->
+        <div id="drawer-content" class="hidden space-y-5">
+          <!-- Lista de productos -->
+          <div id="drawer-items-list" class="space-y-3"></div>
+
+          <!-- Modalidad de entrega -->
+          <div class="space-y-2 pt-3 border-t border-borderSoft">
+            <p class="font-heading font-bold text-sm text-plumDark">Modalidad de entrega</p>
+            <div class="grid grid-cols-2 gap-2.5">
+              <label class="cursor-pointer">
+                <input type="radio" name="deliveryOption" value="retiro" class="peer sr-only" checked />
+                <div class="p-3 rounded-2xl bg-creamBg border border-borderSoft peer-checked:border-mintPastel peer-checked:bg-mintSoft/45 transition-all">
+                  <p class="text-xs sm:text-sm font-bold text-plumDark">Retiro en local</p>
+                  <p class="text-xs font-semibold text-emerald-700 mt-0.5">Gratis</p>
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="deliveryOption" value="envio" class="peer sr-only" />
+                <div class="p-3 rounded-2xl bg-creamBg border border-borderSoft peer-checked:border-lavenderPastel peer-checked:bg-lavenderSoft/60 transition-all">
+                  <p class="text-xs sm:text-sm font-bold text-plumDark">Envío a domicilio</p>
+                  <p class="text-xs font-semibold text-plumMuted mt-0.5">$ 4.500</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Medio de pago -->
+          <div class="space-y-2">
+            <p class="font-heading font-bold text-sm text-plumDark">Medio de pago</p>
+            <div class="space-y-2">
+              <label class="cursor-pointer block">
+                <input type="radio" name="paymentOption" value="Transferencia bancaria" class="peer sr-only" checked />
+                <div class="px-3.5 py-2.5 rounded-2xl bg-creamBg border border-borderSoft peer-checked:border-mintPastel peer-checked:bg-mintSoft/45 flex items-center justify-between gap-2 transition-all">
+                  <span class="text-xs sm:text-sm font-semibold text-plumDark">Transferencia bancaria</span>
+                  <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-mintSoft text-emerald-800">10% OFF</span>
+                </div>
+              </label>
+              <div class="grid grid-cols-2 gap-2">
+                <label class="cursor-pointer block">
+                  <input type="radio" name="paymentOption" value="Mercado Pago" class="peer sr-only" />
+                  <div class="px-3 py-2.5 rounded-2xl bg-creamBg border border-borderSoft peer-checked:border-lavenderPastel peer-checked:bg-lavenderSoft/60 text-center text-xs sm:text-sm font-semibold text-plumDark transition-all">
+                    Mercado Pago
+                  </div>
+                </label>
+                <label class="cursor-pointer block">
+                  <input type="radio" name="paymentOption" value="Efectivo" class="peer sr-only" />
+                  <div class="px-3 py-2.5 rounded-2xl bg-creamBg border border-borderSoft peer-checked:border-lavenderPastel peer-checked:bg-lavenderSoft/60 text-center text-xs sm:text-sm font-semibold text-plumDark transition-all">
+                    Efectivo
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Datos simples del cliente -->
+          <div class="space-y-3">
+            <div>
+              <label for="buyer-name" class="block text-xs font-semibold text-plumDark mb-1">Tu nombre *</label>
+              <input
+                id="buyer-name"
+                type="text"
+                placeholder="Ej: Camila"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-creamBg border border-borderSoft focus:border-pinkPastel focus:outline-none text-sm text-plumDark placeholder:text-plumMuted/60"
+              />
+            </div>
+            <div>
+              <label for="buyer-notes" class="block text-xs font-semibold text-plumDark mb-1">Dirección o aclaraciones (opcional)</label>
+              <textarea
+                id="buyer-notes"
+                rows="2"
+                placeholder="Ej: Envío a Palermo, envolver para regalo, color preferido..."
+                class="w-full px-3.5 py-2.5 rounded-xl bg-creamBg border border-borderSoft focus:border-pinkPastel focus:outline-none text-sm text-plumDark placeholder:text-plumMuted/60 resize-none"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Error en línea sin alert() -->
+          <p id="drawer-error" class="hidden text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-3.5 py-2.5"></p>
+
+          <!-- Resumen de totales -->
+          <div class="rounded-2xl bg-creamBg border border-borderSoft p-4 space-y-2 text-sm">
+            <div class="flex items-center justify-between text-plumMuted">
+              <span>Subtotal</span>
+              <span id="sum-subtotal" class="font-semibold text-plumDark">$ 0</span>
+            </div>
+            <div id="sum-discount-row" class="flex items-center justify-between text-emerald-700">
+              <span>Descuento transferencia (10%)</span>
+              <span id="sum-discount" class="font-bold">- $ 0</span>
+            </div>
+            <div class="flex items-center justify-between text-plumMuted">
+              <span>Envío</span>
+              <span id="sum-shipping" class="font-semibold text-emerald-700">Gratis</span>
+            </div>
+            <div class="pt-2.5 border-t border-borderSoft flex items-center justify-between font-heading font-bold text-lg text-plumDark">
+              <span>Total final</span>
+              <span id="sum-total" class="text-plumDark">$ 0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer fijo del Drawer -->
+      <div id="drawer-footer" class="hidden p-4 sm:p-5 border-t border-pinkSoft bg-white shrink-0">
+        <button
+          id="open-wa-sim-btn"
+          type="button"
+          class="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-2xl bg-waGreen hover:bg-waGreenHover text-[#020617] font-heading font-bold text-sm sm:text-base shadow-md transition-all active:scale-[0.99]"
+        >
+          <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.438 1.344-2 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.344-1.766-.656-3.109-1.344-5.141-4.5-5.297-4.703-.156-.203-1.266-1.688-1.266-3.219s.797-2.281 1.078-2.594c.281-.312.625-.391.828-.391.203 0 .422.016.609.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.766 2.203 1.219 1.094 2.25 1.422 2.562 1.578.312.156.5.141.688-.078.188-.219.797-.938 1.016-1.25.219-.312.438-.266.734-.156.297.109 1.891.891 2.219 1.047.328.156.547.234.625.375.078.141.078.812-.172 1.516z"/>
+          </svg>
+          <span>Armar pedido por WhatsApp</span>
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL SIMULADOR DE CHAT DE WHATSAPP                                   -->
+  <!-- ===================================================================== -->
+  <div
+    id="wa-sim-modal"
+    class="fade-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4 bg-plumDark/70 backdrop-blur-sm opacity-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="wa-sim-title"
+  >
+    <div id="wa-sim-panel" class="modal-panel bg-white rounded-[2rem] max-w-lg w-full border border-borderSoft shadow-2xl overflow-hidden max-h-[92vh] flex flex-col transform scale-95 opacity-0">
+      <!-- Header -->
+      <div class="px-5 py-4 border-b border-borderSoft flex items-center justify-between bg-creamBg shrink-0">
+        <div>
+          <h3 id="wa-sim-title" class="font-heading font-bold text-lg text-plumDark">Simulador de Pedido por WhatsApp</h3>
+          <p class="text-xs text-plumMuted">Así recibís cada venta ordenada y sin comisiones</p>
+        </div>
+        <button
+          id="wa-sim-close"
+          type="button"
+          aria-label="Cerrar simulador"
+          class="w-9 h-9 rounded-xl bg-white hover:bg-pinkSoft border border-borderSoft text-plumDark font-bold text-lg flex items-center justify-center transition-colors"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Cuerpo del chat simulado -->
+      <div class="p-5 overflow-y-auto space-y-4">
+        <div class="rounded-2xl overflow-hidden border border-borderSoft shadow-sm">
+          <!-- Barra superior de WhatsApp -->
+          <div class="bg-[#075E54] px-4 py-3 flex items-center gap-3 text-white">
+            <div class="w-9 h-9 rounded-full bg-white/95 text-plumDark font-heading font-bold text-xs flex items-center justify-center">
+              ND
+            </div>
+            <div>
+              <p class="text-sm font-bold leading-tight">Nube Deco &amp; Bazar</p>
+              <p class="text-[11px] text-emerald-200">en línea</p>
+            </div>
+          </div>
+
+          <!-- Mensaje saliente -->
+          <div class="wa-chat-bg p-4">
+            <div class="ml-auto max-w-[92%] rounded-2xl rounded-tr-sm bg-[#D9FDD3] text-[#111B21] px-3.5 py-2.5 shadow-sm">
+              <pre id="wa-sim-message" class="font-sans text-xs sm:text-[13px] whitespace-pre-wrap leading-relaxed"></pre>
+              <div class="text-right text-[10px] text-slate-500 mt-1 flex items-center justify-end gap-1">
+                <span id="wa-sim-time">19:30</span>
+                <span class="text-sky-600 font-bold">✓✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="p-4 sm:p-5 border-t border-borderSoft bg-creamBg flex flex-col sm:flex-row gap-2.5 shrink-0">
+        <button
+          id="wa-copy-btn"
+          type="button"
+          class="px-4 py-3 rounded-2xl bg-white hover:bg-lavenderSoft border border-borderSoft text-plumDark font-heading font-bold text-sm transition-colors"
+        >
+          <span id="wa-copy-label">Copiar mensaje</span>
+        </button>
+        <a
+          id="wa-open-real-btn"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-waGreen hover:bg-waGreenHover text-[#020617] font-heading font-bold text-sm shadow-sm transition-colors"
+        >
+          <span>Abrir en WhatsApp real</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TOAST DISCRETO DE FEEDBACK                                            -->
+  <!-- ===================================================================== -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 pointer-events-none z-50 px-4 py-2.5 rounded-full bg-plumDark text-white text-xs sm:text-sm font-semibold shadow-xl transition-all duration-200 flex items-center gap-2"
+  >
+    <span class="w-2 h-2 rounded-full bg-mintPastel"></span>
+    <span id="toast-text">Producto agregado</span>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT MODULAR: CATÁLOGO, FILTROS, MODAL, DRAWER Y WHATSAPP       -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * Configuración general y base de datos del catálogo "Nube Deco & Bazar".
+     * En un proyecto real, este array puede cargarse automáticamente desde Google Sheets.
+     */
+    const CATALOG = {
+      whatsappDemoNumber: '5491134441993',
+      shippingCost: 4500,
+      transferDiscountRate: 0.10,
+      categories: ['Todos', 'Bazar & Cocina', 'Mates & Infusiones', 'Deco Hogar', 'Regalería', 'Ofertas %'],
+      products: [
+        {
+          id: 'mate-imperial-pastel',
+          name: 'Set Mate Pastel & Bombilla',
+          category: 'Mates & Infusiones',
+          price: 22900,
+          oldPrice: 28600,
+          badge: '-20% OFF',
+          featured: true,
+          bgClass: 'bg-pinkSoft/70',
+          artType: 'mate',
+          shortDesc: 'Mate térmico acero inoxidable rosa pastel + bombilla pico loro.',
+          fullDesc: 'Mate térmico de doble capa en acero inoxidable con acabado mate soft touch. Conserva la temperatura de tu yerba sin quemar la mano e incluye bombilla chata de acero.',
+          materials: 'Acero inoxidable 304, pintura epoxi mate',
+          dimensions: '9,5 cm de alto × 8 cm de diámetro'
+        },
+        {
+          id: 'taza-nube-ceramica',
+          name: 'Taza Cerámica Nube con Plato',
+          category: 'Bazar & Cocina',
+          price: 16500,
+          oldPrice: null,
+          badge: 'Nuevo',
+          featured: true,
+          bgClass: 'bg-lavenderSoft/75',
+          artType: 'mug',
+          shortDesc: 'Taza artesanal esmaltada con asa redondeada y plato nube.',
+          fullDesc: 'Juego de taza y plato en cerámica gres horneada a alta temperatura. Apta microondas y lavavajillas, ideal para café con leche, matcha o capuchino.',
+          materials: 'Cerámica gres esmaltada a mano',
+          dimensions: 'Capacidad 320 ml · Plato 15 cm'
+        },
+        {
+          id: 'florero-nordico-acanalado',
+          name: 'Florero Nórdico Acanalado',
+          category: 'Deco Hogar',
+          price: 19200,
+          oldPrice: 24000,
+          badge: '-20% OFF',
+          featured: true,
+          bgClass: 'bg-mintSoft/70',
+          artType: 'vase',
+          shortDesc: 'Florero minimalista textura acanalada ideal para flores secas.',
+          fullDesc: 'Pieza decorativa de líneas orgánicas y terminación mate sedosa. Queda impecable tanto con ramos de flores secas como protagonista solo en mesas ratonas o recibidores.',
+          materials: 'Cerámica mate impermeable',
+          dimensions: '21 cm de alto × 10 cm de base'
+        },
+        {
+          id: 'vela-vainilla-lavanda',
+          name: 'Vela Aromática Vainilla & Lavanda',
+          category: 'Regalería',
+          price: 12500,
+          oldPrice: null,
+          badge: 'Destacado',
+          featured: true,
+          bgClass: 'bg-peachSoft/75',
+          artType: 'candle',
+          shortDesc: 'Cera de soja 100% vegetal en frasco reutilizable con tapa de bambú.',
+          fullDesc: 'Vertida a mano con cera de soja ecológica y esencias puras de lavanda francesa y vainilla tibia. Rinde más de 45 horas de quemado limpio sin hollín.',
+          materials: 'Cera de soja, pabilo de algodón, vidrio y bambú',
+          dimensions: '220 g · 9 cm de alto'
+        },
+        {
+          id: 'tetera-vidrio-bambu',
+          name: 'Tetera Infusora Vidrio & Bambú',
+          category: 'Mates & Infusiones',
+          price: 31500,
+          oldPrice: null,
+          badge: 'Nuevo',
+          featured: false,
+          bgClass: 'bg-mintSoft/65',
+          artType: 'teapot',
+          shortDesc: 'Vidrio borosilicato resistente al calor con filtro de acero.',
+          fullDesc: 'Diseñada para preparar té en hebras o infusiones frutales. Su filtro desmontable de malla fina evita sedimentos y la tapa de bambú sella con silicona hermética.',
+          materials: 'Vidrio borosilicato, acero inoxidable y bambú',
+          dimensions: 'Capacidad 900 ml · 14 cm de alto'
+        },
+        {
+          id: 'set-frascos-bambu',
+          name: 'Set x3 Frascos Herméticos Bambú',
+          category: 'Bazar & Cocina',
+          price: 25400,
+          oldPrice: 29900,
+          badge: '-15% OFF',
+          featured: true,
+          bgClass: 'bg-peachSoft/65',
+          artType: 'jars',
+          shortDesc: 'Tres tamaños apilables para café, yerba, pastas o especias.',
+          fullDesc: 'Organizá tu alacena con estilo. Incluye 3 frascos de vidrio grueso transparente con tapa de bambú natural y aro de silicona que conserva los alimentos frescos por más tiempo.',
+          materials: 'Vidrio borosilicato y tapa de bambú natural',
+          dimensions: '500 ml, 800 ml y 1.200 ml'
+        },
+        {
+          id: 'lampara-hongo-pastel',
+          name: 'Lámpara de Mesa Hongo Pastel',
+          category: 'Deco Hogar',
+          price: 44900,
+          oldPrice: null,
+          badge: 'Destacado',
+          featured: true,
+          bgClass: 'bg-lavenderSoft/70',
+          artType: 'lamp',
+          shortDesc: 'Luz cálida dimerizable táctil con batería recargable USB-C.',
+          fullDesc: 'Lámpara inalámbrica de diseño retro-moderno en tono lavanda suave. Ofrece 3 niveles de intensidad táctil para crear climas acogedores en mesas de luz o escritorios.',
+          materials: 'Acrílico opalizado y base metálica satinada',
+          dimensions: '24 cm de alto × 16 cm de pantalla'
+        },
+        {
+          id: 'box-regalo-relax',
+          name: 'Box Regalo "Momento Relax"',
+          category: 'Regalería',
+          price: 33600,
+          oldPrice: 42000,
+          badge: '-20% OFF',
+          featured: true,
+          bgClass: 'bg-pinkSoft/75',
+          artType: 'giftbox',
+          shortDesc: 'Incluye taza cerámica, vela de soja, blend de té y tarjeta dedicatoria.',
+          fullDesc: 'Caja rígida pastel lista para regalar con moño de raso. Combina nuestros tres favoritos de la tienda para sorprender en cumpleaños, aniversarios o agradecimientos.',
+          materials: 'Caja rígida forrada + 3 productos de línea',
+          dimensions: 'Box 26 × 22 × 11 cm'
+        },
+        {
+          id: 'organizador-giratorio',
+          name: 'Organizador Giratorio 360°',
+          category: 'Bazar & Cocina',
+          price: 15800,
+          oldPrice: null,
+          badge: null,
+          featured: false,
+          bgClass: 'bg-mintSoft/60',
+          artType: 'organizer',
+          shortDesc: 'Bandeja giratoria antideslizante ideal para heladera o mesada.',
+          fullDesc: 'Mantené condimentos, frascos o productos de skincare siempre al alcance con un giro suave de 360 grados. Base con topes antideslizantes y borde elevado de contención.',
+          materials: 'Polipropileno libre de BPA y base siliconada',
+          dimensions: '25 cm de diámetro × 6 cm de alto'
+        },
+        {
+          id: 'yerbera-azucarera-pastel',
+          name: 'Set Yerbera & Azucarera Pastel',
+          category: 'Mates & Infusiones',
+          price: 16900,
+          oldPrice: 19900,
+          badge: '-15% OFF',
+          featured: false,
+          bgClass: 'bg-peachSoft/70',
+          artType: 'canisters',
+          shortDesc: 'Latas herméticas con pico vertedor en tonos menta y durazno.',
+          fullDesc: 'Set de dos latas metálicas con recubrimiento pastel mate y pico vertedor plástico antigoteo. Perfectas para llevar en el bolso matero o dejar a la vista en la cocina.',
+          materials: 'Hojalata pintada al horno y pico vertedor',
+          dimensions: 'Yerbera 16 cm · Azucarera 12 cm'
+        },
+        {
+          id: 'espejo-organico-ondulado',
+          name: 'Espejo Orgánico Ondulado',
+          category: 'Deco Hogar',
+          price: 28900,
+          oldPrice: null,
+          badge: 'Nuevo',
+          featured: false,
+          bgClass: 'bg-pinkSoft/65',
+          artType: 'mirror',
+          shortDesc: 'Espejo de apoyo o pared con marco suave de curvas orgánicas.',
+          fullDesc: 'Aporta amplitud y un toque de diseño contemporáneo a tu cómoda o vestidor. Incluye soporte trasero rebatible para apoyar sobre muebles y gancho metálico para colgar.',
+          materials: 'Cristal 4 mm y marco en madera laqueada pastel',
+          dimensions: '38 cm de alto × 26 cm de ancho'
+        },
+        {
+          id: 'difusor-peonias-te',
+          name: 'Difusor Peonías & Té Blanco',
+          category: 'Regalería',
+          price: 14200,
+          oldPrice: null,
+          badge: null,
+          featured: false,
+          bgClass: 'bg-lavenderSoft/65',
+          artType: 'diffuser',
+          shortDesc: 'Aromatizador ambiental 250 ml con 6 varillas de ratán natural.',
+          fullDesc: 'Fragancia floral fresca y delicada que perfuma ambientes de forma constante sin resultar invasiva. Presentado en frasco de vidrio esmerilado con caja pastel.',
+          materials: 'Esencia concentrada, vidrio esmerilado y ratán',
+          dimensions: '250 ml · Varillas de 24 cm'
+        }
+      ]
+    };
+
+    // Estado central de filtros, carrito y modal activo
+    const state = {
+      category: 'Todos',
+      search: '',
+      sort: 'featured',
+      cart: {}, // { [productId]: cantidad }
+      activeModalProductId: null,
+      activeModalQty: 1
+    };
+
+    /**
+     * Formatea números a pesos argentinos (ej. "$ 22.900").
+     */
+    function formatARS(amount) {
+      return '$ ' + Math.round(Number(amount)).toLocaleString('es-AR');
+    }
+
+    /**
+     * Muestra un toast breve de confirmación sin usar alert().
+     */
+    let toastTimeout = null;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      if (!toast || !text) return;
+
+      text.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2200);
+    }
+
+    /**
+     * Genera ilustraciones SVG minimalistas pastel para cada tipo de producto.
+     */
+    function getProductArtworkSVG(artType) {
+      const svgs = {
+        mate: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="94" y1="24" x2="78" y2="70" stroke="#6B6378" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="96" cy="24" rx="6" ry="3.5" transform="rotate(-15 96 24)" fill="#A78BFA"/>
+            <path d="M46 66C46 62 54 58 80 58C106 58 114 62 114 66L108 118C106 130 96 136 80 136C64 136 54 130 52 118L46 66Z" fill="#F472B6" fill-opacity="0.85" stroke="#2D2638" stroke-width="2.5"/>
+            <ellipse cx="80" cy="64" rx="33" ry="8" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5"/>
+            <ellipse cx="80" cy="64" rx="22" ry="4.5" fill="#A7F3D0"/>
+            <path d="M58 96C66 102 94 102 102 96" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.7"/>
+          </svg>`,
+        mug: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="80" cy="126" rx="52" ry="12" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5"/>
+            <path d="M110 74H120C128 74 133 80 133 88C133 96 128 102 120 102H110" stroke="#2D2638" stroke-width="2.5" fill="#EDE9FE"/>
+            <rect x="46" y="56" width="66" height="62" rx="18" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5"/>
+            <path d="M48 76H110" stroke="#A78BFA" stroke-width="2" stroke-dasharray="4 4"/>
+            <path d="M68 42C68 36 74 36 74 30" stroke="#F472B6" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M84 44C84 38 90 38 90 32" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>`,
+        vase: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M80 62C76 42 64 30 56 26" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="56" cy="26" r="7" fill="#FDBA74" stroke="#2D2638" stroke-width="2"/>
+            <path d="M82 62C88 40 100 32 108 24" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="108" cy="24" r="6" fill="#F472B6" stroke="#2D2638" stroke-width="2"/>
+            <path d="M64 60H96L108 128C108 134 96 138 80 138C64 138 52 134 52 128L64 60Z" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="70" y1="64" x2="64" y2="132" stroke="#A7F3D0" stroke-width="2.5"/>
+            <line x1="80" y1="62" x2="80" y2="134" stroke="#A7F3D0" stroke-width="2.5"/>
+            <line x1="90" y1="64" x2="96" y2="132" stroke="#A7F3D0" stroke-width="2.5"/>
+          </svg>`,
+        candle: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M80 26C80 26 90 38 90 46C90 51.5 85.5 56 80 56C74.5 56 70 51.5 70 46C70 38 80 26 80 26Z" fill="#FDBA74" stroke="#2D2638" stroke-width="2"/>
+            <line x1="80" y1="56" x2="80" y2="66" stroke="#2D2638" stroke-width="2.5"/>
+            <rect x="48" y="66" width="64" height="68" rx="14" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5"/>
+            <rect x="56" y="84" width="48" height="32" rx="8" fill="#FCE7F3" stroke="#F472B6" stroke-width="1.5"/>
+            <line x1="66" y1="96" x2="94" y2="96" stroke="#2D2638" stroke-width="2" stroke-linecap="round"/>
+            <line x1="72" y1="104" x2="88" y2="104" stroke="#6B6378" stroke-width="2" stroke-linecap="round"/>
+          </svg>`,
+        teapot: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M48 84C34 84 28 74 26 66" stroke="#2D2638" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M112 72H124C131 72 136 78 136 86C136 94 131 102 122 104H110" stroke="#2D2638" stroke-width="2.5"/>
+            <circle cx="80" cy="96" r="36" fill="#FFFFFF" fill-opacity="0.9" stroke="#2D2638" stroke-width="2.5"/>
+            <path d="M48 102C58 112 102 112 112 102C108 118 96 130 80 130C64 130 52 118 48 102Z" fill="#D1FAE5"/>
+            <rect x="64" y="54" width="32" height="10" rx="5" fill="#FDBA74" stroke="#2D2638" stroke-width="2.2"/>
+            <circle cx="80" cy="49" r="5" fill="#FDBA74" stroke="#2D2638" stroke-width="2"/>
+          </svg>`,
+        jars: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="26" y="78" width="34" height="52" rx="8" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.2"/>
+            <rect x="29" y="70" width="28" height="9" rx="3" fill="#FDBA74" stroke="#2D2638" stroke-width="2"/>
+            <rect x="63" y="54" width="36" height="76" rx="9" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.4"/>
+            <rect x="66" y="45" width="30" height="10" rx="3" fill="#FDBA74" stroke="#2D2638" stroke-width="2"/>
+            <rect x="70" y="88" width="22" height="34" rx="5" fill="#EDE9FE"/>
+            <rect x="102" y="68" width="34" height="62" rx="8" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.2"/>
+            <rect x="105" y="60" width="28" height="9" rx="3" fill="#FDBA74" stroke="#2D2638" stroke-width="2"/>
+            <rect x="108" y="96" width="22" height="26" rx="4" fill="#FCE7F3"/>
+          </svg>`,
+        lamp: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M36 82C36 52 56 36 80 36C104 36 124 52 124 82H36Z" fill="#A78BFA" fill-opacity="0.85" stroke="#2D2638" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M62 82H98L104 130H56L62 82Z" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5" stroke-linejoin="round"/>
+            <ellipse cx="80" cy="82" rx="44" ry="7" fill="#FFEDD5" stroke="#2D2638" stroke-width="2"/>
+            <circle cx="80" cy="112" r="4" fill="#F472B6"/>
+          </svg>`,
+        giftbox: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="38" y="68" width="84" height="64" rx="12" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5"/>
+            <rect x="32" y="54" width="96" height="18" rx="7" fill="#FCE7F3" stroke="#2D2638" stroke-width="2.5"/>
+            <rect x="72" y="54" width="16" height="78" fill="#F472B6" fill-opacity="0.8" stroke="#2D2638" stroke-width="2"/>
+            <path d="M80 54C72 38 54 34 54 46C54 52 68 54 80 54Z" fill="#F472B6" stroke="#2D2638" stroke-width="2.2"/>
+            <path d="M80 54C88 38 106 34 106 46C106 52 92 54 80 54Z" fill="#A78BFA" stroke="#2D2638" stroke-width="2.2"/>
+          </svg>`,
+        organizer: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="80" cy="112" rx="54" ry="18" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5"/>
+            <path d="M26 96V112C26 122 50 130 80 130C110 130 134 122 134 112V96" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5"/>
+            <ellipse cx="80" cy="96" rx="54" ry="16" fill="#D1FAE5" stroke="#2D2638" stroke-width="2.5"/>
+            <rect x="52" y="58" width="22" height="36" rx="6" fill="#FCE7F3" stroke="#2D2638" stroke-width="2"/>
+            <rect x="82" y="48" width="24" height="46" rx="6" fill="#EDE9FE" stroke="#2D2638" stroke-width="2"/>
+          </svg>`,
+        canisters: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="34" y="48" width="44" height="82" rx="10" fill="#D1FAE5" stroke="#2D2638" stroke-width="2.4"/>
+            <rect x="34" y="48" width="44" height="14" rx="6" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.2"/>
+            <path d="M52 48L58 38H66L62 48" fill="#34D399" stroke="#2D2638" stroke-width="2"/>
+            <rect x="86" y="68" width="42" height="62" rx="10" fill="#FFEDD5" stroke="#2D2638" stroke-width="2.4"/>
+            <rect x="86" y="68" width="42" height="14" rx="6" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.2"/>
+            <path d="M104 68L110 58H118L114 68" fill="#FDBA74" stroke="#2D2638" stroke-width="2"/>
+          </svg>`,
+        mirror: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M54 34C66 24 98 28 106 44C114 60 106 78 112 96C118 114 106 134 82 134C58 134 44 120 48 98C52 76 42 44 54 34Z" fill="#FCE7F3" stroke="#2D2638" stroke-width="2.6"/>
+            <path d="M60 42C70 34 94 38 100 50C106 62 100 78 104 94C108 108 100 124 82 124C64 124 54 114 56 96C58 78 50 50 60 42Z" fill="#FFFFFF" stroke="#F472B6" stroke-width="1.8"/>
+            <line x1="66" y1="62" x2="88" y2="48" stroke="#EDE9FE" stroke-width="4" stroke-linecap="round"/>
+            <line x1="66" y1="76" x2="94" y2="58" stroke="#EDE9FE" stroke-width="3" stroke-linecap="round"/>
+          </svg>`,
+        diffuser: `
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="76" y1="64" x2="54" y2="24" stroke="#FDBA74" stroke-width="3" stroke-linecap="round"/>
+            <line x1="80" y1="64" x2="80" y2="20" stroke="#FDBA74" stroke-width="3" stroke-linecap="round"/>
+            <line x1="84" y1="64" x2="106" y2="26" stroke="#FDBA74" stroke-width="3" stroke-linecap="round"/>
+            <rect x="68" y="60" width="24" height="12" rx="4" fill="#A78BFA" stroke="#2D2638" stroke-width="2.2"/>
+            <rect x="48" y="72" width="64" height="62" rx="18" fill="#FFFFFF" stroke="#2D2638" stroke-width="2.5"/>
+            <rect x="58" y="90" width="44" height="24" rx="6" fill="#EDE9FE"/>
+          </svg>`
+      };
+      return svgs[artType] || svgs.vase;
+    }
+
+    /**
+     * Devuelve el HTML del badge de cada producto ("Destacado", "Nuevo" o "-XX% OFF").
+     */
+    function getBadgeHTML(badge) {
+      if (!badge) return '';
+      if (badge.includes('%')) {
+        return `<span class="inline-block px-2.5 py-1 rounded-full bg-pinkPastel text-white text-[11px] font-bold shadow-sm">${badge}</span>`;
+      }
+      if (badge === 'Nuevo') {
+        return `<span class="inline-block px-2.5 py-1 rounded-full bg-mintSoft text-emerald-800 border border-mintPastel/50 text-[11px] font-bold">${badge}</span>`;
+      }
+      return `<span class="inline-block px-2.5 py-1 rounded-full bg-lavenderSoft text-plumDark border border-lavenderPastel/50 text-[11px] font-bold">✦ ${badge}</span>`;
+    }
+
+    /**
+     * Renderiza las categorías pill incluyendo el filtro especial "Ofertas %".
+     */
+    function renderCategoryPills() {
+      const container = document.getElementById('category-pills');
+      if (!container) return;
+
+      container.innerHTML = CATALOG.categories.map((cat) => {
+        const isActive = state.category === cat;
+        const isOffer = cat === 'Ofertas %';
+
+        let classes = 'bg-white text-plumMuted hover:text-plumDark border-borderSoft hover:border-lavenderPastel';
+        if (isActive) {
+          classes = isOffer
+            ? 'bg-pinkPastel text-white border-pinkPastel shadow-sm'
+            : 'bg-plumDark text-white border-plumDark shadow-sm';
+        } else if (isOffer) {
+          classes = 'bg-pinkSoft/70 text-pink-700 border-pinkPastel/40 hover:bg-pinkSoft';
+        }
+
+        return `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${isActive}"
+            data-category="${cat}"
+            class="px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-bold border transition-all shrink-0 ${classes}"
+          >
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Filtra y ordena los productos del catálogo según el estado actual.
+     */
+    function getFilteredProducts() {
+      const q = state.search.trim().toLowerCase();
+
+      let list = CATALOG.products.filter((p) => {
+        const matchCategory = state.category === 'Todos'
+          || (state.category === 'Ofertas %' ? Boolean(p.oldPrice) : p.category === state.category);
+        const matchSearch = !q
+          || p.name.toLowerCase().includes(q)
+          || p.shortDesc.toLowerCase().includes(q)
+          || p.category.toLowerCase().includes(q);
+        return matchCategory && matchSearch;
+      });
+
+      if (state.sort === 'price-asc') {
+        list = [...list].sort((a, b) => a.price - b.price);
+      } else if (state.sort === 'price-desc') {
+        list = [...list].sort((a, b) => b.price - a.price);
+      } else {
+        list = [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
+      }
+
+      return list;
+    }
+
+    /**
+     * Renderiza la grilla principal de productos y actualiza el contador.
+     */
+    function renderProductsGrid() {
+      const grid = document.getElementById('products-grid');
+      const emptyState = document.getElementById('empty-state');
+      const counter = document.getElementById('products-counter');
+      if (!grid) return;
+
+      const items = getFilteredProducts();
+      if (counter) {
+        counter.textContent = items.length === 1 ? 'Mostrando 1 producto' : `Mostrando ${items.length} productos`;
+      }
+
+      if (items.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      grid.innerHTML = items.map((p) => {
+        const qty = state.cart[p.id] || 0;
+        const transferPrice = Math.round(p.price * (1 - CATALOG.transferDiscountRate));
+
+        const actionBtn = qty === 0
+          ? `<button
+              type="button"
+              data-add-one="${p.id}"
+              class="w-full py-2.5 px-4 rounded-2xl bg-plumDark hover:bg-pinkPastel text-white font-heading font-bold text-sm transition-colors active:scale-[0.98]"
+            >
+              + Agregar
+            </button>`
+          : `<div class="w-full flex items-center justify-between bg-lavenderSoft/60 border border-lavenderPastel/50 rounded-2xl p-1">
+              <button
+                type="button"
+                data-cart-dec="${p.id}"
+                aria-label="Restar una unidad de ${p.name}"
+                class="w-9 h-9 rounded-xl bg-white hover:bg-pinkSoft text-plumDark font-bold text-base flex items-center justify-center transition-colors"
+              >
+                &minus;
+              </button>
+              <span class="font-heading font-bold text-sm text-plumDark">${qty} en carrito</span>
+              <button
+                type="button"
+                data-cart-inc="${p.id}"
+                aria-label="Sumar una unidad de ${p.name}"
+                class="w-9 h-9 rounded-xl bg-plumDark hover:bg-pinkPastel text-white font-bold text-base flex items-center justify-center transition-colors"
+              >
+                +
+              </button>
+            </div>`;
+
+        return `
+          <article class="group bg-white rounded-3xl border border-borderSoft shadow-pastel hover:shadow-pastelHover hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between">
+            <div>
+              <!-- Ilustración clicable para abrir modal de detalle -->
+              <button
+                type="button"
+                data-open-product="${p.id}"
+                aria-label="Ver detalles de ${p.name}"
+                class="relative w-full h-48 ${p.bgClass} p-5 flex items-center justify-center overflow-hidden focus:outline-none"
+              >
+                <div class="absolute top-3 left-3 z-10">
+                  ${getBadgeHTML(p.badge)}
+                </div>
+                <div class="w-36 h-36 transition-transform duration-300 group-hover:scale-105">
+                  ${getProductArtworkSVG(p.artType)}
+                </div>
+              </button>
+
+              <!-- Info del producto -->
+              <div class="p-5 pb-4">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-plumMuted">${p.category}</span>
+                <button
+                  type="button"
+                  data-open-product="${p.id}"
+                  class="block text-left w-full mt-1 focus:outline-none"
+                >
+                  <h3 class="font-heading font-bold text-lg text-plumDark group-hover:text-pinkPastel transition-colors leading-snug">
+                    ${p.name}
+                  </h3>
+                </button>
+                <p class="text-xs text-plumMuted mt-1.5 leading-relaxed line-clamp-2">
+                  ${p.shortDesc}
+                </p>
+
+                <!-- Precios -->
+                <div class="mt-3.5 flex items-baseline gap-2">
+                  <span class="font-heading font-bold text-xl text-plumDark">${formatARS(p.price)}</span>
+                  ${p.oldPrice ? `<span class="text-xs text-plumMuted line-through">${formatARS(p.oldPrice)}</span>` : ''}
+                </div>
+                <p class="text-[11px] font-semibold text-emerald-700 mt-0.5">
+                  ${formatARS(transferPrice)} con transferencia
+                </p>
+              </div>
+            </div>
+
+            <!-- Botón agregar / controles de cantidad -->
+            <div class="px-5 pb-5 pt-1">
+              ${actionBtn}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Calcula cantidad de ítems, subtotal, descuento por transferencia, envío y total final.
+     */
+    function calculateCartTotals() {
+      let count = 0;
+      let subtotal = 0;
+
+      Object.entries(state.cart).forEach(([id, qty]) => {
+        const prod = CATALOG.products.find((p) => p.id === id);
+        if (prod && qty > 0) {
+          count += qty;
+          subtotal += prod.price * qty;
+        }
+      });
+
+      const deliveryInput = document.querySelector('input[name="deliveryOption"]:checked');
+      const paymentInput = document.querySelector('input[name="paymentOption"]:checked');
+
+      const isShipping = deliveryInput && deliveryInput.value === 'envio';
+      const paymentMethod = paymentInput ? paymentInput.value : 'Transferencia bancaria';
+      const hasTransferDiscount = paymentMethod === 'Transferencia bancaria';
+
+      const discount = hasTransferDiscount ? Math.round(subtotal * CATALOG.transferDiscountRate) : 0;
+      const shipping = isShipping && count > 0 ? CATALOG.shippingCost : 0;
+      const total = subtotal - discount + shipping;
+
+      return { count, subtotal, discount, shipping, isShipping, paymentMethod, total };
+    }
+
+    /**
+     * Actualiza los contadores del header, la barra mobile y el contenido del drawer del carrito.
+     */
+    function updateCartUI() {
+      const { count, subtotal, discount, shipping, isShipping, total } = calculateCartTotals();
+
+      // Contador en navbar
+      const headerCount = document.getElementById('header-cart-count');
+      if (headerCount) headerCount.textContent = String(count);
+
+      // Barra flotante mobile
+      const mobileBar = document.getElementById('mobile-cart-bar');
+      const mobileCount = document.getElementById('mobile-cart-count');
+      const mobileTotal = document.getElementById('mobile-cart-total');
+      if (mobileBar && mobileCount && mobileTotal) {
+        mobileCount.textContent = String(count);
+        mobileTotal.textContent = formatARS(total);
+        mobileBar.classList.toggle('translate-y-24', count === 0);
+        mobileBar.classList.toggle('opacity-0', count === 0);
+        mobileBar.classList.toggle('translate-y-0', count > 0);
+        mobileBar.classList.toggle('opacity-100', count > 0);
+      }
+
+      // Contenido del drawer
+      const emptyEl = document.getElementById('drawer-empty');
+      const contentEl = document.getElementById('drawer-content');
+      const footerEl = document.getElementById('drawer-footer');
+      const clearBtn = document.getElementById('drawer-clear-btn');
+      const listEl = document.getElementById('drawer-items-list');
+
+      const isEmpty = count === 0;
+      emptyEl.classList.toggle('hidden', !isEmpty);
+      contentEl.classList.toggle('hidden', isEmpty);
+      footerEl.classList.toggle('hidden', isEmpty);
+      clearBtn.classList.toggle('hidden', isEmpty);
+
+      if (!isEmpty && listEl) {
+        listEl.innerHTML = Object.entries(state.cart).map(([id, qty]) => {
+          const prod = CATALOG.products.find((p) => p.id === id);
+          if (!prod || qty <= 0) return '';
+          return `
+            <div class="flex items-center gap-3 p-3 rounded-2xl bg-creamBg border border-borderSoft">
+              <div class="w-14 h-14 rounded-xl ${prod.bgClass} p-1.5 shrink-0">
+                ${getProductArtworkSVG(prod.artType)}
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-heading font-bold text-sm text-plumDark truncate">${prod.name}</p>
+                <p class="text-xs font-bold text-pinkPastel mt-0.5">${formatARS(prod.price * qty)}</p>
+                <div class="flex items-center gap-2 mt-2">
+                  <button type="button" data-cart-dec="${prod.id}" class="w-6 h-6 rounded-lg bg-white border border-borderSoft hover:bg-pinkSoft text-plumDark font-bold text-xs flex items-center justify-center">&minus;</button>
+                  <span class="min-w-[16px] text-center text-xs font-bold text-plumDark">${qty}</span>
+                  <button type="button" data-cart-inc="${prod.id}" class="w-6 h-6 rounded-lg bg-plumDark hover:bg-pinkPastel text-white font-bold text-xs flex items-center justify-center">+</button>
+                </div>
+              </div>
+              <button
+                type="button"
+                data-cart-remove="${prod.id}"
+                aria-label="Eliminar ${prod.name}"
+                class="p-2 rounded-xl text-plumMuted hover:text-rose-600 hover:bg-rose-50 transition-colors"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+              </button>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Totales en resumen
+      document.getElementById('sum-subtotal').textContent = formatARS(subtotal);
+      const discRow = document.getElementById('sum-discount-row');
+      discRow.classList.toggle('hidden', discount === 0);
+      document.getElementById('sum-discount').textContent = '- ' + formatARS(discount);
+
+      const shipEl = document.getElementById('sum-shipping');
+      shipEl.textContent = isShipping ? formatARS(shipping) : 'Gratis';
+      shipEl.className = isShipping ? 'font-semibold text-plumDark' : 'font-semibold text-emerald-700';
+
+      document.getElementById('sum-total').textContent = formatARS(total);
+    }
+
+    /**
+     * Modifica la cantidad de un producto en el carrito (sumar, restar o eliminar).
+     */
+    function updateCartItem(productId, delta, exactRemove = false) {
+      if (exactRemove) {
+        delete state.cart[productId];
+      } else {
+        const nextQty = (state.cart[productId] || 0) + delta;
+        if (nextQty <= 0) {
+          delete state.cart[productId];
+        } else {
+          state.cart[productId] = nextQty;
+        }
+      }
+      renderProductsGrid();
+      updateCartUI();
+    }
+
+    /**
+     * Abre el modal de zoom y detalle completo del producto seleccionado.
+     */
+    function openProductModal(productId) {
+      const prod = CATALOG.products.find((p) => p.id === productId);
+      if (!prod) return;
+
+      state.activeModalProductId = productId;
+      state.activeModalQty = 1;
+
+      const wrap = document.getElementById('pm-artwork-wrap');
+      wrap.className = `relative w-full md:w-1/2 min-h-[240px] sm:min-h-[280px] flex items-center justify-center p-6 ${prod.bgClass}`;
+
+      document.getElementById('pm-badge').innerHTML = getBadgeHTML(prod.badge);
+      document.getElementById('pm-artwork').innerHTML = getProductArtworkSVG(prod.artType);
+      document.getElementById('pm-category').textContent = prod.category;
+      document.getElementById('pm-title').textContent = prod.name;
+      document.getElementById('pm-price').textContent = formatARS(prod.price);
+
+      const oldPriceEl = document.getElementById('pm-old-price');
+      if (prod.oldPrice) {
+        oldPriceEl.textContent = formatARS(prod.oldPrice);
+        oldPriceEl.classList.remove('hidden');
+      } else {
+        oldPriceEl.classList.add('hidden');
+      }
+
+      const transferPrice = Math.round(prod.price * (1 - CATALOG.transferDiscountRate));
+      document.getElementById('pm-transfer-hint').textContent = `${formatARS(transferPrice)} abonando por transferencia (10% OFF)`;
+      document.getElementById('pm-description').textContent = prod.fullDesc;
+      document.getElementById('pm-materials').textContent = prod.materials;
+      document.getElementById('pm-dimensions').textContent = prod.dimensions;
+      document.getElementById('pm-qty-value').textContent = '1';
+
+      const modal = document.getElementById('product-modal');
+      const panel = document.getElementById('product-modal-panel');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        panel.classList.remove('scale-95', 'opacity-0');
+      });
+    }
+
+    /**
+     * Cierra el modal de detalle del producto.
+     */
+    function closeProductModal() {
+      const modal = document.getElementById('product-modal');
+      const panel = document.getElementById('product-modal-panel');
+      if (modal.classList.contains('hidden')) return;
+
+      modal.classList.add('opacity-0');
+      panel.classList.add('scale-95', 'opacity-0');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 240);
+    }
+
+    /**
+     * Abre el drawer lateral derecho del carrito de compras.
+     */
+    function openCartDrawer() {
+      const backdrop = document.getElementById('cart-drawer-backdrop');
+      const panel = document.getElementById('cart-drawer-panel');
+      document.getElementById('drawer-error').classList.add('hidden');
+      updateCartUI();
+
+      backdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        backdrop.classList.remove('opacity-0');
+        panel.classList.remove('translate-x-full');
+      });
+    }
+
+    /**
+     * Cierra el drawer lateral derecho del carrito.
+     */
+    function closeCartDrawer() {
+      const backdrop = document.getElementById('cart-drawer-backdrop');
+      const panel = document.getElementById('cart-drawer-panel');
+      if (backdrop.classList.contains('hidden')) return;
+
+      backdrop.classList.add('opacity-0');
+      panel.classList.add('translate-x-full');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+      }, 280);
+    }
+
+    /**
+     * Construye el texto completo del pedido listo para enviar por WhatsApp.
+     */
+    function buildWhatsAppOrderText() {
+      const { subtotal, discount, shipping, isShipping, paymentMethod, total } = calculateCartTotals();
+      const buyerName = document.getElementById('buyer-name').value.trim();
+      const buyerNotes = document.getElementById('buyer-notes').value.trim();
+
+      const lines = [
+        `☁️ *NUEVO PEDIDO — Nube Deco & Bazar*`,
+        ``,
+        `👤 *Cliente:* ${buyerName}`,
+        `📦 *Entrega:* ${isShipping ? 'Envío a domicilio' : 'Retiro en local (Gratis)'}`,
+        `💳 *Medio de pago:* ${paymentMethod}`,
+        ``,
+        `🛍️ *Detalle de productos:*`
+      ];
+
+      Object.entries(state.cart).forEach(([id, qty]) => {
+        const prod = CATALOG.products.find((p) => p.id === id);
+        if (prod && qty > 0) {
+          lines.push(`• ${qty}x ${prod.name} — ${formatARS(prod.price * qty)}`);
+        }
+      });
+
+      lines.push(``);
+      lines.push(`Subtotal: ${formatARS(subtotal)}`);
+      if (discount > 0) {
+        lines.push(`Descuento transferencia (10%): - ${formatARS(discount)}`);
+      }
+      lines.push(`Envío: ${isShipping ? formatARS(shipping) : 'Gratis'}`);
+      lines.push(`✨ *TOTAL FINAL: ${formatARS(total)}*`);
+
+      if (buyerNotes) {
+        lines.push(``, `📝 *Aclaraciones / Dirección:* ${buyerNotes}`);
+      }
+
+      lines.push(``, `_Pedido armado desde la demo Catálogo Online de Serebi Lab_`);
+      return lines.join('\n');
+    }
+
+    /**
+     * Abre el modal simulador de WhatsApp con el mensaje formateado y listo para copiar o enviar.
+     */
+    function openWhatsAppSimulator() {
+      const nameInput = document.getElementById('buyer-name');
+      const errEl = document.getElementById('drawer-error');
+
+      if (!nameInput.value.trim()) {
+        errEl.textContent = 'Por favor, ingresá tu nombre para armar el pedido.';
+        errEl.classList.remove('hidden');
+        nameInput.focus();
+        return;
+      }
+      errEl.classList.add('hidden');
+
+      const message = buildWhatsAppOrderText();
+      document.getElementById('wa-sim-message').textContent = message;
+
+      const now = new Date();
+      document.getElementById('wa-sim-time').textContent =
+        `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      const waUrl = `https://wa.me/${CATALOG.whatsappDemoNumber}?text=${encodeURIComponent(message)}`;
+      document.getElementById('wa-open-real-btn').setAttribute('href', waUrl);
+
+      closeCartDrawer();
+
+      const modal = document.getElementById('wa-sim-modal');
+      const panel = document.getElementById('wa-sim-panel');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        panel.classList.remove('scale-95', 'opacity-0');
+      });
+    }
+
+    /**
+     * Cierra el modal simulador de WhatsApp.
+     */
+    function closeWhatsAppSimulator() {
+      const modal = document.getElementById('wa-sim-modal');
+      const panel = document.getElementById('wa-sim-panel');
+      if (modal.classList.contains('hidden')) return;
+
+      modal.classList.add('opacity-0');
+      panel.classList.add('scale-95', 'opacity-0');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 240);
+    }
+
+    /**
+     * Copia el mensaje del pedido al portapapeles de forma compatible con iframes.
+     */
+    function copyOrderMessage() {
+      try {
+        const text = document.getElementById('wa-sim-message').textContent;
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        const label = document.getElementById('wa-copy-label');
+        label.textContent = '¡Mensaje copiado!';
+        showToast('Mensaje copiado al portapapeles');
+        setTimeout(() => {
+          label.textContent = 'Copiar mensaje';
+        }, 2000);
+      } catch (err) {
+        console.error('Error al copiar:', err);
+        showToast('No se pudo copiar el mensaje');
+      }
+    }
+
+    /**
+     * Sincroniza ambos buscadores (navbar desktop y barra principal) y aplica filtros.
+     */
+    function handleSearchUpdate(value) {
+      state.search = value;
+      const navInput = document.getElementById('nav-search-input');
+      const mainInput = document.getElementById('main-search-input');
+      const clearBtn = document.getElementById('clear-search-btn');
+
+      if (navInput && navInput.value !== value) navInput.value = value;
+      if (mainInput && mainInput.value !== value) mainInput.value = value;
+      if (clearBtn) clearBtn.classList.toggle('hidden', value.trim() === '');
+
+      renderProductsGrid();
+    }
+
+    /**
+     * Conecta todos los eventos interactivos de la aplicación.
+     */
+    function initEvents() {
+      // Buscadores sincronizados
+      const navInput = document.getElementById('nav-search-input');
+      const mainInput = document.getElementById('main-search-input');
+      if (navInput) navInput.addEventListener('input', (e) => handleSearchUpdate(e.target.value));
+      if (mainInput) mainInput.addEventListener('input', (e) => handleSearchUpdate(e.target.value));
+
+      document.getElementById('clear-search-btn').addEventListener('click', () => {
+        handleSearchUpdate('');
+        mainInput.focus();
+      });
+
+      // Ordenamiento
+      document.getElementById('sort-select').addEventListener('change', (e) => {
+        state.sort = e.target.value;
+        renderProductsGrid();
+      });
+
+      // Restablecer filtros desde estado vacío
+      document.getElementById('reset-filters-btn').addEventListener('click', () => {
+        state.category = 'Todos';
+        state.sort = 'featured';
+        document.getElementById('sort-select').value = 'featured';
+        handleSearchUpdate('');
+        renderCategoryPills();
+        renderProductsGrid();
+      });
+
+      // Delegación global de clics para categorías, productos y carrito
+      document.addEventListener('click', (e) => {
+        const catBtn = e.target.closest('[data-category]');
+        if (catBtn) {
+          state.category = catBtn.getAttribute('data-category');
+          renderCategoryPills();
+          renderProductsGrid();
+          return;
+        }
+
+        const openProdBtn = e.target.closest('[data-open-product]');
+        if (openProdBtn) {
+          openProductModal(openProdBtn.getAttribute('data-open-product'));
+          return;
+        }
+
+        const addOneBtn = e.target.closest('[data-add-one]');
+        if (addOneBtn) {
+          updateCartItem(addOneBtn.getAttribute('data-add-one'), 1);
+          showToast('Producto agregado al carrito');
+          return;
+        }
+
+        const incBtn = e.target.closest('[data-cart-inc]');
+        if (incBtn) {
+          updateCartItem(incBtn.getAttribute('data-cart-inc'), 1);
+          return;
+        }
+
+        const decBtn = e.target.closest('[data-cart-dec]');
+        if (decBtn) {
+          updateCartItem(decBtn.getAttribute('data-cart-dec'), -1);
+          return;
+        }
+
+        const remBtn = e.target.closest('[data-cart-remove]');
+        if (remBtn) {
+          updateCartItem(remBtn.getAttribute('data-cart-remove'), 0, true);
+        }
+      });
+
+      // Modal de producto: cantidad y agregar
+      document.getElementById('pm-qty-dec').addEventListener('click', () => {
+        if (state.activeModalQty > 1) {
+          state.activeModalQty -= 1;
+          document.getElementById('pm-qty-value').textContent = String(state.activeModalQty);
+        }
+      });
+
+      document.getElementById('pm-qty-inc').addEventListener('click', () => {
+        state.activeModalQty += 1;
+        document.getElementById('pm-qty-value').textContent = String(state.activeModalQty);
+      });
+
+      document.getElementById('pm-add-btn').addEventListener('click', () => {
+        if (state.activeModalProductId) {
+          updateCartItem(state.activeModalProductId, state.activeModalQty);
+          closeProductModal();
+          showToast('Agregado a tu carrito');
+        }
+      });
+
+      document.getElementById('pm-close-mobile').addEventListener('click', closeProductModal);
+      document.getElementById('pm-close-desktop').addEventListener('click', closeProductModal);
+      document.getElementById('product-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'product-modal') closeProductModal();
+      });
+
+      // Drawer del carrito
+      document.getElementById('header-cart-btn').addEventListener('click', openCartDrawer);
+      document.getElementById('mobile-open-cart-btn').addEventListener('click', openCartDrawer);
+      document.getElementById('drawer-close-btn').addEventListener('click', closeCartDrawer);
+      document.getElementById('cart-drawer-backdrop').addEventListener('click', (e) => {
+        if (e.target.id === 'cart-drawer-backdrop') closeCartDrawer();
+      });
+
+      document.getElementById('drawer-clear-btn').addEventListener('click', () => {
+        state.cart = {};
+        renderProductsGrid();
+        updateCartUI();
+        showToast('Carrito vaciado');
+      });
+
+      // Recalcular totales al cambiar envío o medio de pago
+      document.querySelectorAll('input[name="deliveryOption"], input[name="paymentOption"]').forEach((radio) => {
+        radio.addEventListener('change', updateCartUI);
+      });
+
+      // Simulador de WhatsApp
+      document.getElementById('open-wa-sim-btn').addEventListener('click', openWhatsAppSimulator);
+      document.getElementById('wa-sim-close').addEventListener('click', closeWhatsAppSimulator);
+      document.getElementById('wa-sim-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'wa-sim-modal') closeWhatsAppSimulator();
+      });
+      document.getElementById('wa-copy-btn').addEventListener('click', copyOrderMessage);
+
+      // Cerrar modales / drawer con tecla Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeProductModal();
+          closeCartDrawer();
+          closeWhatsAppSimulator();
+        }
+      });
+    }
+
+    // Arranque seguro al cargar el DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderCategoryPills();
+        renderProductsGrid();
+        updateCartUI();
+        initEvents();
+      } catch (error) {
+        console.error('Error al inicializar Nube Deco & Bazar:', error);
+      }
+    });
+  </script>
+</body>
+</html>

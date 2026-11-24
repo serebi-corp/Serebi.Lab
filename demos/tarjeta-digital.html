@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es-AR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arq. Sofía Méndez — Arquitectura &amp; Interiorismo | Demo Serebi Lab</title>
+  <meta name="description" content="Tarjeta Digital y Portfolio de Arq. Sofía Méndez. Arquitectura Residencial & Diseño de Interiores en Buenos Aires. Demo en vivo de Serebi Lab." />
+
+  <!-- Google Fonts: Playfair Display (Títulos editoriales) y Plus Jakarta Sans (Textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS vía CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            cream: '#FAF8F5',
+            card: '#FFFFFF',
+            charcoal: '#1C1917',
+            stoneMuted: '#57534E',
+            terracotta: '#B45309',
+            terracottaDark: '#92400E',
+            terracottaSoft: '#FEF3C7',
+            sand: '#E7E5E4',
+            sandLight: '#F5F2ED',
+            serebiDark: '#0B0D17',
+            serebiIndigo: '#818CF8',
+            waGreen: '#25D366',
+            waGreenHover: '#1DA851',
+          },
+          boxShadow: {
+            editorial: '0 10px 30px -12px rgba(28, 25, 23, 0.08)',
+            editorialHover: '0 18px 36px -14px rgba(28, 25, 23, 0.14)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #1C1917;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Transiciones suaves para el modal de proyectos */
+    .modal-backdrop {
+      transition: opacity 0.25s ease;
+    }
+    .modal-panel {
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+    }
+
+    /* Toast de notificación discreto */
+    .toast-box {
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+    }
+  </style>
+</head>
+<body class="bg-cream text-charcoal antialiased selection:bg-terracotta/20 selection:text-charcoal">
+
+  <!-- ===================================================================== -->
+  <!-- 1. BARRA SUPERIOR FIJA DE DEMO — SEREBI LAB                           -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-serebiDark/95 backdrop-blur-md border-b border-serebiIndigo/40 text-slate-100">
+    <div class="max-w-3xl mx-auto px-3 sm:px-5 h-14 flex items-center justify-between gap-2">
+      <!-- Botón Izquierdo: Volver a Serebi Lab -->
+      <a
+        href="../index.html"
+        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-200 bg-white/5 hover:bg-white/15 border border-white/10 transition-colors shrink-0"
+      >
+        <span aria-hidden="true">&larr;</span>
+        <span>Volver a Serebi Lab</span>
+      </a>
+
+      <!-- Etiqueta Central (visible en pantallas medianas en adelante) -->
+      <div class="hidden sm:flex items-center gap-2 text-xs font-medium text-slate-300 truncate">
+        <span class="w-1.5 h-1.5 rounded-full bg-serebiIndigo shrink-0"></span>
+        <span>Demo en vivo · Tarjeta Digital ($60.000)</span>
+      </div>
+
+      <!-- Botón Derecho: Quiero una web así (WhatsApp Serebi Lab) -->
+      <a
+        id="serebi-cta-btn"
+        href="https://wa.me/5491134441993?text=Hola%20Serebi%20Lab!%20Vi%20la%20demo%20de%20Tarjeta%20Digital%20(%2460.000)%20y%20quiero%20una%20web%20as%C3%AD%20para%20mi%20negocio."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-waGreen hover:bg-waGreenHover text-[#020617] shadow-sm transition-all hover:-translate-y-0.5 shrink-0"
+      >
+        <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.438 1.344-2 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.344-1.766-.656-3.109-1.344-5.141-4.5-5.297-4.703-.156-.203-1.266-1.688-1.266-3.219s.797-2.281 1.078-2.594c.281-.312.625-.391.828-.391.203 0 .422.016.609.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.766 2.203 1.219 1.094 2.25 1.422 2.562 1.578.312.156.5.141.688-.078.188-.219.797-.938 1.016-1.25.219-.312.438-.266.734-.156.297.109 1.891.891 2.219 1.047.328.156.547.234.625.375.078.141.078.812-.172 1.516z"/>
+        </svg>
+        <span>Quiero una web así</span>
+      </a>
+    </div>
+    <!-- Sub-etiqueta compacta solo para mobile -->
+    <div class="sm:hidden border-t border-white/10 py-1.5 text-center text-[11px] font-medium text-slate-300 bg-serebiDark">
+      Demo en vivo · Tarjeta Digital ($60.000)
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- CONTENEDOR PRINCIPAL CENTRADO (ANCHO MÁXIMO ELEGANTE: 680px)          -->
+  <!-- ===================================================================== -->
+  <main class="max-w-[680px] mx-auto px-4 sm:px-6 pt-8 pb-16 space-y-10">
+
+    <!-- =================================================================== -->
+    <!-- 2. TARJETA DE PERFIL PRINCIPAL                                      -->
+    <!-- =================================================================== -->
+    <section aria-label="Perfil profesional" class="bg-card rounded-[2rem] border border-sand shadow-editorial overflow-hidden">
+      <!-- Franja superior decorativa con líneas arquitectónicas sutiles -->
+      <div class="relative h-28 sm:h-32 bg-gradient-to-br from-[#F5EFE6] via-[#EFE7DC] to-[#E7DED2] border-b border-sand overflow-hidden">
+        <svg class="w-full h-full opacity-50" viewBox="0 0 680 140" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <line x1="0" y1="35" x2="680" y2="35" stroke="#B45309" stroke-opacity="0.18" stroke-width="1"/>
+          <line x1="0" y1="95" x2="680" y2="95" stroke="#1C1917" stroke-opacity="0.08" stroke-width="1"/>
+          <line x1="140" y1="0" x2="140" y2="140" stroke="#1C1917" stroke-opacity="0.08" stroke-width="1"/>
+          <line x1="540" y1="0" x2="540" y2="140" stroke="#B45309" stroke-opacity="0.16" stroke-width="1"/>
+          <path d="M510 140 V60 A50 50 0 0 1 610 60 V140" stroke="#B45309" stroke-opacity="0.25" stroke-width="1.2"/>
+          <circle cx="140" cy="35" r="3" fill="#B45309" fill-opacity="0.4"/>
+          <circle cx="540" cy="95" r="3" fill="#1C1917" fill-opacity="0.25"/>
+        </svg>
+
+        <!-- Botón discreto Compartir / Copiar enlace en la esquina superior derecha -->
+        <button
+          id="share-link-btn"
+          type="button"
+          class="absolute top-4 right-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white text-charcoal border border-sand text-xs font-semibold shadow-sm transition-all active:scale-95"
+          aria-label="Copiar enlace de la tarjeta digital"
+        >
+          <svg class="w-3.5 h-3.5 text-terracotta" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+          </svg>
+          <span id="share-link-label">Compartir</span>
+        </button>
+      </div>
+
+      <!-- Cuerpo de la tarjeta de perfil -->
+      <div class="px-6 sm:px-9 pb-8 -mt-12 relative text-center">
+        <!-- Avatar Monograma Arquitectónico SM (SVG Inline) -->
+        <div class="inline-flex items-center justify-center p-1.5 rounded-[1.6rem] bg-card border border-sand shadow-md mb-4">
+          <svg width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-2xl" role="img" aria-label="Monograma SM Arq. Sofía Méndez">
+            <rect width="84" height="84" rx="18" fill="#1C1917"/>
+            <!-- Marco interior fino en bronce -->
+            <rect x="6" y="6" width="72" height="72" rx="13" stroke="#B45309" stroke-opacity="0.65" stroke-width="1"/>
+            <!-- Arco arquitectónico sutil de fondo -->
+            <path d="M24 72 V40 A18 18 0 0 1 60 40 V72" stroke="#E7E5E4" stroke-opacity="0.16" stroke-width="1.2"/>
+            <!-- Monograma SM en Serif -->
+            <text x="42" y="51" text-anchor="middle" fill="#FAF8F5" font-family="Playfair Display, Georgia, serif" font-size="30" font-weight="600" letter-spacing="1.5">SM</text>
+            <!-- Línea de base en terracota -->
+            <line x1="28" y1="61" x2="56" y2="61" stroke="#B45309" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <!-- Badge de disponibilidad -->
+        <div class="mb-3">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sandLight border border-sand text-xs font-medium text-charcoal">
+            <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+            <span id="profile-availability">Turnos disponibles</span>
+          </span>
+        </div>
+
+        <!-- Nombre y título -->
+        <h1 id="profile-name" class="font-serif font-semibold text-3xl sm:text-4xl text-charcoal tracking-tight">
+          Arq. Sofía Méndez
+        </h1>
+        <p id="profile-role" class="text-sm sm:text-base font-medium text-terracotta mt-1.5">
+          Arquitectura Residencial &amp; Diseño de Interiores
+        </p>
+
+        <!-- Ubicación -->
+        <p class="inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm text-stoneMuted mt-2.5">
+          <svg class="w-4 h-4 text-terracotta/80 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span id="profile-location">Palermo &amp; Zona Oeste, Buenos Aires</span>
+        </p>
+
+        <!-- Breve bio editorial -->
+        <p id="profile-bio" class="text-sm text-stoneMuted leading-relaxed max-w-md mx-auto mt-4">
+          Proyectamos espacios luminosos, funcionales y atemporales. Acompañamiento integral desde el primer boceto hasta la entrega de llave.
+        </p>
+
+        <!-- Grilla de 4 Botones de Acción Rápida -->
+        <div class="grid grid-cols-2 gap-3 mt-7">
+          <!-- Acción 1: WhatsApp directo -->
+          <a
+            id="action-whatsapp"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="col-span-2 sm:col-span-1 flex items-center justify-center gap-2.5 px-4 py-3.5 rounded-2xl bg-charcoal hover:bg-terracotta text-cream text-sm font-semibold shadow-sm transition-all hover:-translate-y-0.5"
+          >
+            <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.438 1.344-2 1.422-.516.078-1.188.109-1.922-.125-.453-.141-1.031-.344-1.766-.656-3.109-1.344-5.141-4.5-5.297-4.703-.156-.203-1.266-1.688-1.266-3.219s.797-2.281 1.078-2.594c.281-.312.625-.391.828-.391.203 0 .422.016.609.016.188 0 .453-.078.703.531.266.625.891 2.172.969 2.328.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.312.828 1.359 1.766 2.203 1.219 1.094 2.25 1.422 2.562 1.578.312.156.5.141.688-.078.188-.219.797-.938 1.016-1.25.219-.312.438-.266.734-.156.297.109 1.891.891 2.219 1.047.328.156.547.234.625.375.078.141.078.812-.172 1.516z"/>
+            </svg>
+            <span>WhatsApp directo</span>
+          </a>
+
+          <!-- Acción 2: Guardar Contacto (.vcf) -->
+          <button
+            id="action-vcard"
+            type="button"
+            class="col-span-2 sm:col-span-1 flex items-center justify-center gap-2.5 px-4 py-3.5 rounded-2xl bg-terracotta hover:bg-terracottaDark text-white text-sm font-semibold shadow-sm transition-all hover:-translate-y-0.5 active:scale-95"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+            </svg>
+            <span>Guardar Contacto (.vcf)</span>
+          </button>
+
+          <!-- Acción 3: Enviar Email -->
+          <a
+            id="action-email"
+            href="#"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-sandLight hover:bg-sand/70 text-charcoal border border-sand text-sm font-semibold transition-colors"
+          >
+            <svg class="w-4 h-4 text-terracotta shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span>Enviar Email</span>
+          </a>
+
+          <!-- Acción 4: Cómo llegar (Google Maps) -->
+          <a
+            id="action-maps"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-sandLight hover:bg-sand/70 text-charcoal border border-sand text-sm font-semibold transition-colors"
+          >
+            <svg class="w-4 h-4 text-terracotta shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+            </svg>
+            <span>Cómo llegar</span>
+          </a>
+        </div>
+
+        <!-- Enlace rápido de copia abajo de los botones -->
+        <div class="mt-5 pt-5 border-t border-sand flex flex-wrap items-center justify-center gap-4 text-xs text-stoneMuted">
+          <span class="inline-flex items-center gap-1.5">
+            <strong class="text-charcoal font-semibold">Matrícula CPAU:</strong> 34.812
+          </span>
+          <span class="text-sand">•</span>
+          <button
+            id="copy-link-inline-btn"
+            type="button"
+            class="inline-flex items-center gap-1.5 font-semibold text-terracotta hover:text-terracottaDark transition-colors"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+            </svg>
+            <span id="copy-link-inline-label">Copiar enlace de esta tarjeta</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 3. SERVICIOS PRINCIPALES (3 TARJETAS LIMPIAS)                       -->
+    <!-- =================================================================== -->
+    <section aria-labelledby="servicios-heading" class="space-y-4">
+      <div class="flex items-end justify-between px-1">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-terracotta">Especialidades</span>
+          <h2 id="servicios-heading" class="font-serif font-semibold text-2xl sm:text-3xl text-charcoal mt-0.5">
+            Servicios principales
+          </h2>
+        </div>
+        <span class="text-xs text-stoneMuted hidden sm:inline">Presupuestos a medida</span>
+      </div>
+
+      <div id="services-list" class="grid grid-cols-1 gap-3.5">
+        <!-- Inyectado dinámicamente desde CONFIG.services -->
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 4. PORTFOLIO SELECCIONADO (4 PROYECTOS CON SVG + LIGHTBOX MODAL)    -->
+    <!-- =================================================================== -->
+    <section aria-labelledby="portfolio-heading" class="space-y-4">
+      <div class="flex items-end justify-between px-1">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-terracotta">Obras &amp; Espacios</span>
+          <h2 id="portfolio-heading" class="font-serif font-semibold text-2xl sm:text-3xl text-charcoal mt-0.5">
+            Portfolio seleccionado
+          </h2>
+        </div>
+        <span class="text-xs text-stoneMuted">Tocá para ampliar</span>
+      </div>
+
+      <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Inyectado dinámicamente desde CONFIG.projects -->
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 5. HORARIOS DE ATENCIÓN Y CONTACTO RÁPIDO                           -->
+    <!-- =================================================================== -->
+    <section aria-labelledby="horarios-heading" class="bg-card rounded-[2rem] border border-sand shadow-editorial p-6 sm:p-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+        <!-- Horarios -->
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-terracotta">Estudio</span>
+          <h2 id="horarios-heading" class="font-serif font-semibold text-2xl text-charcoal mt-0.5 mb-3">
+            Horarios de atención
+          </h2>
+          <ul class="space-y-2 text-sm text-stoneMuted">
+            <li class="flex items-center justify-between border-b border-sand/70 pb-2">
+              <span class="font-medium text-charcoal">Lunes a Viernes</span>
+              <span>09:30 a 18:30 hs</span>
+            </li>
+            <li class="flex items-center justify-between border-b border-sand/70 pb-2">
+              <span class="font-medium text-charcoal">Sábados</span>
+              <span>10:00 a 13:30 hs (con cita)</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="font-medium text-charcoal">Reuniones online</span>
+              <span class="text-terracotta font-medium">Todo el país</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contacto Rápido -->
+        <div class="bg-sandLight rounded-2xl p-5 border border-sand flex flex-col justify-between h-full">
+          <div>
+            <h3 class="font-serif font-semibold text-lg text-charcoal mb-1.5">
+              ¿Tenés un proyecto en mente?
+            </h3>
+            <p class="text-xs sm:text-sm text-stoneMuted leading-relaxed mb-4">
+              Coordinemos una primera entrevista sin cargo para evaluar tu espacio, tiempos y presupuesto estimado.
+            </p>
+          </div>
+          <a
+            id="footer-whatsapp-btn"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-charcoal hover:bg-terracotta text-cream text-sm font-semibold transition-colors"
+          >
+            <span>Agendar primera consulta</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- FOOTER DISCRETO DE SEREBI LAB                                       -->
+    <!-- =================================================================== -->
+    <footer class="pt-2 pb-6 text-center space-y-2">
+      <p class="text-xs text-stoneMuted">
+        &copy; <span id="current-year">2026</span> Arq. Sofía Méndez · Buenos Aires, Argentina.
+      </p>
+      <p class="text-xs text-stoneMuted/90">
+        Diseñado por
+        <a href="../index.html" class="font-semibold text-charcoal hover:text-terracotta underline decoration-sand underline-offset-4 transition-colors">
+          Serebi Lab
+        </a>
+      </p>
+    </footer>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL (LIGHTBOX) DE PROYECTO AMPLIADO                                 -->
+  <!-- ===================================================================== -->
+  <div
+    id="project-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-charcoal/70 backdrop-blur-sm modal-backdrop opacity-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <div
+      id="modal-panel"
+      class="modal-panel bg-card rounded-[2rem] max-w-lg w-full overflow-hidden border border-sand shadow-2xl transform scale-95 opacity-0 max-h-[90vh] flex flex-col"
+    >
+      <!-- Cabecera visual ampliada (SVG del proyecto) -->
+      <div class="relative bg-sandLight border-b border-sand">
+        <div id="modal-visual" class="w-full h-56 sm:h-64"></div>
+        <button
+          id="modal-close-btn"
+          type="button"
+          aria-label="Cerrar proyecto"
+          class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 hover:bg-charcoal text-charcoal hover:text-white border border-sand flex items-center justify-center shadow-sm transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Detalles del proyecto -->
+      <div class="p-6 sm:p-7 overflow-y-auto space-y-4">
+        <div class="flex flex-wrap items-center gap-2 text-xs">
+          <span id="modal-category" class="px-3 py-1 rounded-full bg-sandLight border border-sand font-semibold text-terracotta"></span>
+          <span id="modal-year" class="px-2.5 py-1 rounded-full bg-cream border border-sand text-stoneMuted font-medium"></span>
+          <span id="modal-area" class="px-2.5 py-1 rounded-full bg-cream border border-sand text-charcoal font-semibold"></span>
+        </div>
+
+        <div>
+          <h3 id="modal-title" class="font-serif font-semibold text-2xl text-charcoal"></h3>
+          <p id="modal-location" class="text-xs text-stoneMuted mt-0.5"></p>
+        </div>
+
+        <p id="modal-description" class="text-sm text-stoneMuted leading-relaxed"></p>
+
+        <div class="pt-2 flex flex-col sm:flex-row gap-2.5">
+          <a
+            id="modal-wa-btn"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-charcoal hover:bg-terracotta text-cream text-sm font-semibold transition-colors"
+          >
+            <span>Consultar por un proyecto similar</span>
+          </a>
+          <button
+            id="modal-close-secondary"
+            type="button"
+            class="px-4 py-3 rounded-xl bg-sandLight hover:bg-sand text-charcoal text-sm font-semibold transition-colors"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TOAST DISCRETO DE FEEDBACK (COPIAR ENLACE / DESCARGA VCARD)           -->
+  <!-- ===================================================================== -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="toast-box fixed bottom-5 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 pointer-events-none z-50 px-4 py-2.5 rounded-full bg-charcoal text-cream text-xs sm:text-sm font-medium shadow-xl border border-white/10 flex items-center gap-2"
+  >
+    <span class="w-2 h-2 rounded-full bg-waGreen"></span>
+    <span id="toast-message">¡Enlace copiado!</span>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT MODULAR: CONFIGURACIÓN, VCARD, MODAL Y PORTAPAPELES        -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * =====================================================================
+     * CONFIGURACIÓN EDITABLE DE LA TARJETA DIGITAL
+     * Para adaptar esta demo a un cliente real, solo editá este objeto.
+     * =====================================================================
+     */
+    const CONFIG = {
+      // Datos del profesional (ficticio para demo)
+      profile: {
+        fullName: 'Arq. Sofía Méndez',
+        firstName: 'Sofía',
+        lastName: 'Méndez',
+        organization: 'Estudio Sofía Méndez — Arquitectura & Interiorismo',
+        role: 'Arquitectura Residencial & Diseño de Interiores',
+        location: 'Palermo & Zona Oeste, Buenos Aires',
+        availability: 'Turnos disponibles',
+        whatsappNumber: '5491134441993', // En la demo apunta a Serebi Lab para que puedan probar el flujo real
+        phoneDisplay: '+54 9 11 3444-1993',
+        email: 'hola@sofiamendezarq.com.ar',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Palermo+Buenos+Aires+Argentina',
+        websiteUrl: window.location.href,
+        defaultWaMessage: 'Hola Sofía! Vi tu Tarjeta Digital y me gustaría coordinar una consulta por un proyecto.'
+      },
+
+      // Servicios principales (3 tarjetas)
+      services: [
+        {
+          title: 'Proyecto & Dirección de Obra',
+          subtitle: 'Viviendas unifamiliares y ampliaciones',
+          description: 'Anteproyecto, planos municipales, renders 3D realistas y seguimiento técnico en obra de principio a fin.',
+          icon: 'compass'
+        },
+        {
+          title: 'Remodelación Integral',
+          subtitle: 'Departamentos, casas y locales',
+          description: 'Redistribución de ambientes, cocinas, baños y actualización de instalaciones con optimización de luz natural.',
+          icon: 'layers'
+        },
+        {
+          title: 'Asesoría de Interiorismo Online',
+          subtitle: 'Modalidad 100% remota o presencial',
+          description: 'Selección de paleta, mobiliario a medida, iluminación y lista de compras para renovar tus espacios sin obra pesada.',
+          icon: 'sparkles'
+        }
+      ],
+
+      // Portfolio seleccionado (4 proyectos con visuales SVG vectoriales)
+      projects: [
+        {
+          id: 'casa-olivos',
+          title: 'Casa Olivos',
+          category: 'Vivienda Unifamiliar',
+          year: '2026',
+          area: '240 m²',
+          location: 'Olivos, Vicente López',
+          description: 'Vivienda desarrollada en dos niveles con volúmenes puros en hormigón visto, carpinterías de piso a techo y patio interno con vegetación nativa que aporta ventilación cruzada y luz natural a cada ambiente.',
+          svgType: 'facade'
+        },
+        {
+          id: 'loft-palermo',
+          title: 'Loft Palermo Soho',
+          category: 'Remodelación Integral',
+          year: '2025',
+          area: '115 m²',
+          location: 'Palermo, CABA',
+          description: 'Intervención integral de un PH antiguo recuperando la altura original de los techos. Se integraron cocina y estar mediante un gran arco revestido en microcemento cálido y carpintería en roble natural.',
+          svgType: 'arch'
+        },
+        {
+          id: 'galeria-botanica',
+          title: 'Estudio & Café Botánico',
+          category: 'Interiorismo Comercial',
+          year: '2025',
+          area: '85 m²',
+          location: 'Ramos Mejía, Zona Oeste',
+          description: 'Diseño de local comercial de estética minimalista orgánica. Estanterías empotradas de línea continua, barra monolítica en travertino y sistema de iluminación cálida dimerizable.',
+          svgType: 'interior'
+        },
+        {
+          id: 'pabellon-oeste',
+          title: 'Pabellón Jardín Oeste',
+          category: 'Ampliación & Quincho',
+          year: '2024',
+          area: '68 m²',
+          location: 'Parque Leloir, Ituzaingó',
+          description: 'Pabellón independiente conectado al jardín mediante cerramientos vidriados corredizos y pérgola de madera tratada que filtra el sol del oeste generando una galería habitable todo el año.',
+          svgType: 'pavilion'
+        }
+      ]
+    };
+
+    /**
+     * Construye un enlace oficial de WhatsApp con mensaje prearmado.
+     */
+    function buildWaLink(number, message) {
+      const clean = number.replace(/\D/g, '');
+      return `https://wa.me/${clean}?text=${encodeURIComponent(message)}`;
+    }
+
+    /**
+     * Devuelve el ícono SVG minimalista para cada tarjeta de servicio.
+     */
+    function getServiceIcon(type) {
+      if (type === 'compass') {
+        return `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>`;
+      }
+      if (type === 'layers') {
+        return `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7l8-4 8 4-8 4-8-4zm0 5l8 4 8-4m-16 5l8 4 8-4"/></svg>`;
+      }
+      return `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>`;
+    }
+
+    /**
+     * Genera ilustraciones vectoriales arquitectónicas (SVG inline)
+     * para garantizar carga instantánea y estética editorial sin depender de imágenes externas.
+     */
+    function getProjectSVG(svgType) {
+      if (svgType === 'facade') {
+        return `
+          <svg viewBox="0 0 400 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración arquitectónica Casa Olivos">
+            <rect width="400" height="260" fill="#F3EFE9"/>
+            <!-- Sol cálido -->
+            <circle cx="315" cy="64" r="34" fill="#FDE68A" fill-opacity="0.65"/>
+            <!-- Líneas técnicas de cota -->
+            <line x1="28" y1="215" x2="372" y2="215" stroke="#1C1917" stroke-opacity="0.25" stroke-width="1"/>
+            <line x1="65" y1="45" x2="65" y2="225" stroke="#B45309" stroke-opacity="0.22" stroke-dasharray="3 3" stroke-width="1"/>
+            <!-- Volumen superior en hormigón claro -->
+            <rect x="75" y="75" width="215" height="62" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.4"/>
+            <!-- Ventanal superior -->
+            <rect x="98" y="90" width="115" height="34" fill="#E7E5E4" stroke="#1C1917" stroke-width="1"/>
+            <line x1="155" y1="90" x2="155" y2="124" stroke="#1C1917" stroke-width="1"/>
+            <!-- Acento vertical en terracota -->
+            <rect x="235" y="75" width="55" height="140" fill="#B45309" fill-opacity="0.88"/>
+            <!-- Volumen inferior -->
+            <rect x="115" y="137" width="120" height="78" fill="#FAF8F5" stroke="#1C1917" stroke-width="1.4"/>
+            <rect x="135" y="152" width="80" height="63" fill="#D6D3D1" stroke="#1C1917" stroke-width="1"/>
+            <line x1="175" y1="152" x2="175" y2="215" stroke="#1C1917" stroke-width="1"/>
+            <!-- Árbol minimalista -->
+            <line x1="330" y1="168" x2="330" y2="215" stroke="#1C1917" stroke-width="1.4"/>
+            <circle cx="330" cy="152" r="22" fill="#D6C7B2" stroke="#1C1917" stroke-opacity="0.35" stroke-width="1"/>
+          </svg>
+        `;
+      }
+
+      if (svgType === 'arch') {
+        return `
+          <svg viewBox="0 0 400 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración arquitectónica Loft Palermo Soho">
+            <rect width="400" height="260" fill="#EFEAE2"/>
+            <!-- Pared texturizada con listones verticales -->
+            <g stroke="#1C1917" stroke-opacity="0.08" stroke-width="1">
+              <line x1="40" y1="20" x2="40" y2="220"/><line x1="56" y1="20" x2="56" y2="220"/><line x1="72" y1="20" x2="72" y2="220"/>
+              <line x1="328" y1="20" x2="328" y2="220"/><line x1="344" y1="20" x2="344" y2="220"/><line x1="360" y1="20" x2="360" y2="220"/>
+            </g>
+            <!-- Gran arco central -->
+            <path d="M120 220 V110 A80 80 0 0 1 280 110 V220 Z" fill="#FAF8F5" stroke="#1C1917" stroke-width="1.4"/>
+            <!-- Luz diagonal interior -->
+            <polygon points="150,220 250,65 280,105 280,220" fill="#B45309" fill-opacity="0.14"/>
+            <!-- Lámpara colgante minimalista -->
+            <line x1="200" y1="30" x2="200" y2="96" stroke="#1C1917" stroke-width="1.2"/>
+            <circle cx="200" cy="106" r="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.4"/>
+            <!-- Silueta sofá minimalista -->
+            <rect x="148" y="182" width="104" height="24" rx="6" fill="#B45309" fill-opacity="0.85"/>
+            <rect x="140" y="194" width="120" height="18" rx="4" fill="#1C1917"/>
+            <!-- Piso -->
+            <line x1="30" y1="220" x2="370" y2="220" stroke="#1C1917" stroke-width="1.2"/>
+          </svg>
+        `;
+      }
+
+      if (svgType === 'interior') {
+        return `
+          <svg viewBox="0 0 400 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración arquitectónica Estudio y Café Botánico">
+            <rect width="400" height="260" fill="#F5F0E8"/>
+            <!-- Ventanal arqueado a la izquierda -->
+            <path d="M55 210 V95 A45 45 0 0 1 145 95 V210 Z" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.3"/>
+            <line x1="100" y1="50" x2="100" y2="210" stroke="#1C1917" stroke-opacity="0.3" stroke-width="1"/>
+            <line x1="55" y1="130" x2="145" y2="130" stroke="#1C1917" stroke-opacity="0.3" stroke-width="1"/>
+            <!-- Estantería minimalista derecha -->
+            <line x1="185" y1="88" x2="345" y2="88" stroke="#1C1917" stroke-width="1.5"/>
+            <line x1="185" y1="128" x2="345" y2="128" stroke="#1C1917" stroke-width="1.5"/>
+            <!-- Objetos decorativos -->
+            <rect x="205" y="64" width="22" height="24" rx="2" fill="#B45309" fill-opacity="0.78"/>
+            <circle cx="265" cy="76" r="12" fill="#D6C7B2"/>
+            <rect x="295" y="102" width="32" height="26" rx="3" fill="#1C1917" fill-opacity="0.82"/>
+            <!-- Barra monolítica travertino -->
+            <rect x="175" y="156" width="175" height="54" rx="3" fill="#E7DFD3" stroke="#1C1917" stroke-width="1.4"/>
+            <line x1="175" y1="168" x2="350" y2="168" stroke="#B45309" stroke-width="1.5"/>
+            <!-- Planta orgánica -->
+            <ellipse cx="122" cy="186" rx="14" ry="24" fill="#78716C" fill-opacity="0.45"/>
+            <line x1="30" y1="210" x2="370" y2="210" stroke="#1C1917" stroke-width="1.2"/>
+          </svg>
+        `;
+      }
+
+      // pavilion
+      return `
+        <svg viewBox="0 0 400 260" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración arquitectónica Pabellón Jardín Oeste">
+          <rect width="400" height="260" fill="#F2ECE4"/>
+          <!-- Losa superior flotante -->
+          <rect x="52" y="72" width="296" height="16" fill="#1C1917"/>
+          <!-- Pérgola de madera (listones en terracota) -->
+          <g fill="#B45309" fill-opacity="0.82">
+            <rect x="64" y="88" width="12" height="12"/>
+            <rect x="92" y="88" width="12" height="12"/>
+            <rect x="120" y="88" width="12" height="12"/>
+            <rect x="148" y="88" width="12" height="12"/>
+            <rect x="176" y="88" width="12" height="12"/>
+            <rect x="204" y="88" width="12" height="12"/>
+          </g>
+          <!-- Columnas esbeltas -->
+          <line x1="70" y1="88" x2="70" y2="196" stroke="#1C1917" stroke-width="2.2"/>
+          <line x1="330" y1="88" x2="330" y2="196" stroke="#1C1917" stroke-width="2.2"/>
+          <!-- Cerramiento vidriado -->
+          <rect x="125" y="100" width="185" height="96" fill="#FFFFFF" fill-opacity="0.88" stroke="#1C1917" stroke-width="1.2"/>
+          <line x1="186" y1="100" x2="186" y2="196" stroke="#1C1917" stroke-opacity="0.45" stroke-width="1"/>
+          <line x1="248" y1="100" x2="248" y2="196" stroke="#1C1917" stroke-opacity="0.45" stroke-width="1"/>
+          <!-- Base y espejo de agua -->
+          <rect x="40" y="196" width="320" height="10" fill="#D6C7B2" stroke="#1C1917" stroke-width="1"/>
+          <rect x="65" y="212" width="270" height="18" rx="4" fill="#CBD5E1" fill-opacity="0.65"/>
+          <line x1="95" y1="221" x2="185" y2="221" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
+    /**
+     * Muestra un mensaje breve tipo toast sin usar alert().
+     */
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      if (!toast || !toastMsg) return;
+
+      toastMsg.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2400);
+    }
+
+    /**
+     * Genera y descarga un archivo vCard (.vcf) real con los datos del profesional
+     * para que el cliente pueda agendar el contacto en su celular con un toque.
+     */
+    function downloadVCard() {
+      try {
+        const p = CONFIG.profile;
+        const vcardLines = [
+          'BEGIN:VCARD',
+          'VERSION:3.0',
+          `N:${p.lastName};${p.firstName};;Arq.;`,
+          `FN:${p.fullName}`,
+          `ORG:${p.organization}`,
+          `TITLE:${p.role}`,
+          `TEL;TYPE=CELL,VOICE:${p.phoneDisplay}`,
+          `EMAIL;TYPE=WORK,INTERNET:${p.email}`,
+          `ADR;TYPE=WORK:;;${p.location};;;Argentina`,
+          `URL:${p.websiteUrl}`,
+          'NOTE:Tarjeta Digital diseñada por Serebi Lab.',
+          'END:VCARD'
+        ].join('\r\n');
+
+        const blob = new Blob([vcardLines], { type: 'text/vcard;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Arq_Sofia_Mendez.vcf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        showToast('Contacto descargado (.vcf)');
+      } catch (error) {
+        console.error('Error al generar vCard:', error);
+        showToast('No se pudo descargar el contacto');
+      }
+    }
+
+    /**
+     * Copia el enlace actual al portapapeles de forma compatible con iframes y móviles.
+     */
+    function copyCurrentLink() {
+      try {
+        const urlToCopy = window.location.href;
+        const tempInput = document.createElement('input');
+        tempInput.value = urlToCopy;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+
+        // Feedback visual en ambos botones
+        const topLabel = document.getElementById('share-link-label');
+        const inlineLabel = document.getElementById('copy-link-inline-label');
+
+        if (topLabel) topLabel.textContent = '¡Enlace copiado!';
+        if (inlineLabel) inlineLabel.textContent = '¡Enlace copiado!';
+
+        showToast('¡Enlace copiado!');
+
+        setTimeout(() => {
+          if (topLabel) topLabel.textContent = 'Compartir';
+          if (inlineLabel) inlineLabel.textContent = 'Copiar enlace de esta tarjeta';
+        }, 2200);
+      } catch (error) {
+        console.error('Error al copiar enlace:', error);
+        showToast('Copiá el enlace desde la barra del navegador');
+      }
+    }
+
+    /**
+     * Renderiza las 3 tarjetas de servicios desde CONFIG.services.
+     */
+    function renderServices() {
+      const container = document.getElementById('services-list');
+      if (!container) return;
+
+      container.innerHTML = CONFIG.services.map((srv) => `
+        <article class="bg-card rounded-3xl border border-sand p-5 sm:p-6 shadow-editorial hover:shadow-editorialHover transition-shadow flex items-start gap-4">
+          <div class="w-11 h-11 rounded-2xl bg-sandLight border border-sand text-terracotta flex items-center justify-center shrink-0 mt-0.5">
+            ${getServiceIcon(srv.icon)}
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-serif font-semibold text-lg sm:text-xl text-charcoal leading-snug">
+              ${srv.title}
+            </h3>
+            <p class="text-xs font-semibold text-terracotta mt-0.5 mb-1.5">
+              ${srv.subtitle}
+            </p>
+            <p class="text-sm text-stoneMuted leading-relaxed">
+              ${srv.description}
+            </p>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /**
+     * Renderiza la grilla de 4 proyectos del portfolio con sus ilustraciones SVG.
+     */
+    function renderPortfolio() {
+      const grid = document.getElementById('portfolio-grid');
+      if (!grid) return;
+
+      grid.innerHTML = CONFIG.projects.map((proj) => `
+        <button
+          type="button"
+          data-open-project="${proj.id}"
+          class="group text-left bg-card rounded-3xl border border-sand overflow-hidden shadow-editorial hover:shadow-editorialHover hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-terracotta"
+        >
+          <div class="h-40 sm:h-44 w-full bg-sandLight border-b border-sand overflow-hidden relative">
+            <div class="w-full h-full transition-transform duration-500 group-hover:scale-105">
+              ${getProjectSVG(proj.svgType)}
+            </div>
+            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 text-charcoal text-[11px] font-semibold border border-sand shadow-sm">
+              ${proj.year}
+            </span>
+          </div>
+          <div class="p-4 sm:p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-terracotta">
+              ${proj.category}
+            </span>
+            <h3 class="font-serif font-semibold text-lg text-charcoal mt-0.5 group-hover:text-terracotta transition-colors">
+              ${proj.title}
+            </h3>
+            <p class="text-xs text-stoneMuted mt-1 flex items-center justify-between">
+              <span>${proj.area} · ${proj.location}</span>
+              <span class="text-terracotta font-semibold">Ver &rarr;</span>
+            </p>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    /**
+     * Inicializa el modal (lightbox) para ampliar cualquier proyecto del portfolio.
+     */
+    function initProjectModal() {
+      const modal = document.getElementById('project-modal');
+      const panel = document.getElementById('modal-panel');
+      const closeBtn = document.getElementById('modal-close-btn');
+      const closeSecondaryBtn = document.getElementById('modal-close-secondary');
+
+      const visualEl = document.getElementById('modal-visual');
+      const categoryEl = document.getElementById('modal-category');
+      const yearEl = document.getElementById('modal-year');
+      const areaEl = document.getElementById('modal-area');
+      const titleEl = document.getElementById('modal-title');
+      const locationEl = document.getElementById('modal-location');
+      const descEl = document.getElementById('modal-description');
+      const waBtn = document.getElementById('modal-wa-btn');
+
+      if (!modal || !panel) return;
+
+      const openModal = (projectId) => {
+        const project = CONFIG.projects.find((p) => p.id === projectId);
+        if (!project) return;
+
+        visualEl.innerHTML = getProjectSVG(project.svgType);
+        categoryEl.textContent = project.category;
+        yearEl.textContent = project.year;
+        areaEl.textContent = project.area;
+        titleEl.textContent = project.title;
+        locationEl.textContent = project.location;
+        descEl.textContent = project.description;
+
+        const msg = `Hola Sofía! Vi el proyecto "${project.title}" (${project.category}) en tu Tarjeta Digital y me gustaría hacerte una consulta.`;
+        waBtn.setAttribute('href', buildWaLink(CONFIG.profile.whatsappNumber, msg));
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+
+        requestAnimationFrame(() => {
+          modal.classList.remove('opacity-0');
+          panel.classList.remove('scale-95', 'opacity-0');
+        });
+      };
+
+      const closeModal = () => {
+        modal.classList.add('opacity-0');
+        panel.classList.add('scale-95', 'opacity-0');
+        document.body.style.overflow = '';
+
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        }, 250);
+      };
+
+      document.addEventListener('click', (event) => {
+        const trigger = event.target.closest('[data-open-project]');
+        if (trigger) {
+          openModal(trigger.getAttribute('data-open-project'));
+        }
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      closeSecondaryBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+    }
+
+    /**
+     * Conecta los datos del perfil, enlaces de acción y eventos iniciales.
+     */
+    function initProfileAndActions() {
+      const p = CONFIG.profile;
+
+      const waUrl = buildWaLink(p.whatsappNumber, p.defaultWaMessage);
+      const actionWa = document.getElementById('action-whatsapp');
+      const footerWa = document.getElementById('footer-whatsapp-btn');
+      const actionEmail = document.getElementById('action-email');
+      const actionMaps = document.getElementById('action-maps');
+
+      if (actionWa) actionWa.setAttribute('href', waUrl);
+      if (footerWa) footerWa.setAttribute('href', waUrl);
+      if (actionEmail) {
+        actionEmail.setAttribute('href', `mailto:${p.email}?subject=${encodeURIComponent('Consulta de proyecto — Tarjeta Digital')}`);
+      }
+      if (actionMaps) actionMaps.setAttribute('href', p.mapsUrl);
+
+      // Botón Guardar Contacto (.vcf)
+      const vcardBtn = document.getElementById('action-vcard');
+      if (vcardBtn) vcardBtn.addEventListener('click', downloadVCard);
+
+      // Botones Compartir / Copiar enlace
+      const shareBtn = document.getElementById('share-link-btn');
+      const inlineCopyBtn = document.getElementById('copy-link-inline-btn');
+      if (shareBtn) shareBtn.addEventListener('click', copyCurrentLink);
+      if (inlineCopyBtn) inlineCopyBtn.addEventListener('click', copyCurrentLink);
+
+      // Año dinámico en el footer
+      const yearEl = document.getElementById('current-year');
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+    }
+
+    // Arranque seguro al cargar el DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        initProfileAndActions();
+        renderServices();
+        renderPortfolio();
+        initProjectModal();
+      } catch (error) {
+        console.error('Error al inicializar la Tarjeta Digital:', error);
+      }
+    });
+  </script>
+</body>
+</html>
